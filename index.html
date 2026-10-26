@@ -1,0 +1,1911 @@
+
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="theme-color" content="#111315">
+        <meta name="description" content="LOPZEK — Plataforma de análisis competitivo de Free Fire">
+
+        <title>LOPZEK | Competitive Analytics</title>
+
+        <link rel="stylesheet" href="css/estilos.css">
+
+    </head>
+
+    <body>
+
+        <!-- ==========================================
+            PANTALLA DE BIENVENIDA
+        =========================================== -->
+        <section class="welcome-screen" id="welcomeScreen">
+
+            <div class="welcome-content">
+
+                <div class="welcome-brand">
+                    <div class="welcome-logo">L</div>
+
+                    <div class="welcome-brand-info">
+                        <h1>LOPZEK</h1>
+                        <span>ANÁLISIS COMPETITIVOS</span>
+                    </div>
+                </div>
+
+                <div class="welcome-divider"></div>
+
+                <p class="welcome-eyebrow">
+                    PLATAFORMA DE ANÁLISIS COMPETITIVO
+                </p>
+
+                <h2>
+                    El rendimiento<br>
+                    <span>se analiza.</span>
+                </h2>
+
+                <p class="welcome-description">
+                    Gestiona rosters, evalúa jugadores y convierte
+                    cada partida en información estratégica.
+                </p>
+
+                <button
+                    class="welcome-button"
+                    id="enterPlatform"
+                    type="button"
+                >
+                    INGRESAR A LA PLATAFORMA
+                    <span>→</span>
+                </button>
+
+                <div class="welcome-footer">
+                    <span>ANÁLISIS</span>
+                    <span class="welcome-footer-dot">◆</span>
+                    <span>RENDIMIENTO</span>
+                    <span class="welcome-footer-dot">◆</span>
+                    <span>COMPETENCIA</span>
+                </div>
+
+            </div>
+
+            <div class="welcome-decoration" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+            INICIO DE SESIÓN
+        =========================================== -->
+        <section class="login-screen" id="loginScreen" hidden>
+            <div class="login-card">
+                <div class="login-brand">
+                    <div class="welcome-logo">L</div>
+                    <h1>LOPZEK</h1>
+                    <p>ANÁLISIS COMPETITIVOS</p>
+                </div>
+
+                <div class="welcome-divider"></div>
+
+                <h2>Iniciar sesión</h2>
+                <p class="login-description">
+                    Ingresa tus credenciales para acceder a la plataforma.
+                </p>
+
+                <form id="loginForm">
+                    <label for="username">Usuario</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Tu nombre de usuario"
+                        autocomplete="username"
+                        required
+                    >
+
+                    <label for="password">Contraseña</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Tu contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <p id="loginMessage" role="status"></p>
+
+                    <button type="submit" class="welcome-button">
+                        INICIAR SESIÓN <span>→</span>
+                    </button>
+
+                    <button type="button" id="backToWelcome" class="login-back">
+                        Volver al inicio
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==========================================
+            APLICACIÓN PRINCIPAL
+        =========================================== -->
+        <div class="app" id="mainApp" hidden>
+
+            <!-- Menú lateral -->
+            <aside class="sidebar" id="sidebar">
+
+                <div class="brand">
+                    <div class="brand-logo">L</div>
+
+                    <div class="brand-info">
+                        <h1>LOPZEK</h1>
+                        <span>ANÁLISIS COMPETITIVOS</span>
+                    </div>
+                </div>
+
+                
+    <nav class="main-nav" aria-label="Navegación principal">
+        <p class="nav-heading">MENÚ PRINCIPAL</p>
+
+        <a href="#dashboard" class="nav-link active" data-page="dashboard">
+            <span class="nav-icon">◈</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="#rosters" class="nav-link" data-page="rosters">
+            <span class="nav-icon">♧</span>
+            <span>Rosters</span>
+        </a>
+
+        <a href="#jugadores" class="nav-link" data-page="jugadores">
+            <span class="nav-icon">♙</span>
+            <span>Jugadores</span>
+        </a>
+
+        <a href="#competiciones" class="nav-link" data-page="competiciones">
+            <span class="nav-icon">♜</span>
+            <span>Competiciones</span>
+        </a>
+
+        <a href="#estadisticas" class="nav-link" data-page="estadisticas">
+            <span class="nav-icon">▥</span>
+            <span>Estadísticas</span>
+        </a>
+
+        <a href="#informes" class="nav-link" data-page="informes">
+            <span class="nav-icon">▤</span>
+            <span>Informes</span>
+        </a>
+
+        <div class="nav-bottom">
+            <p class="nav-heading">SISTEMA</p>
+
+            <a href="#administracion" class="nav-link" data-page="administracion">
+                <span class="nav-icon">⚙</span>
+                <span>Administración</span>
+            </a>
+        </div>
+    </nav>
+
+
+                <div class="sidebar-footer">
+                    <div class="status-indicator"></div>
+
+                    <div>
+                        <strong>LOPZEK SYSTEM</strong>
+                        <span>Panel de análisis</span>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- Contenido principal -->
+            <main class="main-content" id="dashboard">
+
+                <header class="topbar">
+                    <button
+                        class="menu-toggle"
+                        id="menuToggle"
+                        aria-label="Abrir menú"
+                        aria-controls="sidebar"
+                        aria-expanded="false"
+                    >
+                        ☰
+                    </button>
+
+                    <div class="breadcrumb">
+                        <span>LOPZEK</span>
+                        <span class="breadcrumb-separator">/</span>
+                        <strong>Dashboard</strong>
+                    </div>
+
+                    <div class="topbar-right">
+                        <span class="system-status">
+                            <span class="status-indicator"></span>
+                            Sistema inicializado
+                        </span>
+
+                        <div class="user-avatar" title="Perfil de analista">
+                            L
+                        </div>
+                    </div>
+                </header>
+
+                <section class="app-page active" id="page-dashboard">
+                
+                <section class="dashboard-content">
+
+                    <div class="page-heading">
+                        <div>
+                            <p class="eyebrow">CENTRO DE ANÁLISIS</p>
+                            <h2>Dashboard <span>competitivo</span></h2>
+
+                            <p class="page-description">
+                                Controla el rendimiento, analiza los resultados
+                                y lleva tus rosters al siguiente nivel.
+                            </p>
+                        </div>
+
+                        <div class="date-label">
+                            <span class="date-icon">◷</span>
+                            Panel general
+                        </div>
+                    </div>
+
+                    <!-- Indicadores principales -->
+                    <section class="metrics-grid" aria-label="Indicadores principales">
+
+                        <article class="metric-card">
+                            <div class="metric-top">
+                                <span>KILLS TOTALES</span>
+                                <span class="metric-icon">✳</span>
+                            </div>
+
+                            <h3 id="dashboardTotalKills">0</h3>
+                            <p>Kills acumuladas de todas las partidas</p>
+                        </article>
+
+                        <article class="metric-card">
+                            <div class="metric-top">
+                                <span>DAÑO TOTAL</span>
+                                <span class="metric-icon">⌁</span>
+                            </div>
+
+                            <h3 id="dashboardTotalDamage">0</h3>
+                            <p>Daño acumulado de todas las partidas</p>
+                        </article>
+
+                        <article class="metric-card">
+                            <div class="metric-top">
+                                <span>PARTIDAS REGISTRADAS</span>
+                                <span class="metric-icon">▦</span>
+                            </div>
+
+                            <h3 id="dashboardTotalMatches">0</h3>
+                            <p>Partidas registradas en la plataforma</p>
+                        </article>
+
+                        <article class="metric-card">
+                            <div class="metric-top">
+                                <span>PROMEDIO DE KILLS</span>
+                                <span class="metric-icon">↗</span>
+                            </div>
+
+                            <h3 id="dashboardAverageKills">0</h3>
+                            <p>Promedio de kills por partida</p>
+                        </article>
+
+                    </section>
+
+                    <!-- Paneles de análisis -->
+                    <section class="analytics-grid">
+
+                        <article class="panel performance-panel">
+                            <div class="panel-heading">
+                                <div>
+                                    <p class="eyebrow">SEGUIMIENTO</p>
+                                    <h3>Rendimiento competitivo</h3>
+                                </div>
+
+                                <span class="panel-tag">KILLS / PARTIDA</span>
+                            </div>
+
+                            <div class="empty-chart">
+                                <div class="chart-symbol">⌁</div>
+                                <strong>Tu análisis comienza aquí</strong>
+                                <p>
+                                    Cuando registremos resultados, aquí
+                                    visualizaremos la evolución del rendimiento.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article class="panel activity-panel">
+                            <div class="panel-heading">
+                                <div>
+                                    <p class="eyebrow">MOVIMIENTO</p>
+                                    <h3>Actividad reciente</h3>
+                                </div>
+                            </div>
+
+                            <div class="empty-state">
+                                <span class="empty-state-icon">◷</span>
+                                <p>Aún no hay actividad registrada.</p>
+                            </div>
+                        </article>
+
+                        <article class="panel rosters-panel" id="rosters-summary">
+                            <div class="panel-heading">
+                                <div>
+                                    <p class="eyebrow">EQUIPOS</p>
+                                    <h3>Rosters destacados</h3>
+                                </div>
+
+                                <span class="panel-tag">0 ROSTERS</span>
+                            </div>
+
+                            <div class="empty-state">
+                                <span class="empty-state-icon">♧</span>
+                                <p>Los rosters que registres aparecerán aquí.</p>
+                            </div>
+                        </article>
+
+                        <article class="panel distribution-panel">
+                            <div class="panel-heading">
+                                <div>
+                                    <p class="eyebrow">ESTADÍSTICAS</p>
+                                    <h3>Distribución de kills</h3>
+                                </div>
+                            </div>
+
+                            <div class="empty-state">
+                                <span class="empty-state-icon">◉</span>
+                                <p>El gráfico estará disponible cuando existan resultados.</p>
+                            </div>
+                        </article>
+
+                    </section>
+
+                    <footer class="page-footer">
+                        <span>LOPZEK <span class="footer-dot">/</span> ANÁLISIS COMPETITIVOS</span>
+                        <span>Plataforma de análisis competitivo</span>
+                    </footer>
+
+                </section>
+                </section>
+
+                <!-- ==========================================
+                    SECCIÓN: ROSTERS
+                =========================================== -->
+                <section class="app-page" id="page-rosters">
+
+                    <div class="module-header">
+                        <div>
+                            <p class="eyebrow">GESTIÓN DE EQUIPOS</p>
+                            <h2 class="module-title">Rosters</h2>
+                            <p class="module-description">
+                                Administra las organizaciones competitivas y sus plantillas de jugadores.
+                            </p>
+                        </div>
+
+                        <button type="button" class="primary-button" id="addRosterButton">
+                            <span>＋</span> Crear roster
+                        </button>
+                    </div>
+
+                    <div class="roster-summary">
+                        <article class="roster-stat">
+                            <span class="roster-stat-label">TOTAL DE ROSTERS</span>
+                            <strong id="totalRosters">0</strong>
+                            <span class="roster-stat-note">Equipos registrados</span>
+                        </article>
+
+                        <article class="roster-stat">
+                            <span class="roster-stat-label">JUGADORES</span>
+                            <strong id="totalRosterPlayers">0</strong>
+                            <span class="roster-stat-note">Integrantes registrados</span>
+                        </article>
+
+                        <article class="roster-stat">
+                            <span class="roster-stat-label">ORGANIZACIONES</span>
+                            <strong id="totalOrganizations">0</strong>
+                            <span class="roster-stat-note">Organizaciones distintas</span>
+                        </article>
+                    </div>
+
+                    <div class="panel roster-list-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Equipos registrados</h3>
+                                <p>Consulta y organiza tus rosters competitivos.</p>
+                            </div>
+
+                            <span class="panel-tag">ROSTERS</span>
+                        </div>
+
+                        <div class="roster-toolbar">
+                            <input
+                                type="search"
+                                id="rosterSearch"
+                                class="roster-search"
+                                placeholder="Buscar equipo u organización..."
+                                aria-label="Buscar roster"
+                            />
+
+                            <span id="rosterCount" class="roster-count">
+                                0 equipos
+                            </span>
+                        </div>
+
+                        <div id="rosterList" class="roster-list">
+                            <div class="roster-empty">
+                                <span class="module-symbol">♧</span>
+                                <h3>Tu espacio competitivo comienza aquí</h3>
+                                <p>
+                                    Todavía no hay rosters registrados. Crea el primero
+                                    para comenzar a organizar tus equipos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+    <!-- ==========================================
+        SECCIÓN: JUGADORES
+    =========================================== -->
+    <section class="app-page" id="page-jugadores">
+
+        <div class="module-header">
+            <div>
+                <p class="eyebrow">GESTIÓN INDIVIDUAL</p>
+                <h2 class="module-title">Jugadores</h2>
+                <p class="module-description">
+                    Construye perfiles competitivos, organiza tus jugadores
+                    y prepara el seguimiento de su rendimiento individual.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="primary-button"
+                id="addPlayerButton"
+            >
+                <span>＋</span> Registrar jugador
+            </button>
+        </div>
+
+        <!-- Indicadores del módulo -->
+        <div class="roster-summary player-summary">
+
+            <article class="roster-stat">
+                <span class="roster-stat-label">TOTAL DE JUGADORES</span>
+                <strong id="totalPlayers">0</strong>
+                <span class="roster-stat-note">Perfiles registrados</span>
+            </article>
+
+            <article class="roster-stat">
+                <span class="roster-stat-label">JUGADORES ACTIVOS</span>
+                <strong id="activePlayers">0</strong>
+                <span class="roster-stat-note">Disponibles para competir</span>
+            </article>
+
+            <article class="roster-stat">
+                <span class="roster-stat-label">ROSTERS VINCULADOS</span>
+                <strong id="linkedRosters">0</strong>
+                <span class="roster-stat-note">Equipos con jugadores</span>
+            </article>
+
+        </div>
+
+        <!-- Directorio de jugadores -->
+        <div class="panel player-list-panel">
+
+            <div class="panel-heading">
+                <div>
+                    <h3>Directorio competitivo</h3>
+                    <p>Consulta y organiza los perfiles individuales.</p>
+                </div>
+
+                <span class="panel-tag">PLAYERS</span>
+            </div>
+
+            <div class="roster-toolbar">
+
+                <input
+                    type="search"
+                    id="playerSearch"
+                    class="roster-search"
+                    placeholder="Buscar jugador, nick o equipo..."
+                    aria-label="Buscar jugador"
+                />
+
+                <select
+                    id="playerRosterFilter"
+                    class="roster-search"
+                    aria-label="Filtrar por roster"
+                >
+                    <option value="">Todos los rosters</option>
+                </select>
+
+                <span id="playerCount" class="roster-count">
+                    0 jugadores
+                </span>
+
+            </div>
+
+            <div id="playerList" class="player-list">
+
+                <div class="roster-empty">
+                    <span class="module-symbol">♙</span>
+                    <h3>Tu plantilla comienza aquí</h3>
+                    <p>
+                        Registra a tu primer jugador para comenzar a construir
+                        el directorio competitivo de LOPZEK.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+        LOPZEK — FORMULARIO: REGISTRAR JUGADOR
+    =========================================== -->
+    <div class="roster-modal" id="playerModal" hidden>
+
+        <div class="roster-modal-backdrop" data-close-player></div>
+
+        <section
+            class="roster-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="playerModalTitle"
+        >
+
+            <!-- Encabezado del formulario -->
+            <div class="roster-modal-heading">
+                <div>
+                    <p class="eyebrow">GESTIÓN COMPETITIVA</p>
+                    <h2 id="playerModalTitle">Registrar jugador</h2>
+                    <p>Agrega un perfil a tu directorio competitivo.</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="roster-close-button"
+                    data-close-player
+                    aria-label="Cerrar formulario"
+                >×</button>
+            </div>
+
+            <!-- Datos del jugador -->
+            <form id="playerForm">
+
+                <div class="roster-form-grid">
+
+                    <label class="roster-field roster-field-full">
+                        <span>Nick del jugador *</span>
+                        <input
+                            type="text"
+                            id="playerNick"
+                            name="playerNick"
+                            placeholder="Ej. FN LOPEZ"
+                            maxlength="40"
+                            required
+                        >
+                    </label>
+
+                    <label class="roster-field roster-field-full">
+                        <span>Nombre real</span>
+                        <input
+                            type="text"
+                            id="playerName"
+                            name="playerName"
+                            placeholder="Nombre y apellido"
+                            maxlength="100"
+                        >
+                    </label>
+                    
+                    <label class="roster-field roster-field-full">
+                        <span>Foto del jugador</span>
+                        <input
+                            type="file"
+                            id="playerPhoto"
+                            name="playerPhoto"
+                            accept="image/*"
+    >
+                    </label>
+
+                    <label class="roster-field">
+                        <span>Roster *</span>
+                        <select id="playerRoster" name="playerRoster" required>
+                            <option value="">Selecciona un roster</option>
+                        </select>
+                    </label>
+
+                    <label class="roster-field">
+                        <span>Rol competitivo *</span>
+                        <select id="playerRole" name="playerRole" required>
+                            <option value="">Selecciona un rol</option>
+                            <option value="IGL">IGL / Líder</option>
+                            <option value="Fragger">Fragger</option>
+                            <option value="Rusher">Rusher</option>
+                            <option value="Support">Support</option>
+                            <option value="Sniper">Sniper</option>
+                            <option value="Flex">Flex</option>
+                        </select>
+                    </label>
+
+                    <label class="roster-field">
+                        <span>Estado del jugador *</span>
+                        <select id="playerStatus" name="playerStatus" required>
+                            <option value="Activo">Activo</option>
+                            <option value="Reserva">Reserva</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </label>
+
+                    <label class="roster-field">
+                        <span>Región</span>
+                        <input
+                            type="text"
+                            id="playerRegion"
+                            name="playerRegion"
+                            placeholder="Ej. LATAM"
+                            maxlength="50"
+                        >
+                    </label>
+
+                    <label class="roster-field roster-field-full">
+                        <span>Notas del analista</span>
+                        <textarea
+                            id="playerNotes"
+                            name="playerNotes"
+                            rows="3"
+                            maxlength="500"
+                            placeholder="Observaciones sobre el jugador..."
+                        ></textarea>
+                    </label>
+
+                </div>
+
+                <!-- Botones del formulario -->
+                <div class="roster-form-actions">
+
+                    <button
+                        type="button"
+                        class="roster-cancel-button"
+                        data-close-player
+                    >
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="primary-button">
+                        Guardar jugador
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+    
+<!-- ==========================================
+     LOPZEK — FICHA VISUAL DE DETALLES DEL ROSTER
+=========================================== -->
+
+<!-- DASHBOARD COMPETITIVO DEL ROSTER -->
+<div class="modal-roster-detalle" id="rosterDetailsModal" aria-hidden="true">
+    <div class="modal-roster-contenido dashboard-roster" role="dialog"
+        aria-modal="true" aria-labelledby="rosterDetailName">
+
+        <button type="button" class="cerrar-modal-roster"
+            id="closeRosterDetails" aria-label="Cerrar dashboard">×</button>
+
+        <!-- CABECERA -->
+        <header class="dashboard-roster-header">
+            <div class="detalle-roster-logo" id="rosterDetailLogo">L</div>
+
+            <div class="dashboard-roster-identidad">
+                <span class="detalle-roster-etiqueta">LOPZEK / TEAM ANALYTICS</span>
+                <h2 id="rosterDetailName">Nombre del roster</h2>
+                <p id="rosterDetailTag">TAG DEL EQUIPO</p>
+                <div class="dashboard-roster-meta">
+                    <span id="rosterDetailRegion">Sin región</span>
+                    <span id="rosterDetailStatus">Sin estado</span>
+
+                </div>
+            </div>
+        </header>
+
+
+<!-- INDICADORES GENERALES -->
+<section class="dashboard-roster-seccion">
+    <div class="dashboard-roster-titulo">
+        <span>01 / RESUMEN</span>
+        <h3>Rendimiento general</h3>
+    </div>
+
+    <div class="dashboard-roster-kpis">
+
+        <article class="dashboard-roster-kpi">
+            <span>JUGADORES</span>
+            <strong id="rosterDetailPlayersCount">0</strong>
+            <small>En la plantilla</small>
+        </article>
+
+        <article class="dashboard-roster-kpi">
+            <span>KILLS TOTALES</span>
+            <strong id="rosterDetailTotalKills">—</strong>
+            <small>Partidas registradas</small>
+        </article>
+
+        <article class="dashboard-roster-kpi">
+            <span>DAÑO TOTAL</span>
+            <strong id="rosterDetailTotalDamage">—</strong>
+            <small>Daño acumulado</small>
+        </article>
+
+        <article class="dashboard-roster-kpi">
+            <span>PROMEDIO DE KILLS</span>
+            <strong id="rosterDetailAverageKills">—</strong>
+            <small>Por partida</small>
+        </article>
+
+        <article class="dashboard-roster-kpi">
+            <span>TOTAL DE PARTIDAS</span>
+            <strong id="rosterDetailTotalMatches">—</strong>
+            <small>Partidas disputadas</small>
+        </article>
+
+        <article class="dashboard-roster-kpi">
+            <span>BOOYAH POR BLOQUES</span>
+            <strong id="rosterDetailBlockBooyahs">0</strong>
+            <small>Bloques ganados</small>
+        </article>
+
+        <article class="dashboard-roster-kpi">
+            <span>TOP 3 POR BLOQUES</span>
+            <strong id="rosterDetailBlockTop3">0</strong>
+            <small>Posiciones del 1.º al 3.º</small>
+        </article>
+
+        <article class="dashboard-roster-kpi">
+            <span>TOP 4+ POR BLOQUES</span>
+            <strong id="rosterDetailBlockTop4Plus">0</strong>
+            <small>Posiciones del 4.º en adelante</small>
+        </article>
+
+    </div>
+</section>
+
+        <!-- RANKINGS -->
+        <section class="dashboard-roster-seccion">
+            <div class="dashboard-roster-titulo">
+                <span>02 / RANKINGS</span>
+                <h3>Rendimiento individual</h3>
+            </div>
+
+            <div class="dashboard-roster-rankings">
+                <article class="dashboard-roster-panel">
+                    <h4></span> Top de kills</h4>
+                    <div id="rosterDetailKillsRanking"
+                        class="dashboard-roster-ranking-lista">
+                        <p class="dashboard-roster-vacio">
+                            Las estadísticas aparecerán cuando registres partidas.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="dashboard-roster-panel">
+                    <h4></span> Top de daño</h4>
+                    <div id="rosterDetailDamageRanking"
+                        class="dashboard-roster-ranking-lista">
+                        <p class="dashboard-roster-vacio">
+                            Las estadísticas aparecerán cuando registres partidas.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- GRÁFICAS -->
+        <section class="dashboard-roster-seccion">
+            <div class="dashboard-roster-titulo">
+                <span>03 / ANÁLISIS</span>
+                <h3>Comparativa de jugadores</h3>
+            </div>
+
+            <div class="dashboard-roster-graficas">
+                <article class="dashboard-roster-panel">
+                    <h4>Kills por jugador</h4>
+                    <div id="rosterDetailKillsChart"
+                        class="dashboard-roster-chart">
+                        <p class="dashboard-roster-vacio">
+                            Sin datos para graficar.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="dashboard-roster-panel">
+                    <h4>Daño por jugador</h4>
+                    <div id="rosterDetailDamageChart"
+                        class="dashboard-roster-chart">
+                        <p class="dashboard-roster-vacio">
+                            Sin datos para graficar.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- DESCRIPCIÓN Y JUGADORES -->
+        <section class="dashboard-roster-seccion">
+            <div class="dashboard-roster-titulo">
+                <span>04 / PLANTILLA</span>
+                <h3>Jugadores del roster</h3>
+            </div>
+
+            <p id="rosterDetailDescription" class="dashboard-roster-descripcion">
+                Este roster todavía no tiene una descripción.
+            </p>
+
+            <div id="rosterDetailPlayersList"
+                class="detalle-roster-lista-jugadores">
+                <p class="dashboard-roster-vacio">
+                    Todavía no hay jugadores vinculados a este roster.
+                </p>
+            </div>
+        </section>
+
+    </div>
+</div>
+<!-- FIN DEL DASHBOARD DEL ROSTER -->
+
+
+<!-- ==========================================
+     LOPZEK — PERFIL COMPETITIVO INDIVIDUAL
+=========================================== -->
+
+<div id="playerProfileModal" class="player-profile-modal" hidden>
+
+    <div class="player-profile-backdrop" data-close-player-profile></div>
+
+    <section
+        class="player-profile-container"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="playerProfileNick"
+    >
+
+        <!-- BARRA SUPERIOR -->
+        <div class="player-profile-topbar">
+            <div class="player-profile-breadcrumb">
+                <span>LOPZEK</span>
+                <span>/</span>
+                <span>ANÁLISIS DE JUGADORES</span>
+            </div>
+
+            <button
+                type="button"
+                id="closePlayerProfile"
+                class="player-profile-close"
+                data-close-player-profile
+                aria-label="Cerrar perfil"
+            >×</button>
+        </div>
+
+        <!-- IDENTIDAD DEL JUGADOR -->
+        <header class="player-profile-header">
+          
+<div class="player-profile-avatar" id="playerProfileAvatar">
+    <img
+        id="playerProfilePhoto"
+        src="./assets/avatar-default.png"
+        alt="Foto del jugador"
+    >
+    <span id="playerProfileInitial">L</span>
+</div>
+
+
+            <div class="player-profile-identity">
+
+                <span class="player-profile-eyebrow">
+                    DESEMPEÑO INDIVIDUAL
+                </span>
+
+                <h2 id="playerProfileNick">NOMBRE DEL JUGADOR</h2>
+
+                <p id="playerProfileName">Nombre real no registrado</p>
+
+                <div class="player-profile-tags">
+                    <span id="playerProfileRole">Rol sin definir</span>
+                    <span id="playerProfileStatus">Sin estado</span>
+                    <span id="playerProfileRegion">Sin región</span>
+                </div>
+
+                <div class="player-profile-roster">
+                    <span>ROSTER ACTUAL</span>
+                    <strong id="playerProfileRoster">Sin roster</strong>
+                </div>
+
+            </div>
+
+            <div class="player-profile-index">
+                <span>PLAYER</span>
+                <strong id="playerProfileId">—</strong>
+                <small>LOPZEK ANALYTICS</small>
+            </div>
+
+        </header>
+
+        <!-- RESUMEN ESTADÍSTICO -->
+        <section class="player-profile-section">
+
+            <div class="player-profile-section-heading">
+                <div>
+                    <h3>Resumen competitivo</h3>
+                </div>
+
+                <p>Indicadores individuales</p>
+            </div>
+
+            <div class="player-profile-kpis">
+
+                <article class="player-profile-kpi">
+                    <span>PARTIDAS</span>
+                    <strong id="playerProfileMatches">—</strong>
+                    <small>Registradas</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>KILLS</span>
+                    <strong id="playerProfileKills">—</strong>
+                    <small>Eliminaciones totales</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>DAÑO TOTAL</span>
+                    <strong id="playerProfileDamage">—</strong>
+                    <small>Daño acumulado</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>K/D</span>
+                    <strong id="playerProfileKD">—</strong>
+                    <small>Relación kills / muertes</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>PROMEDIO KILLS</span>
+                    <strong id="playerProfileAverageKills">—</strong>
+                    <small>Por partida</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>DAÑO PROMEDIO</span>
+                    <strong id="playerProfileAverageDamage">—</strong>
+                    <small>Por partida</small>
+                </article>
+
+                
+                <article class="player-profile-kpi">
+                    <span>DERRIBOS TOTALES</span>
+                    <strong id="playerProfileKnockdowns">—</strong>
+                    <small>En todas las partidas</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>MUERTES TOTALES</span>
+                    <strong id="playerProfileDeaths">—</strong>
+                    <small>En todas las partidas</small>
+                </article>
+
+                <article class="player-profile-kpi">
+    <span>TOP 3</span>
+    <strong id="playerProfileTop3">—</strong>
+    <small>Partidas en el podio</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>TOP 5</span>
+                    <strong id="playerProfileTop5">—</strong>
+                    <small>Partidas entre los cinco primeros</small>
+                </article>
+
+                <article class="player-profile-kpi">
+                    <span>BOOYAH</span>
+                    <strong id="playerProfileBooyahs">—</strong>
+                    <small>Primeros lugares</small>
+                </article>
+
+            </div>
+
+            <p class="player-profile-data-note">
+                Las estadísticas aparecerán cuando se registren partidas y resultados.
+            </p>
+
+        </section>
+
+        <!-- EVOLUCIÓN DEL RENDIMIENTO -->
+        <section class="player-profile-section">
+
+            <div class="player-profile-section-heading">
+                <div>
+                    <h3>Evolución del rendimiento</h3>
+                </div>
+            </div>
+
+            <div class="player-profile-analysis-grid">
+
+                <article class="player-profile-panel player-profile-evolution">
+
+                    <div class="player-profile-panel-heading">
+                        <h4>Historial competitivo</h4>
+                        <span class="player-profile-panel-tag">MATCH HISTORY</span>
+                    </div>
+
+<div id="playerProfileEvolution" class="player-profile-chart-container">
+
+    <div class="player-profile-chart-legend">
+        <span class="player-chart-legend-item">
+            <span class="player-chart-dot player-chart-dot-damage"></span>
+            Daño
+        </span>
+
+        <span class="player-chart-legend-item">
+            <span class="player-chart-dot player-chart-dot-kills"></span>
+            Kills
+        </span>
+    </div>
+
+    <div class="player-profile-chart-wrapper">
+        <canvas
+            id="playerProfileKillsDamageChart"
+            role="img"
+            aria-label="Gráfica semanal de kills y daño del jugador"
+        ></canvas>
+    </div>
+
+    <p id="playerProfileChartMessage" class="player-profile-chart-message">
+        La gráfica aparecerá cuando existan partidas registradas.
+    </p>
+
+</div>
+
+                </article>
+
+                
+<article class="player-profile-panel">
+
+    <div class="player-profile-panel-heading">
+        <h4>Fortalezas del jugador</h4>
+    </div>
+
+    <div id="playerProfileStrengths" class="player-profile-strengths">
+
+        <div class="player-profile-strengths-chart">
+            <canvas id="playerProfileRadarChart"></canvas>
+        </div>
+
+    </div>
+
+</article>
+
+            </div>
+
+        </section>
+
+        <!-- RENDIMIENTO POR MAPA -->
+        <section class="player-profile-section">
+
+            <div class="player-profile-section-heading">
+                <div>
+                    <h3>Rendimiento por mapa</h3>
+                </div>
+
+                <p>Comparativa individual</p>
+            </div>
+
+            <div class="player-profile-panel player-profile-map-panel">
+
+                <div class="player-profile-table-wrapper">
+
+                    <table class="player-profile-table">
+
+                        <thead>
+                            <tr>
+                                <th>MAPA</th>
+                                <th>PARTIDAS</th>
+                                <th>KILLS</th>
+                                <th>DAÑO</th>
+                                <th>PROM. KILLS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="playerProfileMapStats">
+                            <tr>
+                                <td colspan="5">
+                                    Los datos por mapa aparecerán al registrar resultados.
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ÚLTIMAS PARTIDAS -->
+        <section class="player-profile-section">
+
+            <div class="player-profile-section-heading">
+                <div>
+                    <h3>Últimas partidas</h3>
+                </div>
+
+                <p>Seguimiento reciente</p>
+            </div>
+
+            <div class="player-profile-panel">
+
+                <div class="player-profile-table-wrapper">
+
+                    <table class="player-profile-table">
+
+                        <thead>
+                            <tr>
+                                <th>PARTIDA</th>
+                                <th>MAPA</th>
+                                <th>POSICIÓN</th>
+                                <th>KILLS</th>
+                                <th>DAÑO</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="playerProfileRecentMatches">
+                            <tr>
+                                <td colspan="5">
+                                    Todavía no hay partidas registradas para este jugador.
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- NOTAS DEL ANALISTA -->
+        <section class="player-profile-section">
+
+            <div class="player-profile-section-heading">
+                <div>
+                    <h3>Observaciones del analista</h3>
+                </div>
+            </div>
+
+            <div class="player-profile-panel">
+                <p id="playerProfileNotes" class="player-profile-notes">
+                    No hay observaciones registradas para este jugador.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- PIE DEL PERFIL -->
+        <footer class="player-profile-footer">
+            <span>LOPZEK <span>/</span>ANÁLISIS COMPETITIVOS</span>
+            <span>PERFIL DE RENDIMIENTO DEL JUGADOR</span>
+        </footer>
+ 
+    </section>
+
+</div>
+
+<!-- FIN DEL PERFIL COMPETITIVO INDIVIDUAL -->
+
+<!-- CONFIRMACIÓN PARA ELIMINAR ROSTER -->
+<div id="modalEliminarRoster" class="modal-eliminar-overlay" hidden>
+    <div class="modal-eliminar"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="tituloEliminarRoster">
+
+        <div class="modal-eliminar-icono">!</div>
+
+        <h2 id="tituloEliminarRoster">¿Eliminar roster?</h2>
+
+        <p>
+            ¿Estás seguro de que deseas eliminar a
+            <strong id="nombreRosterEliminar"></strong>?
+            Esta acción no se puede deshacer.
+        </p>
+
+        <div class="modal-eliminar-acciones">
+            <button type="button" id="cancelarEliminarRoster">
+                Cancelar
+            </button>
+
+            <button type="button" id="confirmarEliminarRoster">
+                Eliminar roster
+            </button>
+        </div>
+    </div>
+</div>
+<!-- FIN DE CONFIRMACIÓN PARA ELIMINAR ROSTER -->
+
+                <!-- ==========================================
+                    SECCIÓN: COMPETICIONES
+                =========================================== -->
+                <section class="app-page" id="page-competiciones">
+
+                    <p class="eyebrow">TORNEOS Y EVENTOS</p>
+
+                    <h2 class="module-title">Competiciones</h2>
+
+                    <p class="module-description">
+                        Organiza torneos, registra resultados y consulta el historial competitivo.
+                    </p>
+
+                    <div class="module-placeholder">
+                        <span class="module-symbol">♜</span>
+                        <h3>Centro de competiciones</h3>
+                        <p>
+                            Aquí construiremos el registro de torneos, jornadas, partidas y resultados.
+                        </p>
+                    </div>
+
+                </section>
+<!-- ==========================================
+    SECCIÓN: ESTADÍSTICAS
+=========================================== -->
+<section class="app-page" id="page-estadisticas">
+
+    <p class="eyebrow">ANÁLISIS DE RENDIMIENTO</p>
+
+    <h2 class="module-title">Estadísticas</h2>
+
+    <p class="module-description">
+        Analiza el rendimiento individual y colectivo mediante indicadores competitivos.
+    </p>
+                
+<div class="stats-workspace">
+
+    <div class="stats-section-heading">
+        <div>
+            <h3>Registro de partidas</h3>
+            <p>
+                Registra los resultados individuales de cada jugador
+                por fecha, bloque y sala.
+            </p>
+        </div>
+    </div>
+
+    <form id="matchStatsForm" class="stats-form">
+
+        <div class="stats-form-grid">
+
+            <div class="form-group">
+                <label for="statsMatchDate">Fecha de la partida</label>
+                <input
+                    type="date"
+                    id="statsMatchDate"
+                    name="matchDate"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="statsRoster">Roster</label>
+                <select id="statsRoster" name="rosterId" required>
+                    <option value="">Selecciona un roster</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="statsBlock">Bloque</label>
+                <select id="statsBlock" name="blockNumber" required>
+                    <option value="">Selecciona un bloque</option>
+                    <option value="1">Bloque 1</option>
+                    <option value="2">Bloque 2</option>
+                    <option value="3">Bloque 3</option>
+                    <option value="4">Bloque 4</option>
+                    <option value="5">Bloque 5</option>
+                    <option value="6">Bloque 6</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="statsRoom">Sala</label>
+                <select id="statsRoom" name="roomNumber" required>
+                    <option value="">Selecciona una sala</option>
+                    <option value="1">Sala 1</option>
+                    <option value="2">Sala 2</option>
+                    <option value="3">Sala 3</option>
+                    <option value="4">Sala 4</option>
+                    <option value="5">Sala 5</option>
+                    <option value="6">Sala 6</option>
+                    <option value="7">Sala 7</option>
+                    <option value="8">Sala 8</option>
+                    <option value="9">Sala 9</option>
+                    <option value="10">Sala 10</option>
+                    <option value="11">Sala 11</option>
+                    <option value="12">Sala 12</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="statsMap">Mapa</label>
+                <select id="statsMap" name="map" required>
+                    <option value="">Selecciona un mapa</option>
+                    <option value="Bermuda">Bermuda</option>
+                    <option value="Purgatorio">Purgatorio</option>
+                    <option value="Kalahari">Kalahari</option>
+                    <option value="Nexterra">Nexterra</option>
+                    <option value="Solara">Solara</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="statsPosition">Posición final del roster</label>
+                <select id="statsPosition" name="position" required>
+                    <option value="">Selecciona la posición</option>
+                    <option value="1">1.º lugar</option>
+                    <option value="2">2.º lugar</option>
+                    <option value="3">3.º lugar</option>
+                    <option value="4">4.º lugar</option>
+                    <option value="5">5.º lugar</option>
+                    <option value="6">6.º lugar</option>
+                    <option value="7">7.º lugar</option>
+                    <option value="8">8.º lugar</option>
+                    <option value="9">9.º lugar</option>
+                    <option value="10">10.º lugar</option>
+                    <option value="11">11.º lugar</option>
+                    <option value="12">12.º lugar</option>
+                    <option value="13">13.º lugar</option>
+                    <option value="14">14.º lugar</option>
+                    <option value="15">15.º lugar</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="stats-players-heading">
+            <h3>Resultados por jugador</h3>
+            <p>
+                Selecciona un roster para preparar el registro de sus jugadores.
+            </p>
+        </div>
+
+        <div id="statsPlayersContainer" class="stats-players-container">
+            <p class="empty-state">
+                Selecciona un roster para continuar.
+            </p>
+        </div>
+
+        <div class="stats-form-actions">
+            <button
+                type="submit"
+                id="saveMatchStatsButton"
+                class="btn-primary"
+            >
+                Guardar resultados
+            </button>
+        </div>
+
+        <p id="matchStatsMessage" class="form-message" role="status"></p>
+
+    </form>
+
+    
+<!-- REGISTRO MANUAL DE RESULTADOS POR BLOQUES -->
+<section class="stats-block-results">
+
+    <div class="stats-section-heading">
+        <div>
+            <h3>Resultados acumulados por bloques</h3>
+            <p>
+                Registra los totales competitivos del roster seleccionado.
+            </p>
+        </div>
+    </div>
+ 
+<form id="rosterBlockResultsForm">
+
+    <div class="stats-form-grid">
+
+        <div class="form-group">
+            <label for="rosterBlockResultsRoster">Roster</label>
+            <select id="rosterBlockResultsRoster" required>
+                <option value="">Selecciona un roster</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rosterBlockDate">Fecha</label>
+            <input type="date" id="rosterBlockDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rosterBlockNumber">Número de bloque</label>
+            <input
+                type="number"
+                id="rosterBlockNumber"
+                min="1"
+                step="1"
+                placeholder="Ej. 1"
+                required
+            >
+        </div>
+
+        
+<div class="form-group roster-block-top-card roster-block-top-card--booyah">
+    <div class="roster-block-top-heading">
+        <span class="roster-block-top-icon">🏆</span>
+        <div>
+            <label for="rosterBlockBooyahs">TOP 1</label>
+            <p>Booyahs conseguidos</p>
+        </div>
+    </div>
+
+    <div class="roster-block-counter">
+        <button type="button" class="roster-block-counter-btn"
+            data-counter-target="rosterBlockBooyahs"
+            data-counter-step="-1" aria-label="Restar Booyah">−</button>
+
+        <input type="number" id="rosterBlockBooyahs"
+            min="0" step="1" value="0" required>
+
+        <button type="button" class="roster-block-counter-btn"
+            data-counter-target="rosterBlockBooyahs"
+            data-counter-step="1" aria-label="Sumar Booyah">+</button>
+    </div>
+</div>
+
+        
+<div class="form-group roster-block-top-card roster-block-top-card--top3">
+    <div class="roster-block-top-heading">
+        <span class="roster-block-top-icon">🥇</span>
+        <div>
+            <label for="rosterBlockTop3">TOP 3</label>
+            <p>Puestos del 1 al 3</p>
+        </div>
+    </div>
+
+    <div class="roster-block-counter">
+        <button type="button" class="roster-block-counter-btn"
+            data-counter-target="rosterBlockTop3"
+            data-counter-step="-1" aria-label="Restar TOP 3">−</button>
+
+        <input type="number" id="rosterBlockTop3"
+            min="0" step="1" value="0" required>
+
+        <button type="button" class="roster-block-counter-btn"
+            data-counter-target="rosterBlockTop3"
+            data-counter-step="1" aria-label="Sumar TOP 3">+</button>
+    </div>
+</div>
+
+        
+<div class="form-group roster-block-top-card roster-block-top-card--top4">
+    <div class="roster-block-top-heading">
+        <span class="roster-block-top-icon">📊</span>
+        <div>
+            <label for="rosterBlockTop4Plus">TOP 4+</label>
+            <p>Puesto 4 en adelante</p>
+        </div>
+    </div>
+
+    <div class="roster-block-counter">
+        <button type="button" class="roster-block-counter-btn"
+            data-counter-target="rosterBlockTop4Plus"
+            data-counter-step="-1" aria-label="Restar TOP 4+">−</button>
+
+        <input type="number" id="rosterBlockTop4Plus"
+            min="0" step="1" value="0" required>
+
+        <button type="button" class="roster-block-counter-btn"
+            data-counter-target="rosterBlockTop4Plus"
+            data-counter-step="1" aria-label="Sumar TOP 4+">+</button>
+    </div>
+</div>
+
+    </div>
+
+    <div class="stats-form-actions">
+        <button
+            type="submit"
+            id="saveRosterBlockResults"
+            class="btn-primary"
+        >
+            Guardar resultados del bloque
+        </button>
+    </div>
+
+    <p id="rosterBlockResultsMessage" role="status"></p>
+
+</form>
+
+</section>
+
+</div>
+
+                </section>
+
+                <!-- ==========================================
+                    SECCIÓN: INFORMES
+                =========================================== -->
+                <section class="app-page" id="page-informes">
+
+                    
+<p class="eyebrow">REPORTES COMPETITIVOS</p>
+
+<h2 class="module-title">Informes</h2>
+
+<p class="module-description">
+    Historial semanal y mensual del rendimiento competitivo.
+</p>
+
+<div class="reports-workspace">
+
+    
+    <!-- FILTROS DE INFORMES LOPZEK -->
+    <div class="reports-panel reports-filters-panel">
+
+        <div class="reports-panel-heading">
+            <div>
+                <h3>Centro de informes</h3>
+                <p>
+                    Consulta el rendimiento general, por roster
+                    o por jugador.
+                </p>
+            </div>
+        </div>
+
+        <div class="reports-filters-grid">
+
+            <div class="reports-filter-field">
+                <label for="reportsTypeFilter">
+                    Tipo de informe
+                </label>
+
+                <select id="reportsTypeFilter">
+                    <option value="general">
+                        Informe general
+                    </option>
+                    <option value="roster">
+                        Informe por roster
+                    </option>
+                    <option value="player">
+                        Informe por jugador
+                    </option>
+                </select>
+            </div>
+
+            <div
+                class="reports-filter-field"
+                id="reportsRosterFilterGroup"
+                style="display: none;"
+            >
+                <label for="reportsRosterFilter">
+                    Seleccionar roster
+                </label>
+
+                <select id="reportsRosterFilter">
+                    <option value="">
+                        Selecciona un roster
+                    </option>
+                </select>
+            </div>
+
+            <div
+                class="reports-filter-field"
+                id="reportsPlayerFilterGroup"
+                style="display: none;"
+            >
+                <label for="reportsPlayerFilter">
+                    Seleccionar jugador
+                </label>
+
+                <select id="reportsPlayerFilter">
+                    <option value="">
+                        Selecciona un jugador
+                    </option>
+                </select>
+            </div>
+
+        </div>
+
+        <p class="reports-filter-hint">
+            Los informes semanales abarcan de lunes a viernes.
+            Los mensuales incluyen el mes seleccionado.
+        </p>
+
+    </div>
+    <!-- FIN DE FILTROS DE INFORMES -->
+
+    <!-- RESUMEN SUPERIOR -->
+    <div class="reports-overview">
+
+        <div class="reports-card">
+            <p class="reports-card-label">Vista actual</p>
+            <p class="reports-card-value">Mensual</p>
+            <p class="reports-card-description">
+                Consulta el rendimiento acumulado del mes.
+            </p>
+        </div>
+        
+        <div class="reports-card">
+            <p class="reports-card-label">Vista semanal</p>
+            <p class="reports-card-value">Semanal</p>
+            <p class="reports-card-description">
+                Consulta el rendimiento de la semana.
+            </p>
+        </div>
+
+        <div class="reports-card">
+            <p class="reports-card-label">Historial</p>
+            <p class="reports-card-value">Archivo</p>
+            <p class="reports-card-description">
+                Consulta períodos anteriores sin perder sus registros.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- CALENDARIO E HISTORIAL DIARIO -->
+    <div class="reports-main-grid">
+
+        <div class="reports-panel">
+
+            <div class="reports-panel-heading">
+                <div>
+                    <h3>Registro diario</h3>
+                    <p>Selecciona una jornada para consultar sus partidas.</p>
+                </div>
+            </div>
+
+            <div id="reportsDailyList">
+                <div class="reports-empty-message">
+                    Aquí aparecerán los días con partidas registradas.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="reports-panel">
+
+            <div class="reports-panel-heading">
+                <div>
+                    <h3>Calendario mensual</h3>
+                    <p id="reportsMonthLabel" class="reports-gold-text">
+                        Mes seleccionado
+                    </p>
+                </div>
+            </div>
+
+            <div id="reportsCalendar">
+                <div class="reports-empty-message">
+                    Aquí aparecerá el calendario con los días que tengan partidas.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+                    <!-- RESUMEN DEL PERÍODO -->
+                <div class="reports-panel" style="margin-top: 22px;">
+
+                    <div class="reports-panel-heading">
+                        <div>
+                            <h3>Resumen del período seleccionado</h3>
+                            <p>Estadísticas obtenidas de las partidas registradas.</p>
+                        </div>
+                    </div>
+
+                    <div id="reportsPeriodSummary">
+                        <div class="reports-empty-message">
+                            Selecciona un día o período para consultar sus estadísticas.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- FIN DE reports-workspace -->
+
+        </section>
+        <!-- FIN DE INFORMES -->
+
+
+        <!-- ==========================================
+             SECCIÓN: ADMINISTRACIÓN
+        =========================================== -->
+        <section class="app-page" id="page-administracion">
+
+            <p class="eyebrow">CONFIGURACIÓN DEL SISTEMA</p>
+
+            <h2 class="module-title">Administración</h2>
+
+            <p class="module-description">
+                Gestiona la configuración general y la organización de la plataforma LOPZEK.
+            </p>
+
+            <div class="module-placeholder">
+                <span class="module-symbol">⚙</span>
+                <h3>Panel de administración</h3>
+                <p>
+                    Aquí construiremos las herramientas de configuración y gestión general
+                    de la plataforma.
+                </p>
+            </div>
+
+        </section>
+
+<!-- ==========================================
+FORMULARIO: CREAR ROSTER
+=========================================== -->
+                <div class="roster-modal" id="rosterModal" hidden>
+                    <div class="roster-modal-backdrop" data-close-roster></div>
+
+                    <section
+                        class="roster-modal-content"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="rosterModalTitle"
+                    >
+                        <div class="roster-modal-heading">
+                            <div>
+                                <p class="eyebrow">GESTIÓN COMPETITIVA</p>
+                                <h2 id="rosterModalTitle">Crear roster</h2>
+                                <p>Registra la información básica de un equipo.</p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="roster-close-button"
+                                data-close-roster
+                                aria-label="Cerrar formulario"
+                            >×</button>
+                        </div>
+
+                        <form id="rosterForm">
+                            <div class="roster-form-grid">
+
+                                <label class="roster-field roster-field-full">
+                                    <span>Nombre del equipo *</span>
+                                    <input
+                                        type="text"
+                                        id="rosterName"
+                                        name="rosterName"
+                                        placeholder="Ej. FN Academy"
+                                        maxlength="50"
+                                        required
+                                    />
+                                </label>
+
+                                
+    <label class="roster-field roster-field-full">
+        <span>TAG del equipo</span>
+        <input
+            type="text"
+            id="rosterTag"
+            name="rosterTag"
+            placeholder="Ej. FN, LOPZEK, TSM..."
+            maxlength="40"
+        />
+    </label>
+
+    <label class="roster-field roster-field-full">
+        <span>Logo del equipo</span>
+        <input
+            type="file"
+            id="rosterImage"
+            name="rosterImage"
+            accept="image/*"
+        />
+        <small class="roster-image-help">
+            Selecciona una imagen para identificar el roster.
+        </small>
+    </label>
+
+
+                                <label class="roster-field">
+                                    <span>Región</span>
+                                    <select id="rosterRegion" name="rosterRegion">
+                                        <option value="">Seleccionar región</option>
+                                        <option value="LATAM">LATAM</option>
+                                        <option value="Brasil">Brasil</option>
+                                        <option value="Norteamérica">Norteamérica</option>
+                                        <option value="Otra">Otra</option>
+                                    </select>
+                                </label>
+
+                                <label class="roster-field">
+                                    <span>Estado</span>
+                                    <select id="rosterStatus" name="rosterStatus">
+                                        <option value="Activo">Activo</option>
+                                        <option value="En desarrollo">En desarrollo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </label>
+
+                                <label class="roster-field roster-field-full">
+                                    <span>Descripción (opcional)</span>
+                                    <textarea
+                                        id="rosterDescription"
+                                        name="rosterDescription"
+                                        rows="3"
+                                        maxlength="250"
+                                        placeholder="Información adicional del equipo..."
+                                    ></textarea>
+                                </label>
+
+                            </div>
+
+                            <div class="roster-form-actions">
+                                <button
+                                    type="button"
+                                    class="roster-cancel-button"
+                                    data-close-roster
+                                >Cancelar</button>
+
+                                <button type="submit" class="primary-button">
+                                    Guardar roster
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+<!-- VENTANA DE CONFIRMACIÓN PARA ELIMINAR JUGADORES -->
+<div id="modalEliminarJugador" class="modal-eliminar-overlay" hidden>
+    <div class="modal-eliminar">
+        <div class="modal-eliminar-icono">!</div>
+
+        <h2>¿Eliminar jugador?</h2>
+
+        <p>
+            ¿Estás seguro de que deseas eliminar a
+            <strong id="nombreJugadorEliminar"></strong>?
+            Esta acción no se puede deshacer.
+        </p>
+
+        <div class="modal-eliminar-acciones">
+            <button type="button" id="cancelarEliminarJugador">
+                Cancelar
+            </button>
+
+            <button type="button" id="confirmarEliminarJugador">
+                Eliminar jugador
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/app.js"></script>
+<script src="js/platform-auth.js"></script>
+
+    </body>
+    </html>

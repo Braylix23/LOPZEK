@@ -1,0 +1,6422 @@
+
+/* =========================================================
+   LOPZEK — HOJA DE ESTILOS PRINCIPAL
+   ========================================================= */
+
+
+/* 01. VARIABLES Y COLORES */
+
+:root {
+    --fondo: #101216;
+    --panel: #191C22;
+    --panel-secundario: #20242C;
+    --panel-hover: #292E38;
+
+    --dorado: #D5A348;
+    --dorado-claro: #F0C875;
+    --dorado-oscuro: #9D722B;
+
+    --texto: #F3F0E8;
+    --texto-secundario: #A5A9B2;
+    --borde: #303540;
+
+    --exito: #63C79A;
+
+    --sidebar-ancho: 250px;
+    --radio: 14px;
+    --transicion: 0.25s ease;
+}
+
+
+/* 02. CONFIGURACIÓN GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 3px;
+}
+
+
+/* 03. ESTRUCTURA PRINCIPAL */
+
+.app {
+    min-height: 100vh;
+}
+
+.main-content {
+    min-height: 100vh;
+    margin-left: var(--sidebar-ancho);
+    padding: 0 32px;
+}
+
+.dashboard-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.app-page {
+    display: none;
+    animation: moduleAppear 0.3s ease both;
+}
+
+.app-page.active {
+    display: block;
+}
+
+
+/* 04. BARRA LATERAL */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+
+    width: var(--sidebar-ancho);
+    height: 100vh;
+    padding: 27px 17px;
+
+    background: var(--panel);
+    border-right: 1px solid var(--borde);
+
+    transition: transform var(--transicion);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 35px;
+}
+
+.brand-logo {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    width: 43px;
+    height: 43px;
+
+    background: linear-gradient(
+        135deg,
+        var(--dorado-claro),
+        var(--dorado-oscuro)
+    );
+
+    border-radius: 12px;
+    color: #171717;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.brand-info h1 {
+    font-size: 23px;
+    font-weight: 850;
+    letter-spacing: 1.5px;
+}
+
+.brand-info span {
+    display: block;
+    margin-top: 2px;
+    color: var(--texto-secundario);
+    font-size: 8px;
+    letter-spacing: 1.2px;
+}
+
+.main-nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 5px;
+}
+
+.nav-heading {
+    margin: 8px 10px 10px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.3px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    min-height: 45px;
+    padding: 11px 13px;
+
+    color: var(--texto-secundario);
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    transition: var(--transicion);
+}
+
+.nav-link:hover {
+    color: var(--texto);
+    background: var(--panel-hover);
+}
+
+.nav-link.active {
+    color: var(--dorado-claro);
+    background: rgba(213, 163, 72, 0.11);
+    border-color: rgba(213, 163, 72, 0.22);
+}
+
+.nav-icon {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    font-size: 18px;
+}
+
+.nav-bottom {
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 18px 9px 0;
+    border-top: 1px solid var(--borde);
+}
+
+.sidebar-footer strong,
+.sidebar-footer span {
+    display: block;
+}
+
+.sidebar-footer strong {
+    font-size: 11px;
+}
+
+.sidebar-footer span {
+    margin-top: 3px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.status-indicator {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--exito);
+    box-shadow: 0 0 10px rgba(99, 199, 154, 0.25);
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+
+/* 05. BARRA SUPERIOR */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    min-height: 82px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.breadcrumb strong {
+    color: var(--texto);
+}
+
+.breadcrumb-separator {
+    color: var(--dorado);
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.user-avatar {
+    display: grid;
+    place-items: center;
+
+    width: 39px;
+    height: 39px;
+
+    border: 1px solid var(--dorado-oscuro);
+    border-radius: 50%;
+    background: var(--panel-secundario);
+    color: var(--dorado-claro);
+    font-weight: 800;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+
+/* 06. TÍTULOS DE PÁGINAS Y MÓDULOS */
+
+.page-heading {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 28px;
+    padding: 8px 0 24px;
+    border-bottom: 1px solid rgba(213, 163, 72, 0.13);
+}
+
+.eyebrow {
+    margin-bottom: 9px;
+    color: var(--dorado);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.page-heading h2 {
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+}
+
+.page-heading h2 span {
+    color: var(--dorado);
+}
+
+.page-description {
+    max-width: 560px;
+    margin-top: 10px;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.date-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 13px;
+    white-space: nowrap;
+
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.date-icon {
+    color: var(--dorado);
+    font-size: 17px;
+}
+
+.module-title {
+    margin: 10px 0 12px;
+    color: var(--texto);
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.module-description {
+    max-width: 680px;
+    margin: 0 0 32px;
+    color: var(--texto-secundario);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.module-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.module-header .module-description {
+    margin-bottom: 0;
+}
+
+.module-placeholder {
+    position: relative;
+    overflow: hidden;
+    padding: 36px;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    background:
+        radial-gradient(
+            ellipse at top right,
+            rgba(213, 163, 72, 0.09),
+            transparent 55%
+        ),
+        var(--panel);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.module-symbol {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(213, 163, 72, 0.28);
+    border-radius: 15px;
+    background: rgba(213, 163, 72, 0.09);
+    color: var(--dorado-claro);
+    font-size: 27px;
+}
+
+.module-placeholder h3 {
+    margin: 0 0 12px;
+    color: var(--texto);
+    font-size: 21px;
+}
+
+.module-placeholder p {
+    max-width: 600px;
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* 07. TARJETAS DE INDICADORES */
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 22px;
+}
+
+.metric-card {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    padding: 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.025),
+            transparent 65%
+        ),
+        var(--panel);
+
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+
+    transition: var(--transicion);
+}
+
+.metric-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+
+    background: linear-gradient(
+        90deg,
+        var(--dorado-oscuro),
+        var(--dorado-claro)
+    );
+
+    opacity: 0.8;
+}
+
+.metric-card:nth-child(2)::before {
+    background: linear-gradient(90deg, #9D722B, #D5A348);
+}
+
+.metric-card:nth-child(3)::before {
+    background: linear-gradient(90deg, #686E78, #C2C6CF);
+}
+
+.metric-card:nth-child(4)::before {
+    background: linear-gradient(90deg, #9D722B, #F0C875);
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(213, 163, 72, 0.45);
+}
+
+.metric-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.5px;
+}
+
+.metric-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(213, 163, 72, 0.18);
+    border-radius: 11px;
+    background: rgba(213, 163, 72, 0.08);
+    color: var(--dorado);
+    font-size: 21px;
+}
+
+.metric-card h3 {
+    margin: 18px 0 7px;
+    font-size: clamp(25px, 2.5vw, 33px);
+    font-weight: 850;
+    letter-spacing: -0.8px;
+    font-variant-numeric: tabular-nums;
+}
+
+.metric-card p {
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+
+/* 08. PANELES Y GRÁFICOS */
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, 1fr);
+    gap: 19px;
+}
+
+.panel {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.018),
+            transparent 55%
+        ),
+        var(--panel);
+
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.panel:hover {
+    border-color: rgba(213, 163, 72, 0.28);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-bottom: 22px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.panel-heading h3 {
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+.panel-heading .eyebrow {
+    margin-bottom: 6px;
+}
+
+.panel-heading p {
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.panel-tag {
+    padding: 6px 9px;
+    border: 1px solid rgba(213, 163, 72, 0.25);
+    border-radius: 6px;
+    background: rgba(213, 163, 72, 0.08);
+    color: var(--dorado-claro);
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.45px;
+    white-space: nowrap;
+}
+
+.performance-panel {
+    min-height: 320px;
+    background:
+        radial-gradient(
+            ellipse at 85% 100%,
+            rgba(213, 163, 72, 0.055),
+            transparent 50%
+        ),
+        var(--panel);
+}
+
+.activity-panel {
+    min-height: 320px;
+}
+
+.rosters-panel,
+.distribution-panel {
+    min-height: 230px;
+}
+
+.empty-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 210px;
+    padding: 20px;
+    text-align: center;
+}
+
+.performance-panel .empty-chart {
+    border-radius: 10px;
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        );
+    background-size: 30px 30px;
+}
+
+.chart-symbol {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(213, 163, 72, 0.22);
+    border-radius: 15px;
+    background: rgba(213, 163, 72, 0.08);
+    color: var(--dorado);
+    font-size: 28px;
+}
+
+.empty-chart strong {
+    font-size: 13px;
+}
+
+.empty-chart p {
+    max-width: 320px;
+    margin-top: 8px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 130px;
+    padding: 18px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.012);
+    text-align: center;
+}
+
+.empty-state-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(213, 163, 72, 0.18);
+    border-radius: 13px;
+    background: rgba(213, 163, 72, 0.07);
+    color: var(--dorado);
+    font-size: 27px;
+}
+
+.empty-state p {
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+
+/* 09. PIE DE PÁGINA */
+
+.page-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 28px;
+    padding: 20px 0;
+    border-top: 1px solid var(--borde);
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.footer-dot {
+    padding: 0 5px;
+    color: var(--dorado);
+}
+
+
+/* 10. BOTONES GENERALES */
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    flex-shrink: 0;
+    padding: 13px 19px;
+    border: 1px solid var(--dorado);
+    border-radius: 9px;
+    background: linear-gradient(
+        135deg,
+        var(--dorado-claro),
+        var(--dorado)
+    );
+    color: #171717;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 22px rgba(213, 163, 72, 0.2);
+}
+
+.primary-button:focus-visible,
+.roster-search:focus-visible {
+    outline: 2px solid var(--dorado-claro);
+    outline-offset: 3px;
+}
+
+
+/* 11. PANTALLA DE BIENVENIDA */
+
+.welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 30px 20px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(201, 154, 85, 0.10),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(79, 133, 137, 0.08),
+            transparent 35%
+        ),
+        #101216;
+
+    color: #F0EDE6;
+
+    opacity: 1;
+    transform: scale(1);
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+.welcome-screen.leaving {
+    opacity: 0;
+    transform: scale(1.02);
+    pointer-events: none;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    width: min(650px, 100%);
+    margin: auto;
+    text-align: center;
+    animation: welcomeAppear 0.8s ease both;
+}
+
+.welcome-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.welcome-logo {
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    border: 1px solid #C99A55;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #DDB66F, #A97835);
+    color: #111315;
+    font-size: 35px;
+    font-weight: 900;
+    box-shadow: 0 0 35px rgba(201, 154, 85, 0.15);
+}
+
+.welcome-brand-info h1 {
+    margin: 0;
+    color: #F0EDE6;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 5px;
+}
+
+.welcome-brand-info span {
+    display: block;
+    margin-top: 5px;
+    color: #C99A55;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+}
+
+.welcome-divider {
+    width: 65px;
+    height: 2px;
+    margin: 0 auto 32px;
+    background: #C99A55;
+}
+
+.welcome-eyebrow {
+    margin-bottom: 18px;
+    color: #C99A55;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.welcome-content h2 {
+    margin: 0;
+    color: #F3F0E8;
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+}
+
+.welcome-content h2 span {
+    color: #D5A348;
+}
+
+.welcome-description {
+    max-width: 470px;
+    margin: 24px auto 32px;
+    color: #A7A9AD;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.welcome-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    min-height: 56px;
+    padding: 0 27px;
+    border: 1px solid #D6AD68;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #DDB66F, #C99A55);
+    color: #171717;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.welcome-button span {
+    font-size: 20px;
+    transition: transform 0.25s ease;
+}
+
+.welcome-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(201, 154, 85, 0.2);
+}
+
+.welcome-button:hover span {
+    transform: translateX(4px);
+}
+
+.welcome-button:focus-visible {
+    outline: 2px solid #F0EDE6;
+    outline-offset: 5px;
+}
+
+.welcome-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    margin-top: 55px;
+    color: #777C82;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.welcome-footer-dot {
+    color: #C99A55;
+    font-size: 7px;
+}
+
+.welcome-decoration {
+    position: absolute;
+    right: -160px;
+    bottom: -250px;
+    width: 500px;
+    height: 500px;
+    pointer-events: none;
+}
+
+.welcome-decoration span {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(201, 154, 85, 0.10);
+    border-radius: 50%;
+}
+
+.welcome-decoration span:nth-child(2) {
+    inset: 45px;
+}
+
+.welcome-decoration span:nth-child(3) {
+    inset: 90px;
+}
+
+@keyframes welcomeAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.app.dashboard-appearing {
+    animation: dashboardAppear 0.45s ease both;
+}
+
+@keyframes dashboardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* 12. MÓDULO DE ROSTERS: RESUMEN Y LISTADO */
+
+.roster-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.roster-stat {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 145px;
+    padding: 23px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.025),
+            transparent 70%
+        ),
+        var(--panel);
+}
+
+.roster-stat::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 2px;
+    background: var(--dorado);
+    content: "";
+}
+
+.roster-stat-label {
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1px;
+}
+
+.roster-stat strong {
+    color: var(--texto);
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 750;
+}
+
+.roster-stat-note {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.roster-list-panel {
+    min-width: 0;
+    padding: 25px;
+}
+
+.roster-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 22px 0;
+}
+
+.roster-search {
+    width: min(100%, 390px);
+    padding: 12px 15px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    background: var(--fondo);
+    color: var(--texto);
+    font: inherit;
+    font-size: 13px;
+}
+
+.roster-search::placeholder {
+    color: var(--texto-secundario);
+    opacity: 0.8;
+}
+
+.roster-count {
+    flex-shrink: 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.roster-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+    padding: 30px 20px;
+    border: 1px dashed var(--borde);
+    border-radius: 11px;
+    text-align: center;
+}
+
+.roster-empty .module-symbol {
+    margin-bottom: 17px;
+}
+
+.roster-empty h3 {
+    margin: 0 0 10px;
+    color: var(--texto);
+    font-size: 17px;
+}
+
+.roster-empty p {
+    max-width: 430px;
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* 13. FORMULARIO DE ROSTERS */
+
+.roster-modal[hidden] {
+    display: none !important;
+}
+
+.roster-modal {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.roster-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(5px);
+}
+
+.roster-modal-content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 620px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 30px;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    background: var(--panel);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.roster-modal-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.roster-modal-heading h2 {
+    margin: 8px 0;
+    color: var(--texto);
+    font-size: 26px;
+}
+
+.roster-modal-heading p:last-child {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.roster-close-button {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+    background: var(--panel-secundario);
+    color: var(--texto);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.roster-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.roster-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.roster-field-full {
+    grid-column: 1 / -1;
+}
+
+.roster-field > span {
+    color: var(--texto);
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.roster-field input,
+.roster-field select,
+.roster-field textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 13px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    outline: none;
+    background: var(--fondo);
+    color: var(--texto);
+    font: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s ease;
+}
+
+.roster-field input:focus,
+.roster-field select:focus,
+.roster-field textarea:focus {
+    border-color: var(--dorado);
+}
+
+.roster-field input::placeholder,
+.roster-field textarea::placeholder {
+    color: var(--texto-secundario);
+    opacity: 0.75;
+}
+
+.roster-field textarea {
+    resize: vertical;
+}
+
+.roster-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--borde);
+}
+
+.roster-cancel-button {
+    padding: 12px 18px;
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+    background: transparent;
+    color: var(--texto);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.roster-cancel-button:hover,
+.roster-close-button:hover {
+    border-color: var(--dorado);
+}
+
+
+/* 14. TARJETAS DE ROSTERS */
+
+.roster-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.roster-item {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 19px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--panel-secundario);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.roster-item:hover {
+    border-color: var(--dorado-oscuro);
+    transform: translateY(-2px);
+}
+
+.roster-item-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    overflow: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid rgba(213, 163, 72, 0.45);
+    border-radius: 10px;
+    background: linear-gradient(
+        145deg,
+        rgba(213, 163, 72, 0.18),
+        rgba(213, 163, 72, 0.04)
+    );
+    color: var(--dorado-claro);
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.roster-team-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 32px;
+    max-height: 32px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 5px;
+}
+
+.roster-item-info {
+    min-width: 0;
+}
+
+.roster-item-info h4 {
+    margin: 0 0 6px;
+    overflow-wrap: anywhere;
+    color: var(--texto);
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.roster-item-info p {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.roster-item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.roster-item-meta > span {
+    padding: 7px 10px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.roster-item-meta .roster-status {
+    border-color: rgba(213, 163, 72, 0.35);
+    background: rgba(213, 163, 72, 0.09);
+    color: var(--dorado-claro);
+}
+
+.roster-item-description {
+    grid-column: 2 / -1;
+    margin: 0;
+    padding-top: 13px;
+    border-top: 1px solid var(--borde);
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+
+/* 15. FICHA DEL ROSTER */
+
+.modal-roster-detalle {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5, 7, 9, 0.88);
+    backdrop-filter: blur(8px);
+    overflow-y: auto;
+}
+
+.modal-roster-detalle.is-open {
+    display: flex;
+}
+
+.modal-roster-contenido {
+    position: relative;
+    width: 100%;
+    max-width: 780px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 34px;
+    color: #F5F5F5;
+    background: #111315;
+    border: 1px solid rgba(201, 154, 85, 0.4);
+    border-radius: 18px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+}
+
+.cerrar-detalle-roster {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    color: #FFFFFF;
+    background: #25282C;
+    border: 1px solid #3A3D41;
+    border-radius: 10px;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cerrar-detalle-roster:hover {
+    color: #111315;
+    background: #C99A55;
+}
+
+.detalle-roster-portada {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 10px 50px 30px 0;
+    border-bottom: 1px solid #303338;
+}
+
+.detalle-roster-logo {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 112px;
+    height: 112px;
+    overflow: hidden;
+    color: #FFFFFF;
+    background: linear-gradient(145deg, #E13A43, #811D25);
+    border: 2px solid #C99A55;
+    border-radius: 16px;
+    font-size: 48px;
+    font-weight: 900;
+}
+
+.detalle-roster-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalle-roster-etiqueta {
+    color: #C99A55;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.detalle-roster-identidad h2 {
+    margin: 9px 0 6px;
+    color: #FFFFFF;
+    font-size: clamp(25px, 4vw, 36px);
+    overflow-wrap: anywhere;
+}
+
+.detalle-roster-identidad p {
+    margin: 0;
+    color: #E13A43;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.detalle-roster-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 26px 0;
+}
+
+.detalle-roster-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding: 19px 16px;
+    background: #1A1D21;
+    border: 1px solid #303338;
+    border-radius: 12px;
+}
+
+.detalle-roster-stat span {
+    color: #A7A9AD;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.detalle-roster-stat strong {
+    color: #C99A55;
+    font-size: 20px;
+    overflow-wrap: anywhere;
+}
+
+.detalle-roster-descripcion,
+.detalle-roster-plantilla {
+    margin-top: 28px;
+}
+
+.detalle-roster-descripcion h3,
+.detalle-roster-plantilla h3 {
+    margin: 0 0 14px;
+    color: #FFFFFF;
+    font-size: 17px;
+}
+
+.detalle-roster-descripcion p {
+    margin: 0;
+    color: #B8BBC0;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.detalle-roster-lista-jugadores {
+    display: grid;
+    gap: 10px;
+}
+
+.detalle-roster-jugador {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: #1A1D21;
+    border: 1px solid #303338;
+    border-left: 3px solid #E13A43;
+    border-radius: 10px;
+}
+
+.detalle-roster-jugador-avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    color: #111315;
+    background: #C99A55;
+    border-radius: 10px;
+    font-weight: 900;
+}
+
+.detalle-roster-jugador-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.detalle-roster-jugador-info strong {
+    color: #FFFFFF;
+    overflow-wrap: anywhere;
+}
+
+.detalle-roster-jugador-info span {
+    color: #A7A9AD;
+    font-size: 12px;
+}
+
+.detalle-roster-sin-jugadores {
+    margin: 0;
+    padding: 22px;
+    color: #A7A9AD;
+    text-align: center;
+    background: #1A1D21;
+    border: 1px dashed #45484D;
+    border-radius: 10px;
+}
+
+
+/* 16. DASHBOARD COMPETITIVO DE ROSTERS */
+
+.dashboard-roster {
+    width: min(1100px, 94vw);
+    max-width: 1100px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+    background: #111316;
+    color: #F5F5F5;
+    border: 1px solid rgba(201, 154, 85, 0.35);
+    border-radius: 18px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.65);
+}
+
+.dashboard-roster .cerrar-modal-roster {
+    position: sticky;
+    top: 0;
+    float: right;
+    z-index: 10;
+    width: 38px;
+    height: 38px;
+    margin-bottom: -38px;
+    border: 1px solid #393D43;
+    border-radius: 10px;
+    background: #22252A;
+    color: #FFFFFF;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.dashboard-roster .cerrar-modal-roster:hover {
+    background: #D52B36;
+}
+
+.dashboard-roster-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 0 30px;
+    border-bottom: 1px solid #30343A;
+}
+
+.dashboard-roster-header .detalle-roster-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 105px;
+    height: 105px;
+    overflow: hidden;
+    border: 2px solid #C99A55;
+    border-radius: 16px;
+    background: #202329;
+    color: #C99A55;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.dashboard-roster-header .detalle-roster-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.dashboard-roster-identidad {
+    min-width: 0;
+}
+
+.dashboard-roster-identidad > span:first-child,
+.dashboard-roster-titulo > span {
+    color: #C99A55;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.dashboard-roster-identidad h2 {
+    margin: 8px 0 4px;
+    color: #FFFFFF;
+    font-size: clamp(27px, 4vw, 38px);
+    overflow-wrap: anywhere;
+}
+
+.dashboard-roster-identidad > p {
+    margin: 0;
+    color: #D52B36;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.dashboard-roster-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.dashboard-roster-meta span {
+    padding: 6px 10px;
+    border: 1px solid #393D43;
+    border-radius: 6px;
+    background: #202329;
+    color: #D8D9DC;
+    font-size: 12px;
+}
+
+.dashboard-roster-seccion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    padding-top: 15px;
+}
+
+.dashboard-roster-seccion > * {
+    width: 100%;
+}
+
+.dashboard-roster-titulo {
+    margin-bottom: 17px;
+}
+
+.dashboard-roster-titulo h3 {
+    margin: 7px 0 0;
+    color: #FFFFFF;
+    font-size: 22px;
+}
+
+.dashboard-roster-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.dashboard-roster-kpi {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    max-width: none;
+    overflow: hidden;
+    padding: 19px 16px;
+    border: 1px solid #30343A;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #202329, #17191D);
+}
+
+.dashboard-roster-kpi::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #C99A55;
+    content: "";
+}
+
+.dashboard-roster-kpi:nth-child(2)::before,
+.dashboard-roster-kpi:nth-child(4)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        #f5a623,
+        rgba(245, 166, 35, 0)
+    );
+
+    opacity: 0.75;
+}
+
+.dashboard-roster-kpi > span {
+    display: block;
+    color: #A5A8AF;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.dashboard-roster-kpi strong {
+    display: block;
+    margin: 13px 0 8px;
+    color: #FFFFFF;
+    font-size: clamp(24px, 3vw, 34px);
+    overflow-wrap: anywhere;
+}
+
+.dashboard-roster-kpi small {
+    color: #898E97;
+    font-size: 11px;
+}
+
+.dashboard-roster-seccion .dashboard-roster-kpi {
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 19px 16px;
+}
+
+.dashboard-roster-total-partidas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    margin-top: 14px;
+}
+
+.dashboard-roster-total-partidas .dashboard-roster-kpi {
+    grid-column: 2 / 4;
+    justify-self: center;
+    width: calc((100% - 14px) / 2);
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 19px 16px;
+    box-sizing: border-box;
+}
+
+.dashboard-roster-rankings,
+.dashboard-roster-graficas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.dashboard-roster-panel {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid #30343A;
+    border-radius: 12px;
+    background: #191B20;
+}
+
+.dashboard-roster-panel h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 20px;
+    color: #F5F5F5;
+    font-size: 15px;
+}
+
+.dashboard-roster-panel h4 > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(201, 154, 85, 0.13);
+    color: #C99A55;
+    font-size: 12px;
+}
+
+.dashboard-roster-ranking-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* RANKINGS INDIVIDUALES: KILLS Y DAÑO */
+
+.dashboard-roster-ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #30343A;
+    border-radius: 10px;
+    background: linear-gradient(110deg, #22252B, #191B20);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.dashboard-roster-ranking-item:hover {
+    border-color: rgba(201, 154, 85, 0.65);
+    transform: translateY(-2px);
+}
+
+/* Posición del jugador */
+
+.dashboard-roster-ranking-pos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #393D43;
+    border-radius: 8px;
+    background: #15171A;
+    color: #B8BBC2;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+/* Primeros tres puestos */
+
+.dashboard-roster-ranking-item:nth-child(1)
+.dashboard-roster-ranking-pos {
+    border-color: #C99A55;
+    background: rgba(201, 154, 85, 0.16);
+    color: #F0C674;
+}
+
+.dashboard-roster-ranking-item:nth-child(2)
+.dashboard-roster-ranking-pos {
+    border-color: #858B96;
+    color: #D9DDE4;
+}
+
+.dashboard-roster-ranking-item:nth-child(3)
+.dashboard-roster-ranking-pos {
+    border-color: #986C4D;
+    color: #D9A17A;
+}
+
+/* Foto del jugador */
+
+.dashboard-roster-ranking-foto {
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+    border: 2px solid #393D43;
+    border-radius: 50%;
+    background: #292C32;
+}
+
+.dashboard-roster-ranking-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nick y rol */
+
+.dashboard-roster-ranking-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.dashboard-roster-ranking-info strong {
+    overflow: hidden;
+    color: #F5F5F5;
+    font-size: 13px;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dashboard-roster-ranking-info small {
+    overflow: hidden;
+    color: #9297A0;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Kills o daño */
+
+.dashboard-roster-ranking-valor {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    text-align: right;
+}
+
+.dashboard-roster-ranking-valor strong {
+    color: #E6B765;
+    font-size: 19px;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+}
+
+.dashboard-roster-ranking-valor small {
+    color: #9297A0;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.dashboard-roster-vacio {
+    margin: 0;
+    padding: 20px 12px;
+    border: 1px dashed #3B3E45;
+    border-radius: 8px;
+    color: #9297A0;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.dashboard-roster-chart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    min-height: 180px;
+}
+
+
+/* =====================================================
+   LOPZEK — GRÁFICAS COMPARATIVAS PREMIUM
+===================================================== */
+
+.dashboard-roster-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-height: 180px;
+    padding: 4px 0;
+}
+
+.dashboard-roster-barra-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    animation: rosterBarReveal 0.45s ease both;
+}
+
+.dashboard-roster-barra-cabecera {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.dashboard-roster-barra-posicion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #343840;
+    border-radius: 8px;
+    background: #22252B;
+    color: #9CA2AD;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.dashboard-roster-barra-posicion.is-first {
+    border-color: #8C6A3A;
+    background: #352A1D;
+    color: #D9AA63;
+}
+
+.dashboard-roster-barra-jugador {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.dashboard-roster-barra-foto {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border: 1px solid #3B3F47;
+    border-radius: 10px;
+    background: #25282E;
+}
+
+.dashboard-roster-barra-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dashboard-roster-barra-nombre {
+    overflow: hidden;
+    color: #E5E7EB;
+    font-size: 12px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dashboard-roster-barra-valor {
+    color: #F5F5F5;
+    font-size: 15px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.dashboard-roster-chart-kills
+.dashboard-roster-barra-valor {
+    color: #D9AA63;
+}
+
+.dashboard-roster-chart-damage
+.dashboard-roster-barra-valor {
+    color: #E45C65;
+}
+
+.dashboard-roster-barra-fondo {
+    width: 100%;
+    height: 7px;
+    margin-left: 45px;
+    width: calc(100% - 45px);
+    overflow: hidden;
+    border-radius: 20px;
+    background: #2B2E35;
+}
+
+.dashboard-roster-barra-progreso {
+    height: 100%;
+    min-width: 0;
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+.dashboard-roster-chart-kills .dashboard-roster-barra-progreso {
+    background: linear-gradient(90deg, #80603A, #D9AA63);
+}
+
+.dashboard-roster-chart-damage .dashboard-roster-barra-progreso {
+    background: linear-gradient(90deg, #8D2932, #E45C65);
+}
+
+@keyframes rosterBarReveal {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-roster-rankings,
+    .dashboard-roster-graficas {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dashboard-roster-panel {
+        padding: 16px;
+    }
+}
+
+/* 17. RESPONSIVE: TABLETAS Y PANTALLAS MEDIANAS */
+
+@media (max-width: 1150px) {
+    :root {
+        --sidebar-ancho: 220px;
+    }
+
+    .main-content {
+        padding: 0 23px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .analytics-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .dashboard-roster {
+        padding: 24px 20px;
+    }
+
+    .dashboard-roster-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-roster-rankings,
+    .dashboard-roster-graficas {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* 18. RESPONSIVE: CELULARES Y TABLETAS PEQUEÑAS */
+
+@media (max-width: 760px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.visible {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        background: rgba(0, 0, 0, 0.68);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 0 19px;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--borde);
+        border-radius: 9px;
+        background: var(--panel);
+        color: var(--texto);
+    }
+
+    .topbar {
+        justify-content: flex-start;
+        gap: 14px;
+    }
+
+    .topbar-right {
+        gap: 10px;
+        margin-left: auto;
+    }
+
+    .system-status {
+        font-size: 0;
+    }
+
+    .system-status .status-indicator {
+        width: 9px;
+        height: 9px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .date-label {
+        align-self: flex-start;
+    }
+
+    .dashboard-content {
+        padding-top: 24px;
+    }
+
+    .roster-item {
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 13px;
+        padding: 15px;
+    }
+
+    .roster-item-mark {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        font-size: 20px;
+    }
+
+    .roster-item-meta {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+
+    .roster-item-description {
+        grid-column: 1 / -1;
+    }
+
+    .module-header {
+        flex-wrap: wrap;
+    }
+
+    .roster-summary {
+        gap: 12px;
+    }
+
+    .roster-stat {
+        padding: 17px;
+    }
+}
+
+
+/* 19. RESPONSIVE: CELULARES */
+
+@media (max-width: 600px) {
+    .welcome-screen {
+        padding: 24px;
+    }
+
+    .welcome-brand {
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .welcome-logo {
+        width: 52px;
+        height: 52px;
+        font-size: 29px;
+    }
+
+    .welcome-brand-info h1 {
+        font-size: 25px;
+        letter-spacing: 4px;
+    }
+
+    .welcome-brand-info span {
+        font-size: 8px;
+        letter-spacing: 1.8px;
+    }
+
+    .welcome-divider {
+        margin-bottom: 28px;
+    }
+
+    .welcome-eyebrow {
+        font-size: 9px;
+        letter-spacing: 2px;
+        line-height: 1.7;
+    }
+
+    .welcome-content h2 {
+        font-size: clamp(39px, 11vw, 58px);
+        letter-spacing: -1.5px;
+    }
+
+    .welcome-description {
+        margin: 20px auto 28px;
+        font-size: 14px;
+    }
+
+    .welcome-button {
+        width: 100%;
+        max-width: 340px;
+        gap: 12px;
+        padding: 0 16px;
+        font-size: 10px;
+        letter-spacing: 0.8px;
+    }
+
+    .welcome-footer {
+        gap: 8px;
+        margin-top: 38px;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .welcome-decoration {
+        right: -300px;
+        bottom: -300px;
+    }
+
+    .modal-roster-detalle {
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+    .modal-roster-contenido {
+        max-height: calc(100vh - 24px);
+        padding: 22px 17px;
+        border-radius: 14px;
+    }
+
+    .detalle-roster-portada {
+        align-items: flex-start;
+        gap: 14px;
+        padding-right: 30px;
+    }
+
+    .detalle-roster-logo {
+        width: 76px;
+        height: 76px;
+        border-radius: 12px;
+        font-size: 34px;
+    }
+
+    .detalle-roster-etiqueta {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .detalle-roster-identidad h2 {
+        font-size: 23px;
+    }
+
+    .detalle-roster-estadisticas {
+        grid-template-columns: 1fr;
+        gap: 9px;
+        margin: 20px 0;
+    }
+
+    .detalle-roster-stat {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px;
+    }
+
+    .detalle-roster-stat strong {
+        text-align: right;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 560px) {
+    .roster-modal {
+        padding: 12px;
+    }
+
+    .roster-modal-content {
+        max-height: calc(100vh - 24px);
+        padding: 21px;
+    }
+
+    .roster-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .roster-field-full {
+        grid-column: auto;
+    }
+
+    .roster-form-actions {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 0 14px;
+    }
+
+    .topbar {
+        min-height: 70px;
+        gap: 10px;
+    }
+
+    .breadcrumb {
+        gap: 6px;
+        font-size: 10px;
+    }
+
+    .user-avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .dashboard-content {
+        padding-top: 21px;
+    }
+
+    .page-heading h2 {
+        font-size: 25px;
+    }
+
+    .page-description {
+        font-size: 12px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .metric-card {
+        padding: 19px;
+    }
+
+    .metric-card h3 {
+        font-size: 28px;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    .panel-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .page-footer {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .roster-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .roster-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .roster-search {
+        width: 100%;
+    }
+
+    .roster-list-panel {
+        padding: 17px;
+    }
+
+    .module-header .primary-button {
+        width: 100%;
+    }
+
+    .dashboard-roster {
+        width: 96vw;
+        max-height: 94vh;
+        padding: 20px 14px;
+        border-radius: 12px;
+    }
+
+    .dashboard-roster-header {
+        align-items: flex-start;
+        gap: 14px;
+        padding-top: 35px;
+    }
+
+    .dashboard-roster-header .detalle-roster-logo {
+        width: 68px;
+        height: 68px;
+        border-radius: 12px;
+        font-size: 28px;
+    }
+
+    .dashboard-roster-identidad > span:first-child {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .dashboard-roster-identidad h2 {
+        font-size: 24px;
+    }
+
+    .dashboard-roster-titulo h3 {
+        font-size: 19px;
+    }
+
+    .dashboard-roster-kpi {
+        padding: 16px 12px;
+    }
+
+    .dashboard-roster-kpi > span {
+        font-size: 9px;
+        letter-spacing: 0.5px;
+    }
+
+    .dashboard-roster .detalle-roster-lista-jugadores {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-roster-panel {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .welcome-brand-info h1 {
+        font-size: 22px;
+        letter-spacing: 3px;
+    }
+
+    .welcome-brand-info span {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .welcome-content h2 {
+        font-size: 36px;
+    }
+
+    .dashboard-roster-header {
+        gap: 10px;
+    }
+
+    .dashboard-roster-header .detalle-roster-logo {
+        width: 58px;
+        height: 58px;
+        font-size: 24px;
+    }
+
+    .dashboard-roster-identidad h2 {
+        font-size: 21px;
+    }
+}
+
+
+/* 20. ACCESIBILIDAD: MOVIMIENTO REDUCIDO */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .welcome-content,
+    .app-page,
+    .app.dashboard-appearing {
+        animation: none;
+    }
+
+    .welcome-screen {
+        transition: none;
+    }
+
+    .welcome-button,
+    .welcome-button span,
+    .metric-card,
+    .panel,
+    .roster-item {
+        transition: none;
+    }
+
+    .welcome-button:hover,
+    .metric-card:hover,
+    .roster-item:hover {
+        transform: none;
+    }
+}
+
+/* BOTÓN PARA ELIMINAR JUGADORES */
+
+.player-delete-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    padding: 7px 11px;
+    background: transparent;
+    color: #a7a7ad;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.player-delete-button::before {
+    content: "⌫";
+    font-size: 15px;
+}
+
+.player-delete-button:hover {
+    color: #ff5b64;
+    background: rgba(255, 65, 75, 0.07);
+    border-color: rgba(255, 65, 75, 0.3);
+}
+
+.player-delete-button:focus-visible {
+    outline: 2px solid #d93643;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   VENTANA DE CONFIRMACIÓN PARA ELIMINAR
+========================================= */
+
+.modal-eliminar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(5, 7, 12, 0.82);
+    backdrop-filter: blur(5px);
+}
+
+.modal-eliminar-overlay[hidden] {
+    display: none;
+}
+
+.modal-eliminar {
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    background: #17191f;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: aparecerModalEliminar 0.2s ease-out;
+}
+
+.modal-eliminar-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 18px;
+    color: #ff5b64;
+    background: rgba(255, 65, 75, 0.10);
+    border: 1px solid rgba(255, 65, 75, 0.28);
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.modal-eliminar h2 {
+    margin: 0 0 12px;
+    color: #f3f3f5;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.modal-eliminar p {
+    margin: 0;
+    color: #a7a7b0;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.modal-eliminar p strong {
+    color: #e5c16c;
+}
+
+.modal-eliminar-acciones {
+    display: flex;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.modal-eliminar-acciones button {
+    flex: 1;
+    min-height: 42px;
+    padding: 10px 14px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#cancelarEliminarJugador {
+    color: #d0d0d5;
+    background: #22252d;
+    border: 1px solid #393c45;
+}
+
+#cancelarEliminarJugador:hover {
+    background: #2c3039;
+    border-color: #555966;
+}
+
+#confirmarEliminarJugador {
+    color: #ffffff;
+    background: #c92f3c;
+    border: 1px solid #e3424f;
+}
+
+#confirmarEliminarJugador:hover {
+    background: #e13b49;
+}
+
+.modal-eliminar-acciones button:focus-visible {
+    outline: 2px solid #e5c16c;
+    outline-offset: 3px;
+}
+
+@keyframes aparecerModalEliminar {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 420px) {
+    .modal-eliminar {
+        padding: 24px 18px;
+    }
+
+    .modal-eliminar-acciones {
+        gap: 8px;
+    }
+
+    .modal-eliminar-acciones button {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+}
+
+
+/* ==========================================
+   LOPZEK — BOTÓN ELIMINAR ROSTER
+========================================== */
+
+.roster-delete-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 9px 15px;
+    border: 1px solid rgba(224, 91, 91, 0.35);
+    border-radius: 10px;
+
+    background: rgba(224, 91, 91, 0.08);
+    color: #E78383;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+
+    cursor: pointer;
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.roster-delete-button::before {
+    content: "×";
+    font-size: 18px;
+    line-height: 12px;
+}
+
+.roster-delete-button:hover {
+    background: rgba(224, 91, 91, 0.16);
+    color: #FFAAAA;
+    border-color: rgba(224, 91, 91, 0.7);
+    box-shadow: 0 4px 14px rgba(224, 91, 91, 0.12);
+    transform: translateY(-2px);
+}
+
+.roster-delete-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.roster-delete-button:focus-visible {
+    outline: 2px solid #C99A55;
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .roster-delete-button {
+        padding: 8px 12px;
+        font-size: 11px;
+        border-radius: 8px;
+    }
+}
+
+
+/* ==========================================
+   LOPZEK — CONTROL DE VISIBILIDAD
+========================================== */
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================
+   LOPZEK — PANTALLA DE INICIO DE SESIÓN
+========================================== */
+
+.login-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 24px 18px;
+    overflow-y: auto;
+    background:
+        radial-gradient(
+            circle at 80% 15%,
+            rgba(201, 154, 85, 0.10),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(79, 133, 137, 0.10),
+            transparent 34%
+        ),
+        #101216;
+    color: #F0EDE6;
+}
+
+.login-card {
+    width: min(100%, 430px);
+    margin: auto;
+    padding: clamp(24px, 5vw, 38px);
+    border: 1px solid rgba(201, 154, 85, 0.25);
+    border-radius: 18px;
+    background: linear-gradient(145deg, #1A1D22, #131519);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    animation: welcomeAppear 0.5s ease both;
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 25px;
+}
+
+.login-brand h1 {
+    margin: 0;
+    color: #F0EDE6;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+.login-brand p {
+    margin: 5px 0 0;
+    color: #C99A55;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.login-card .welcome-divider {
+    margin-bottom: 25px;
+}
+
+.login-card > h2 {
+    margin: 0 0 9px;
+    color: #F3F0E8;
+    font-size: 27px;
+    text-align: center;
+}
+
+.login-description {
+    margin: 0 0 27px;
+    color: #A7A9AD;
+    font-size: 13px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#loginForm label {
+    margin-top: 7px;
+    color: #E5E1D8;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+#loginForm input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #353941;
+    border-radius: 9px;
+    outline: none;
+    background: #101216;
+    color: #F0EDE6;
+    font: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#loginForm input::placeholder {
+    color: #777C82;
+}
+
+#loginForm input:focus {
+    border-color: #C99A55;
+    box-shadow: 0 0 0 3px rgba(201, 154, 85, 0.10);
+}
+
+#loginMessage {
+    min-height: 18px;
+    margin: 5px 0;
+    color: #E78383;
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+#loginForm .welcome-button {
+    width: 100%;
+    margin-top: 5px;
+}
+
+#loginForm .welcome-button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+    box-shadow: none;
+}
+
+.login-back {
+    align-self: center;
+    margin-top: 9px;
+    padding: 10px 14px;
+    border: 0;
+    background: transparent;
+    color: #A7A9AD;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.login-back:hover {
+    color: #C99A55;
+}
+
+.login-back:focus-visible {
+    outline: 2px solid #C99A55;
+    outline-offset: 3px;
+    border-radius: 5px;
+}
+
+@media (max-width: 420px) {
+    .login-screen {
+        align-items: center;
+        padding: 18px 14px;
+    }
+
+    .login-card {
+        padding: 24px 19px;
+        border-radius: 14px;
+    }
+
+    .login-brand h1 {
+        font-size: 24px;
+        letter-spacing: 3px;
+    }
+
+    .login-card > h2 {
+        font-size: 24px;
+    }
+}
+
+
+/* ==========================================
+   LOPZEK — PERFIL COMPETITIVO INDIVIDUAL
+========================================== */
+
+.player-profile-modal[hidden] {
+    display: none !important;
+}
+
+.player-profile-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    color: #F3F0E8;
+    font-family: inherit;
+}
+
+.player-profile-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 7, 10, 0.88);
+    backdrop-filter: blur(8px);
+}
+
+.player-profile-container {
+    position: relative;
+    z-index: 1;
+    width: min(1180px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    background: #101216;
+    border: 1px solid #303540;
+    border-radius: 18px;
+    box-shadow: 0 25px 90px rgba(0, 0, 0, 0.6);
+    scrollbar-color: #9D722B #191C22;
+    scrollbar-width: thin;
+}
+
+.player-profile-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 17px 30px;
+    background: rgba(16, 18, 22, 0.96);
+    border-bottom: 1px solid #303540;
+    backdrop-filter: blur(12px);
+}
+
+.player-profile-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.player-profile-breadcrumb span:first-child {
+    color: #D5A348;
+}
+
+.player-profile-close {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    color: #F3F0E8;
+    background: #20242C;
+    border: 1px solid #303540;
+    border-radius: 10px;
+    font-size: 27px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.player-profile-close:hover {
+    color: #101216;
+    background: #D5A348;
+}
+
+.player-profile-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 38px 34px;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 95% 0%, rgba(213, 163, 72, 0.13), transparent 45%),
+        linear-gradient(125deg, #191C22, #101216 75%);
+    border-bottom: 1px solid #303540;
+}
+
+.player-profile-header::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #9D722B, #F0C875, transparent 85%);
+    content: "";
+}
+
+.player-profile-avatar {
+    position: relative;
+    width: 190px;
+    height: 230px;
+    min-width: 190px;
+    flex: 0 0 190px;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+
+.player-profile-avatar img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 0;
+    z-index: 2;
+}
+
+.player-profile-avatar img[hidden] {
+    display: none !important;
+}
+
+.player-profile-avatar span {
+    font-size: 46px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.player-profile-identity {
+    flex: 1;
+    min-width: 0;
+}
+
+.player-profile-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: #D5A348;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+}
+
+.player-profile-identity h2 {
+    margin: 0;
+    color: #F3F0E8;
+    font-size: clamp(25px, 4vw, 39px);
+    font-weight: 900;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.player-profile-identity > p {
+    margin: 8px 0 16px;
+    color: #A5A9B2;
+    font-size: 14px;
+}
+
+.player-profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.player-profile-tags span {
+    padding: 7px 10px;
+    color: #D8D0C2;
+    background: #20242C;
+    border: 1px solid #303540;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.player-profile-tags span:first-child {
+    color: #F0C875;
+    border-color: rgba(213, 163, 72, 0.4);
+}
+
+.player-profile-roster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+    margin-top: 18px;
+}
+
+.player-profile-roster > span,
+.player-profile-index > span,
+.player-profile-index small {
+    color: #A5A9B2;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.player-profile-roster strong {
+    color: #F0C875;
+    font-size: 13px;
+}
+
+.player-profile-index {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+    min-width: 120px;
+    padding-left: 20px;
+    border-left: 1px solid #303540;
+}
+
+.player-profile-index strong {
+    max-width: 170px;
+    color: #F0C875;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+    text-align: right;
+}
+
+.player-profile-index small {
+    text-align: right;
+    font-size: 8px;
+}
+
+.player-profile-section {
+    padding: 30px 34px;
+    border-bottom: 1px solid #252932;
+}
+
+.player-profile-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 21px;
+}
+
+.player-profile-section-heading > div > span {
+    color: #D5A348;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.player-profile-section-heading h3 {
+    margin: 7px 0 0;
+    color: #F3F0E8;
+    font-size: clamp(19px, 2.5vw, 25px);
+    font-weight: 800;
+}
+
+.player-profile-section-heading > p {
+    margin: 0;
+    color: #A5A9B2;
+    font-size: 11px;
+    text-align: right;
+}
+
+.player-profile-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.player-profile-kpi {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    padding: 21px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #20242C, #191C22);
+    border: 1px solid #303540;
+    border-radius: 11px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.player-profile-kpi:hover {
+    transform: translateY(-3px);
+    border-color: #9D722B;
+}
+
+.player-profile-kpi::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 2px;
+    background: #D5A348;
+    content: "";
+}
+
+.player-profile-kpi > span {
+    color: #A5A9B2;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.player-profile-kpi strong {
+    color: #F0C875;
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 900;
+    line-height: 1;
+    overflow-wrap: anywhere;
+}
+
+.player-profile-kpi small {
+    color: #A5A9B2;
+    font-size: 11px;
+}
+
+.player-profile-data-note {
+    margin: 17px 0 0;
+    padding: 12px 15px;
+    color: #A5A9B2;
+    background: rgba(213, 163, 72, 0.05);
+    border-left: 2px solid #9D722B;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.player-profile-analysis-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 15px;
+}
+
+.player-profile-panel {
+    min-width: 0;
+    padding: 22px;
+    background: #191C22;
+    border: 1px solid #303540;
+    border-radius: 11px;
+}
+
+.player-profile-panel-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.player-profile-panel-heading h4 {
+    margin: 0;
+    color: #F3F0E8;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.player-profile-panel-tag {
+    padding: 6px 8px;
+    color: #F0C875;
+    background: rgba(213, 163, 72, 0.08);
+    border: 1px solid rgba(213, 163, 72, 0.25);
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.player-profile-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 175px;
+    padding: 20px;
+    text-align: center;
+}
+
+.player-profile-empty > span {
+    margin-bottom: 13px;
+    color: #D5A348;
+    font-size: 32px;
+}
+
+.player-profile-empty strong {
+    color: #F3F0E8;
+    font-size: 13px;
+}
+
+.player-profile-empty p {
+    max-width: 330px;
+    margin: 9px 0 0;
+    color: #A5A9B2;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.player-profile-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-color: #9D722B #191C22;
+    scrollbar-width: thin;
+}
+
+.player-profile-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.player-profile-table th {
+    padding: 13px 15px;
+    color: #D5A348;
+    background: #20242C;
+    border-bottom: 1px solid #3A3F49;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.player-profile-table td {
+    padding: 16px 15px;
+    color: #A5A9B2;
+    border-bottom: 1px solid #303540;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.player-profile-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.player-profile-table tbody tr:hover td {
+    background: rgba(213, 163, 72, 0.035);
+}
+
+.player-profile-table td[colspan] {
+    padding: 25px 15px;
+    text-align: center;
+}
+
+.player-profile-notes {
+    margin: 0;
+    color: #D8D0C2;
+    font-size: 13px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.player-profile-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px 34px;
+    color: #A5A9B2;
+    background: #0C0E11;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.player-profile-footer span:first-child span {
+    padding: 0 5px;
+    color: #D5A348;
+}
+
+/* Tarjetas de jugadores: interacción con el perfil */
+
+.player-item {
+    cursor: pointer;
+}
+
+.player-item:focus-visible {
+    outline: 2px solid #D5A348;
+    outline-offset: 3px;
+}
+
+/* =========================================
+   LOPZEK — DISEÑO DE ESTADÍSTICAS
+========================================= */
+
+.stats-workspace {
+    width: 100%;
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 30px;
+    background: #191C22;
+    border: 1px solid #303540;
+    border-radius: 18px;
+    box-sizing: border-box;
+}
+
+.stats-section-heading {
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #303540;
+}
+
+.stats-section-heading h2 {
+    margin: 0 0 10px;
+    color: #F3F0E8;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.stats-section-heading p {
+    margin: 0;
+    color: #A5A9B2;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.stats-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.stats-form label {
+    display: block;
+    margin-bottom: 9px;
+    color: #F3F0E8;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stats-form input,
+.stats-form select {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 13px;
+    color: #F3F0E8;
+    background: #20242C;
+    border: 1px solid #303540;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.stats-form input:focus,
+.stats-form select:focus {
+    border-color: #D5A348;
+    box-shadow: 0 0 0 3px rgba(213, 163, 72, 0.12);
+}
+
+.stats-form select option {
+    color: #F3F0E8;
+    background: #20242C;
+}
+
+#statsPlayersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#statsPlayersContainer > * {
+    min-width: 0;
+}
+
+#saveMatchStatsButton {
+    min-height: 48px;
+    padding: 13px 22px;
+    color: #111315;
+    background: #D5A348;
+    border: none;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#saveMatchStatsButton:hover {
+    background: #F0C875;
+    transform: translateY(-1px);
+}
+
+#matchStatsMessage {
+    color: #A5A9B2;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .stats-workspace {
+        margin: 14px auto;
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .stats-section-heading h2 {
+        font-size: 22px;
+    }
+
+    #saveMatchStatsButton {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   LOPZEK — DISEÑO DE ESTADÍSTICAS
+========================================= */
+
+.stats-workspace {
+    width: 100%;
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 30px;
+    background: #191C22;
+    border: 1px solid #303540;
+    border-radius: 18px;
+    box-sizing: border-box;
+}
+
+.stats-section-heading {
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #303540;
+}
+
+.stats-section-heading h2 {
+    margin: 0 0 10px;
+    color: #F3F0E8;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.stats-section-heading p {
+    margin: 0;
+    color: #A5A9B2;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.stats-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.stats-form label {
+    display: block;
+    margin-bottom: 9px;
+    color: #F3F0E8;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stats-form input,
+.stats-form select {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 13px;
+    color: #F3F0E8;
+    background: #20242C;
+    border: 1px solid #303540;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.stats-form input:focus,
+.stats-form select:focus {
+    border-color: #D5A348;
+    box-shadow: 0 0 0 3px rgba(213, 163, 72, 0.12);
+}
+
+.stats-form select option {
+    color: #F3F0E8;
+    background: #20242C;
+}
+
+#statsPlayersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#statsPlayersContainer > * {
+    min-width: 0;
+}
+
+#saveMatchStatsButton {
+    min-height: 48px;
+    padding: 13px 22px;
+    color: #111315;
+    background: #D5A348;
+    border: none;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#saveMatchStatsButton:hover {
+    background: #F0C875;
+    transform: translateY(-1px);
+}
+
+#matchStatsMessage {
+    color: #A5A9B2;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .stats-workspace {
+        margin: 14px auto;
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .stats-section-heading h2 {
+        font-size: 22px;
+    }
+
+    #saveMatchStatsButton {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   LOPZEK — ESTADÍSTICAS COMPACTAS
+========================================= */
+
+#statsPlayersContainer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+#statsPlayersContainer > * {
+    min-width: 0;
+    padding: 18px;
+    background: #20242C;
+    border: 1px solid #303540;
+    border-radius: 14px;
+}
+
+/* Distribución compacta de los campos */
+#statsPlayersContainer > * label {
+    margin-bottom: 6px;
+    font-size: 12px;
+}
+
+#statsPlayersContainer > * input,
+#statsPlayersContainer > * select {
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+/* Si cada jugador contiene varios campos */
+#statsPlayersContainer > * .player-stats-fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+/* Tabletas y móviles */
+@media (max-width: 900px) {
+    #statsPlayersContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    #statsPlayersContainer > * .player-stats-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================
+   LOPZEK — TARJETAS COMPACTAS DE JUGADORES
+========================================= */
+
+#statsPlayersContainer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    align-items: start;
+}
+
+#statsPlayersContainer .stats-player-row {
+    min-width: 0;
+    padding: 18px;
+    background: linear-gradient(145deg, #20242C, #191C22);
+    border: 1px solid #303540;
+    border-radius: 14px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+#statsPlayersContainer .stats-player-row:hover {
+    border-color: #9D722B;
+    transform: translateY(-2px);
+}
+
+/* Identidad del jugador */
+
+#statsPlayersContainer .stats-player-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #303540;
+}
+
+#statsPlayersContainer .stats-player-identity strong {
+    color: #F0C875;
+    font-size: 17px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+#statsPlayersContainer .stats-player-identity span {
+    color: #A5A9B2;
+    font-size: 12px;
+}
+
+/* Estadísticas en columnas */
+
+#statsPlayersContainer .stats-player-fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 10px;
+}
+
+#statsPlayersContainer .stats-player-fields label {
+    min-width: 0;
+    margin: 0;
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+#statsPlayersContainer .stats-player-fields input {
+    width: 100%;
+    min-width: 0;
+    min-height: 38px;
+    margin-top: 6px;
+    padding: 8px;
+    color: #F3F0E8;
+    background: #101216;
+    border: 1px solid #303540;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#statsPlayersContainer .stats-player-fields input:focus {
+    border-color: #D5A348;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(213, 163, 72, 0.12);
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 1000px) {
+    #statsPlayersContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    #statsPlayersContainer .stats-player-row {
+        padding: 14px;
+    }
+
+    #statsPlayersContainer .stats-player-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* LOPZEK — DISTRIBUCIÓN DE CAMPOS DE PARTIDA */
+.stats-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    padding: 24px;
+    background: #15181E;
+    border: 1px solid #303540;
+    border-radius: 14px;
+    box-sizing: border-box;
+}
+
+.stats-form-grid .form-group {
+    min-width: 0;
+}
+
+@media (max-width: 560px) {
+    .stats-form-grid {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 16px;
+    }
+}
+
+/* ==========================================
+   LOPZEK — CENTRO DE INFORMES
+========================================== */
+
+.reports-workspace {
+    width: 100%;
+    max-width: 1400px;
+    margin: 28px auto;
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   LOPZEK — INFORMES
+   Tarjetas, paneles y distribución
+========================================== */
+
+.reports-overview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 26px;
+}
+
+.reports-card {
+    position: relative;
+    min-width: 0;
+    min-height: 154px;
+    padding: 23px 22px;
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        #1D2129 0%,
+        #171A20 100%
+    );
+
+    border: 1px solid #303540;
+    border-radius: 14px;
+    box-sizing: border-box;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+/* Detalle dorado superior */
+.reports-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 22px;
+
+    width: 42px;
+    height: 3px;
+
+    background: #D5A348;
+    border-radius: 0 0 4px 4px;
+}
+
+.reports-card:hover {
+    transform: translateY(-3px);
+    border-color: #66532D;
+    background: linear-gradient(
+        145deg,
+        #222731 0%,
+        #191C22 100%
+    );
+}
+
+.reports-card-label {
+    margin: 0 0 12px;
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+}
+
+.reports-card-value {
+    margin: 0;
+    color: #F0C875;
+    font-size: clamp(21px, 2vw, 25px);
+    font-weight: 800;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.reports-card-description {
+    margin: 10px 0 0;
+    color: #A5A9B2;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+/* Distribución del calendario y registro diario */
+.reports-main-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.85fr) minmax(0, 1.5fr);
+    gap: 20px;
+    align-items: stretch;
+}
+
+.reports-panel {
+    min-width: 0;
+    padding: 24px;
+
+    background: linear-gradient(
+        150deg,
+        #1B1E25 0%,
+        #171A20 100%
+    );
+
+    border: 1px solid #303540;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.reports-panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #303540;
+}
+
+.reports-panel-heading h3 {
+    margin: 0;
+    color: #F3F0E8;
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+}
+
+.reports-panel-heading p {
+    margin: 7px 0 0;
+    color: #A5A9B2;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.reports-gold-text {
+    color: #D5A348 !important;
+    font-weight: 700;
+}
+
+.reports-divider {
+    height: 1px;
+    margin: 20px 0;
+    background: #303540;
+}
+
+.reports-empty-message {
+    padding: 26px 18px;
+    color: #A5A9B2;
+    font-size: 12px;
+    line-height: 1.8;
+    text-align: center;
+
+    background: #15181E;
+    border: 1px dashed #363B46;
+    border-radius: 11px;
+}
+
+/* Filtros del centro de informes */
+.reports-filters-panel {
+    margin-bottom: 22px;
+}
+
+.reports-filters-grid {
+    gap: 16px;
+}
+
+.reports-filter-field {
+    gap: 9px;
+}
+
+.reports-filter-field label {
+    color: #C1C4CB;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.4px;
+}
+
+.reports-filter-field select {
+    min-height: 44px;
+    padding: 10px 13px;
+    color: #F3F0E8;
+    background: #12151A;
+    border: 1px solid #363B46;
+    border-radius: 9px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.reports-filter-field select:focus {
+    border-color: #D5A348;
+}
+
+.reports-filter-hint {
+    margin-top: 15px;
+    color: #9297A1;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* Adaptación a pantallas medianas */
+@media (max-width: 900px) {
+    .reports-overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .reports-main-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Adaptación a móviles */
+@media (max-width: 560px) {
+    .reports-overview {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .reports-card {
+        min-height: auto;
+        padding: 21px 19px;
+    }
+
+    .reports-panel {
+        padding: 17px;
+    }
+
+    .reports-panel-heading {
+        align-items: flex-start;
+        margin-bottom: 17px;
+    }
+
+    .reports-filters-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ==========================================
+   LOPZEK — CALENDARIO E INFORMES
+========================================== */
+
+/* Lista de jornadas */
+.reports-day-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px;
+    color: #F3F0E8;
+    text-align: left;
+    background: #15181E;
+    border: 1px solid #303540;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-sizing: border-box;
+}
+
+.reports-day-item:hover {
+    background: #20242C;
+    border-color: #9D722B;
+}
+
+.reports-day-item.active {
+    background: #29251D;
+    border-color: #D5A348;
+}
+
+.reports-day-name {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.reports-day-date {
+    color: #A5A9B2;
+    font-size: 12px;
+}
+
+.reports-day-count {
+    flex-shrink: 0;
+    padding: 6px 9px;
+    color: #F0C875;
+    font-size: 11px;
+    font-weight: 700;
+    background: #302819;
+    border-radius: 7px;
+}
+
+/* Controles del calendario */
+.reports-calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.reports-calendar-header button,
+.reports-period-controls button {
+    padding: 9px 12px;
+    color: #F0C875;
+    background: #20242C;
+    border: 1px solid #303540;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reports-calendar-header button:hover,
+.reports-period-controls button:hover {
+    background: #302819;
+    border-color: #D5A348;
+}
+
+/* Cuadrícula del calendario */
+.reports-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.reports-calendar-weekday {
+    padding: 8px 0;
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.reports-calendar-day {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 42px;
+    padding: 5px;
+    color: #F3F0E8;
+    background: #15181E;
+    border: 1px solid #303540;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reports-calendar-day:hover {
+    border-color: #D5A348;
+    background: #29251D;
+}
+
+.reports-calendar-day.has-matches::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    width: 5px;
+    height: 5px;
+    background: #D5A348;
+    border-radius: 50%;
+}
+
+.reports-calendar-day.selected {
+    color: #111315;
+    font-weight: 800;
+    background: #F0C875;
+    border-color: #F0C875;
+}
+
+.reports-calendar-day.selected::after {
+    background: #111315;
+}
+
+.reports-calendar-day.empty {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Selector de período */
+.reports-period-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.reports-period-controls button.active {
+    color: #111315;
+    background: #F0C875;
+    border-color: #F0C875;
+}
+
+/* Indicadores estadísticos */
+
+
+.reports-summary-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-flow: row;
+    gap: 16px;
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+.reports-summary-card {
+    min-width: 0;
+    padding: 18px;
+    background: #15181E;
+    border: 1px solid #303540;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.reports-summary-label {
+    margin: 0 0 10px;
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.reports-summary-value {
+    margin: 0;
+    color: #F0C875;
+    font-size: 24px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+/* Partidas del período */
+.reports-match-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 10px;
+    padding: 16px;
+    background: #15181E;
+    border: 1px solid #303540;
+    border-radius: 10px;
+}
+
+.reports-match-item h4 {
+    margin: 0 0 7px;
+    color: #F3F0E8;
+    font-size: 14px;
+}
+
+.reports-match-item p {
+    margin: 0;
+    color: #A5A9B2;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.reports-match-value {
+    flex-shrink: 0;
+    color: #F0C875;
+    font-weight: 800;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 1000px) {
+    .reports-summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .reports-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .reports-calendar-grid {
+        gap: 4px;
+    }
+
+    .reports-calendar-day {
+        min-height: 34px;
+        font-size: 12px;
+    }
+
+    .reports-match-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* ==========================================
+   LOPZEK — AJUSTE DE CLASES DEL CALENDARIO
+========================================== */
+
+.reports-calendar-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.reports-calendar-navigation strong {
+    color: #F0C875;
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.reports-calendar-navigation button {
+    width: 36px;
+    height: 36px;
+    color: #F0C875;
+    font-size: 23px;
+    background: #20242C;
+    border: 1px solid #303540;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reports-calendar-navigation button:hover {
+    background: #302819;
+    border-color: #D5A348;
+}
+
+.reports-weekday {
+    padding: 8px 0;
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.reports-calendar-blank {
+    min-height: 42px;
+}
+
+.reports-calendar-day.is-selected {
+    color: #111315;
+    font-weight: 800;
+    background: #F0C875;
+    border-color: #F0C875;
+}
+
+.reports-calendar-day.is-selected::after {
+    background: #111315;
+}
+
+.reports-calendar-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 18px 0 0;
+    color: #A5A9B2;
+    font-size: 12px;
+}
+
+.reports-day-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    background: #D5A348;
+    border-radius: 50%;
+}
+
+.reports-calendar-day.has-matches .reports-day-dot {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.reports-calendar-day {
+    position: relative;
+}
+
+
+/* ==========================================
+   LOPZEK — INFORMES PROFESIONALES
+   Historial diario y navegación de períodos
+========================================== */
+
+.reports-period-controls {
+    display: flex;
+    gap: 8px;
+    padding: 5px;
+    margin-bottom: 18px;
+    background: #111419;
+    border: 1px solid #303540;
+    border-radius: 12px;
+}
+
+.reports-period-controls button {
+    flex: 1;
+    min-height: 38px;
+    padding: 9px 12px;
+    color: #A5A9B2;
+    font-size: 12px;
+    font-weight: 700;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.reports-period-controls button:hover {
+    color: #F3F0E8;
+    background: #20242C;
+}
+
+.reports-period-controls button.is-active {
+    color: #111315;
+    background: linear-gradient(135deg, #F0C875, #D5A348);
+    border-color: #F0C875;
+    box-shadow: 0 3px 12px rgba(213, 163, 72, 0.15);
+}
+
+.reports-list-caption {
+    margin: 0 0 14px;
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.reports-daily-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 68px;
+    padding: 14px 15px;
+    margin-bottom: 9px;
+    color: #F3F0E8;
+    text-align: left;
+    background: linear-gradient(135deg, #1B1F26, #171A20);
+    border: 1px solid #303540;
+    border-radius: 12px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.reports-daily-item:hover {
+    background: #22262E;
+    border-color: #80652F;
+    transform: translateY(-1px);
+}
+
+.reports-daily-item.is-selected {
+    background: linear-gradient(110deg, #302819, #211F1A);
+    border-color: #D5A348;
+    box-shadow: inset 3px 0 0 #D5A348;
+}
+
+.reports-daily-date {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.reports-daily-date strong {
+    color: #F3F0E8;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.reports-daily-item.is-selected .reports-daily-date strong {
+    color: #F0C875;
+}
+
+.reports-daily-date small {
+    color: #8F96A3;
+    font-size: 12px;
+}
+
+.reports-daily-count {
+    flex-shrink: 0;
+    padding: 7px 10px;
+    color: #F0C875;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    background: rgba(213, 163, 72, 0.10);
+    border: 1px solid rgba(213, 163, 72, 0.20);
+    border-radius: 8px;
+}
+
+.reports-daily-item.is-selected .reports-daily-count {
+    color: #111315;
+    background: #F0C875;
+    border-color: #F0C875;
+}
+
+/* Mejor separación entre las zonas principales */
+.reports-main-grid {
+    gap: 22px;
+}
+
+.reports-main-grid > .reports-panel {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Encabezados de los paneles */
+.reports-panel-heading {
+    padding-bottom: 17px;
+    border-bottom: 1px solid #303540;
+}
+
+.reports-panel-heading h3 {
+    letter-spacing: -0.3px;
+}
+
+.reports-panel-heading p {
+    line-height: 1.7;
+}
+
+/* Adaptación móvil */
+@media (max-width: 560px) {
+    .reports-period-controls {
+        gap: 4px;
+    }
+
+    .reports-period-controls button {
+        padding: 9px 5px;
+        font-size: 11px;
+    }
+
+    .reports-daily-item {
+        min-height: 64px;
+        padding: 12px;
+    }
+}
+
+/* ==========================================
+   LOPZEK — RESUMEN ESTADÍSTICO PROFESIONAL
+========================================== */
+
+#reportsPeriodSummary {
+    min-width: 0;
+}
+
+#reportsPeriodSummary h4 {
+    margin: 26px 0 14px;
+    color: #F3F0E8;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.reports-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.reports-summary-card {
+    position: relative;
+    min-width: 0;
+    min-height: 112px;
+    padding: 20px 18px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #20242C, #171A20);
+    border: 1px solid #343945;
+    border-radius: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.reports-summary-card:hover {
+    border-color: #80652F;
+    transform: translateY(-2px);
+}
+
+.reports-summary-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 36px;
+    height: 2px;
+    background: #D5A348;
+    border-radius: 0 0 4px 4px;
+}
+
+.reports-summary-label {
+    margin: 0 0 14px;
+    color: #A5A9B2;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.9px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.reports-summary-value {
+    margin: 0;
+    color: #F0C875;
+    font-size: clamp(22px, 2vw, 30px);
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Listado de partidas del período */
+#reportsPeriodSummary .reports-match-item {
+    position: relative;
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    background: #171A20;
+    border: 1px solid #303540;
+    border-radius: 12px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+#reportsPeriodSummary .reports-match-item:hover {
+    background: #1E2229;
+    border-color: #66532D;
+}
+
+#reportsPeriodSummary .reports-match-item h4 {
+    margin: 0 0 8px;
+    color: #F0C875;
+    font-size: 14px;
+    font-weight: 750;
+}
+
+#reportsPeriodSummary .reports-match-item p {
+    color: #A5A9B2;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+#reportsPeriodSummary .reports-match-value {
+    padding: 8px 11px;
+    color: #F0C875;
+    font-size: 13px;
+    background: #292319;
+    border: 1px solid #4B3C23;
+    border-radius: 8px;
+}
+
+/* Mensajes sin resultados */
+#reportsPeriodSummary .reports-empty-message {
+    margin-top: 12px;
+    padding: 32px 20px;
+    background: #15181E;
+    border-color: #343945;
+}
+
+/* Adaptación a tabletas */
+@media (max-width: 1000px) {
+    .reports-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Adaptación a móviles */
+@media (max-width: 560px) {
+    .reports-summary-grid {
+        gap: 10px;
+    }
+
+    .reports-summary-card {
+        min-height: 100px;
+        padding: 16px 13px;
+    }
+
+    .reports-summary-label {
+        font-size: 9px;
+    }
+
+    .reports-summary-value {
+        font-size: 23px;
+    }
+
+    #reportsPeriodSummary .reports-match-item {
+        padding: 15px;
+    }
+}
+
+
+/* ==========================================
+   LOPZEK — INFORMES
+   Estructura y distribución definitiva
+========================================== */
+
+/* Título del período */
+#reportsPeriodSummary .reports-summary-title {
+    margin: 0 0 22px;
+    padding-bottom: 16px;
+    color: #F3F0E8;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.4;
+    border-bottom: 1px solid #303540;
+}
+
+/* Cinco indicadores en una cuadrícula uniforme */
+#reportsPeriodSummary .reports-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 32px;
+    align-items: stretch;
+}
+
+#reportsPeriodSummary .reports-summary-stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    min-width: 0;
+    min-height: 112px;
+    padding: 18px 15px;
+    background: linear-gradient(145deg, #20242C, #171A20);
+    border: 1px solid #343945;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+#reportsPeriodSummary .reports-summary-stat span {
+    display: block;
+    color: #A5A9B2;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.5;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+}
+
+#reportsPeriodSummary .reports-summary-stat strong {
+    display: block;
+    color: #F0C875;
+    font-size: clamp(20px, 1.7vw, 27px);
+    font-weight: 800;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+/* Encabezado de la lista de partidas */
+#reportsPeriodSummary .reports-summary-subtitle {
+    margin: 0 0 16px;
+    padding-bottom: 14px;
+    color: #F3F0E8;
+    font-size: 16px;
+    font-weight: 750;
+    border-bottom: 1px solid #303540;
+}
+
+/* Cada partida en una fila ordenada */
+#reportsPeriodSummary .reports-match-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    padding: 18px 20px;
+    margin: 0 0 10px;
+    background: #15181E;
+    border: 1px solid #303540;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+#reportsPeriodSummary .reports-match-item > div:first-child {
+    flex: 1 1 220px;
+    min-width: 0;
+}
+
+#reportsPeriodSummary .reports-match-item > div:first-child > strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #F0C875;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+#reportsPeriodSummary .reports-match-item p {
+    margin: 0;
+    color: #A5A9B2;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* Resultados de cada partida */
+#reportsPeriodSummary .reports-match-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    flex: 0 1 auto;
+}
+
+#reportsPeriodSummary .reports-match-results span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 6px 10px;
+    color: #D9DCE2;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    background: #20242C;
+    border: 1px solid #343945;
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+#reportsPeriodSummary .reports-match-results span:first-child {
+    color: #F0C875;
+    background: #292319;
+    border-color: #4B3C23;
+}
+
+/* Pantallas medianas */
+@media (max-width: 1100px) {
+    #reportsPeriodSummary .reports-summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #reportsPeriodSummary .reports-match-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    #reportsPeriodSummary .reports-match-results {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+/* Móviles */
+@media (max-width: 560px) {
+    #reportsPeriodSummary .reports-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 26px;
+    }
+
+    #reportsPeriodSummary .reports-summary-stat {
+        min-height: 100px;
+        padding: 14px 12px;
+    }
+
+    #reportsPeriodSummary .reports-summary-stat strong {
+        font-size: 22px;
+    }
+
+    #reportsPeriodSummary .reports-summary-title {
+        font-size: 17px;
+    }
+
+    #reportsPeriodSummary .reports-match-item {
+        padding: 15px;
+    }
+
+    #reportsPeriodSummary .reports-match-results {
+        gap: 6px;
+    }
+}
+
+
+/* ==========================================
+   LOPZEK — AJUSTE FINO DEL CALENDARIO
+========================================== */
+
+#reportsCalendar {
+    width: 100%;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+#reportsCalendar .reports-calendar-navigation {
+    margin-bottom: 16px;
+}
+
+#reportsCalendar .reports-calendar-navigation button {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+}
+
+#reportsCalendar .reports-calendar-grid {
+    width: 100%;
+    gap: 7px;
+    box-sizing: border-box;
+}
+
+#reportsCalendar .reports-weekday {
+    padding: 8px 0;
+    font-size: 11px;
+}
+
+#reportsCalendar .reports-calendar-blank {
+    min-height: 42px;
+}
+
+#reportsCalendar .reports-calendar-day {
+    min-height: 42px;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+#reportsCalendar .reports-calendar-day.has-matches::after {
+    bottom: 4px;
+    width: 5px;
+    height: 5px;
+}
+
+#reportsCalendar .reports-calendar-legend {
+    margin-top: 16px;
+    font-size: 12px;
+}
+
+@media (max-width: 560px) {
+    #reportsCalendar .reports-calendar-grid {
+        gap: 4px;
+    }
+
+    #reportsCalendar .reports-calendar-day,
+    #reportsCalendar .reports-calendar-blank {
+        min-height: 36px;
+    }
+
+    #reportsCalendar .reports-calendar-day {
+        font-size: 12px;
+    }
+}
+
+/* Foto del jugador: más grande y sin contenedor dorado */
+.player-mark {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    padding: 0;
+    overflow: hidden;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 10px;
+    box-shadow: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagen del jugador */
+.player-card-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+/* ==========================================
+   GRÁFICA DE KILLS Y DAÑO
+========================================== */
+
+.player-profile-chart-container {
+    width: 100%;
+    min-width: 0;
+}
+
+.player-profile-chart-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.player-chart-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #c5c8ce;
+    font-size: 13px;
+}
+
+.player-chart-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.player-chart-dot-damage {
+    background: #d5a348;
+}
+
+.player-chart-dot-kills {
+    background: #62a8ff;
+}
+
+.player-profile-chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320px;
+}
+
+.player-profile-chart-wrapper canvas {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.player-profile-chart-message {
+    margin: 16px 0 0;
+    color: #a6aab0;
+    font-size: 13px;
+    text-align: center;
+}
+
+.player-profile-strengths-chart {
+    position: relative;
+    width: 100%;
+    height: 390px;
+    min-height: 360px;
+    padding: 12px;
+}
+
+#playerProfileRadarChart {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* =====================================================
+   LOPZEK — DASHBOARD DEL ROSTER
+   Resumen, indicadores y tarjetas
+===================================================== */
+
+.dashboard-roster-seccion {
+    margin-top: 26px;
+    padding: 24px;
+    background: linear-gradient(
+        145deg,
+        rgba(22, 25, 31, 0.98),
+        rgba(14, 16, 21, 0.98)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.20);
+}
+
+/* Encabezado de cada sección */
+
+.dashboard-roster-titulo {
+    margin-bottom: 22px;
+}
+
+.dashboard-roster-titulo > span {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #f5a623;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.dashboard-roster-titulo h3 {
+    margin: 0;
+    color: #f5f6f8;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Cuadrícula de indicadores */
+
+.dashboard-roster-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+}
+
+/* Tarjetas individuales */
+
+.dashboard-roster-kpi {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    min-height: 125px;
+    padding: 20px;
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        rgba(35, 39, 47, 0.95),
+        rgba(24, 27, 33, 0.95)
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 14px;
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+/* Línea decorativa superior */
+
+.dashboard-roster-kpi::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        #f5a623,
+        rgba(245, 166, 35, 0)
+    );
+
+    opacity: 0.75;
+}
+
+/* Efecto al pasar el cursor */
+
+.dashboard-roster-kpi:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245, 166, 35, 0.38);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+/* Nombre del indicador */
+
+.dashboard-roster-kpi > span {
+    margin-bottom: 13px;
+    color: #a8adb8;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.15px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+/* Valor principal */
+
+.dashboard-roster-kpi > strong {
+    display: block;
+    color: #ffffff !important;
+    font-size: clamp(25px, 2.2vw, 34px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    overflow-wrap: anywhere;
+}
+
+/* Mantener blancas las cifras de kills */
+
+#rosterDetailTotalKills,
+#rosterDetailAverageKills {
+    color: #ffffff !important;
+}
+
+/* Texto secundario */
+
+.dashboard-roster-kpi > small {
+    display: block;
+    margin-top: 10px;
+    color: #777f8d;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Adaptación a tablets */
+
+@media (max-width: 1000px) {
+    .dashboard-roster-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Adaptación a móviles */
+
+@media (max-width: 560px) {
+    .dashboard-roster-seccion {
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .dashboard-roster-titulo h3 {
+        font-size: 19px;
+    }
+
+    .dashboard-roster-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .dashboard-roster-kpi {
+        min-height: 112px;
+        padding: 14px;
+        border-radius: 11px;
+    }
+
+    .dashboard-roster-kpi > span {
+        margin-bottom: 10px;
+        font-size: 9px;
+        letter-spacing: 0.7px;
+    }
+
+    .dashboard-roster-kpi > strong {
+        font-size: 25px;
+    }
+
+    .dashboard-roster-kpi > small {
+        margin-top: 8px;
+        font-size: 10px;
+    }
+}
+
+
+
+/* =========================================================
+   LOPZEK — PANEL PROFESIONAL DE RESULTADOS POR BLOQUE
+   Roster · Fecha · Bloque · TOP · Guardado
+========================================================= */
+
+#rosterBlockResultsForm {
+    --rb-bg: #111318;
+    --rb-panel: #191c23;
+    --rb-input: #101216;
+    --rb-border: #303540;
+    --rb-border-hover: #65502d;
+    --rb-gold: #f5a623;
+    --rb-gold-light: #ffd166;
+    --rb-text: #f5f6f8;
+    --rb-muted: #9ba1ad;
+
+    color: var(--rb-text);
+}
+
+/* ---------- DISTRIBUCIÓN GENERAL ---------- */
+
+#rosterBlockResultsForm .stats-form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+/* ---------- TARJETAS DE ROSTER, FECHA Y BLOQUE ---------- */
+
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockResultsRoster),
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockDate),
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockNumber) {
+    min-width: 0;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(145deg, #1c2028, #14161b);
+    border: 1px solid var(--rb-border);
+    border-radius: 15px;
+    box-shadow: 0 5px 16px rgb(0 0 0 / 12%);
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockResultsRoster):hover,
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockDate):hover,
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockNumber):hover {
+    border-color: var(--rb-border-hover);
+    box-shadow: 0 7px 20px rgb(0 0 0 / 20%);
+}
+
+/* ---------- ETIQUETAS ---------- */
+
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockResultsRoster) label,
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockDate) label,
+#rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockNumber) label {
+    display: block;
+    margin: 0 0 11px;
+    color: var(--rb-gold-light);
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: .35px;
+}
+
+/* ---------- CONTROLES DE DATOS ---------- */
+
+#rosterBlockResultsForm #rosterBlockResultsRoster,
+#rosterBlockResultsForm #rosterBlockDate,
+#rosterBlockResultsForm #rosterBlockNumber {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    box-sizing: border-box;
+    padding: 11px 13px;
+    color: var(--rb-text);
+    background: var(--rb-input);
+    border: 1px solid #3b414d;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 550;
+    color-scheme: dark;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#rosterBlockResultsForm #rosterBlockResultsRoster option {
+    color: var(--rb-text);
+    background: var(--rb-panel);
+}
+
+#rosterBlockResultsForm #rosterBlockResultsRoster:focus,
+#rosterBlockResultsForm #rosterBlockDate:focus,
+#rosterBlockResultsForm #rosterBlockNumber:focus {
+    outline: none;
+    border-color: var(--rb-gold);
+    box-shadow: 0 0 0 3px rgb(245 166 35 / 13%);
+}
+
+/* ---------- TARJETAS TOP ---------- */
+
+#rosterBlockResultsForm .roster-block-top-card {
+    min-width: 0;
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at top right, rgb(245 166 35 / 7%), transparent 58%),
+        linear-gradient(145deg, #1c2028, #14161b);
+    border: 1px solid var(--rb-border);
+    border-radius: 15px;
+    box-shadow: 0 5px 16px rgb(0 0 0 / 12%);
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#rosterBlockResultsForm .roster-block-top-card:hover {
+    border-color: var(--rb-border-hover);
+    box-shadow: 0 8px 22px rgb(0 0 0 / 20%);
+}
+
+/* Encabezado de cada TOP */
+
+#rosterBlockResultsForm .roster-block-top-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    margin-bottom: 20px;
+}
+
+#rosterBlockResultsForm .roster-block-top-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    background: linear-gradient(145deg, #332a1c, #211d16);
+    border: 1px solid #5d4929;
+    border-radius: 12px;
+    font-size: 21px;
+}
+
+#rosterBlockResultsForm .roster-block-top-heading > div {
+    min-width: 0;
+}
+
+#rosterBlockResultsForm .roster-block-top-heading label {
+    display: block;
+    margin: 0 0 5px;
+    color: var(--rb-gold-light);
+    font-size: 15px;
+    font-weight: 850;
+    letter-spacing: .5px;
+}
+
+#rosterBlockResultsForm .roster-block-top-heading p {
+    margin: 0;
+    color: var(--rb-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ---------- CONTADORES + / − ---------- */
+
+#rosterBlockResultsForm .roster-block-counter {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    align-items: center;
+    gap: 9px;
+}
+
+#rosterBlockResultsForm .roster-block-counter-btn {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 44px;
+    padding: 0;
+    color: var(--rb-gold-light);
+    background: #252932;
+    border: 1px solid #414754;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+#rosterBlockResultsForm .roster-block-counter-btn:hover {
+    color: #17130b;
+    background: var(--rb-gold);
+    border-color: var(--rb-gold);
+}
+
+#rosterBlockResultsForm .roster-block-counter-btn:active {
+    transform: scale(.96);
+}
+
+#rosterBlockResultsForm .roster-block-counter-btn:focus-visible {
+    outline: 2px solid var(--rb-gold-light);
+    outline-offset: 3px;
+}
+
+#rosterBlockResultsForm .roster-block-counter input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 5px;
+    color: #fff;
+    background: #101216;
+    border: 1px solid #414754;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#rosterBlockResultsForm .roster-block-counter input:focus {
+    outline: none;
+    border-color: var(--rb-gold);
+    box-shadow: 0 0 0 3px rgb(245 166 35 / 13%);
+}
+
+/* Ocultar flechas nativas de los campos numéricos de los TOP */
+
+#rosterBlockResultsForm .roster-block-counter input::-webkit-inner-spin-button,
+#rosterBlockResultsForm .roster-block-counter input::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+#rosterBlockResultsForm .roster-block-counter input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* ---------- ÁREA DE GUARDADO ---------- */
+
+#rosterBlockResultsForm .stats-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #292d35;
+}
+
+#rosterBlockResultsForm #saveRosterBlockResults {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 230px;
+    min-height: 49px;
+    padding: 13px 24px;
+    color: #17130b;
+    background: linear-gradient(135deg, #ffd166, #f5a623);
+    border: 1px solid #ffd166;
+    border-radius: 11px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 850;
+    letter-spacing: .45px;
+    cursor: pointer;
+    box-shadow: 0 5px 16px rgb(245 166 35 / 12%);
+    transition: filter .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+#rosterBlockResultsForm #saveRosterBlockResults:hover:not(:disabled) {
+    filter: brightness(1.06);
+    box-shadow: 0 8px 23px rgb(245 166 35 / 22%);
+    transform: translateY(-1px);
+}
+
+#rosterBlockResultsForm #saveRosterBlockResults:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+#rosterBlockResultsForm #saveRosterBlockResults:focus-visible {
+    outline: 2px solid var(--rb-gold-light);
+    outline-offset: 4px;
+}
+
+#rosterBlockResultsForm #saveRosterBlockResults:disabled {
+    opacity: .6;
+    cursor: wait;
+    box-shadow: none;
+}
+
+/* ---------- MENSAJES DEL FORMULARIO ---------- */
+
+#rosterBlockResultsForm #rosterBlockResultsMessage {
+    margin: 14px 0 0;
+    color: var(--rb-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 900px) {
+    #rosterBlockResultsForm .stats-form-grid {
+        gap: 12px;
+    }
+
+    #rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockResultsRoster),
+    #rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockDate),
+    #rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockNumber),
+    #rosterBlockResultsForm .roster-block-top-card {
+        padding: 15px;
+    }
+
+    #rosterBlockResultsForm .roster-block-counter {
+        grid-template-columns: 36px minmax(0, 1fr) 36px;
+        gap: 6px;
+    }
+
+    #rosterBlockResultsForm .roster-block-counter-btn {
+        width: 36px;
+    }
+}
+
+/* ---------- MÓVILES ---------- */
+
+@media (max-width: 600px) {
+    #rosterBlockResultsForm .stats-form-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    #rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockResultsRoster),
+    #rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockDate),
+    #rosterBlockResultsForm .stats-form-grid > .form-group:has(#rosterBlockNumber),
+    #rosterBlockResultsForm .roster-block-top-card {
+        padding: 17px;
+    }
+
+    #rosterBlockResultsForm .roster-block-counter {
+        grid-template-columns: 46px minmax(0, 1fr) 46px;
+        gap: 10px;
+    }
+
+    #rosterBlockResultsForm .roster-block-counter-btn {
+        width: 46px;
+        height: 46px;
+    }
+
+    #rosterBlockResultsForm .roster-block-counter input {
+        height: 46px;
+    }
+
+    #rosterBlockResultsForm .stats-form-actions {
+        justify-content: stretch;
+    }
+
+    #rosterBlockResultsForm #saveRosterBlockResults {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #rosterBlockResultsForm *,
+    #rosterBlockResultsForm *::before,
+    #rosterBlockResultsForm *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+
+/* Fotos en la plantilla del roster */
+
+.detalle-roster-jugador-avatar {
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #3B3F47;
+    border-radius: 12px;
+    background: #22252B;
+}
+
+.detalle-roster-jugador-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =====================================================
+   LOPZEK — 04 / PLANTILLA
+   Tarjetas profesionales de jugadores del roster
+===================================================== */
+
+#rosterDetailsModal .detalle-roster-lista-jugadores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+    align-items: stretch;
+}
+
+/* Tarjeta individual */
+#rosterDetailsModal .detalle-roster-jugador {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    padding: 20px;
+    overflow: hidden;
+
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.045), transparent 65%),
+        #17191e;
+
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 15px;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+/* Acento superior */
+#rosterDetailsModal .detalle-roster-jugador::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        #d62828,
+        #d9a441,
+        transparent
+    );
+
+    opacity: .8;
+}
+
+#rosterDetailsModal .detalle-roster-jugador:hover {
+    transform: translateY(-4px);
+    border-color: rgba(217,164,65,.48);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.24),
+        0 0 18px rgba(214,40,40,.06);
+}
+
+/* Foto del jugador */
+#rosterDetailsModal .detalle-roster-jugador-avatar {
+    position: relative;
+    flex: 0 0 76px;
+    width: 76px;
+    height: 76px;
+    overflow: hidden;
+
+    background: #24262d;
+    border: 2px solid rgba(217,164,65,.65);
+    border-radius: 12px;
+
+    box-shadow: 0 5px 16px rgba(0,0,0,.25);
+}
+
+#rosterDetailsModal .detalle-roster-jugador-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Información del jugador */
+#rosterDetailsModal .detalle-roster-jugador-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    min-width: 0;
+}
+
+#rosterDetailsModal .detalle-roster-jugador-info strong {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+
+    color: #f5f5f6;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: .2px;
+}
+
+#rosterDetailsModal .detalle-roster-jugador-info span {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+
+    color: #a6a8b0;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+/* Primer detalle: rol y estado */
+#rosterDetailsModal
+.detalle-roster-jugador-info span:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 8px;
+    background: rgba(217,164,65,.09);
+    border: 1px solid rgba(217,164,65,.18);
+    border-radius: 6px;
+
+    color: #e4c27d;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .35px;
+}
+
+/* Nombre real */
+#rosterDetailsModal
+.detalle-roster-jugador-info span + span {
+    color: #858893;
+    font-size: 11px;
+}
+
+/* Mensaje cuando no hay jugadores */
+#rosterDetailsModal .detalle-roster-sin-jugadores,
+#rosterDetailsModal .dashboard-roster-vacio {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 28px 20px;
+
+    color: #999ca6;
+    text-align: center;
+    line-height: 1.6;
+
+    background: rgba(255,255,255,.025);
+    border: 1px dashed rgba(255,255,255,.13);
+    border-radius: 12px;
+}
+
+/* Descripción del roster */
+#rosterDetailsModal .dashboard-roster-descripcion {
+    margin: 0 0 6px;
+    padding: 15px 18px;
+
+    color: #b8bac2;
+    font-size: 13px;
+    line-height: 1.7;
+
+    background: rgba(255,255,255,.025);
+    border-left: 3px solid #d62828;
+    border-radius: 0 9px 9px 0;
+}
+
+/* Encabezado de la sección */
+#rosterDetailsModal .dashboard-roster-seccion:last-child {
+    margin-top: 28px;
+    padding: 24px;
+
+    background: rgba(15,16,20,.72);
+    border: 1px solid rgba(255,255,255,.075);
+    border-radius: 18px;
+}
+
+/* Título 04 / PLANTILLA */
+#rosterDetailsModal .dashboard-roster-titulo {
+    margin-bottom: 20px;
+}
+
+#rosterDetailsModal .dashboard-roster-titulo span {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #d9a441;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#rosterDetailsModal .dashboard-roster-titulo h3 {
+    margin: 0;
+    color: #f5f5f6;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 800;
+    letter-spacing: -.4px;
+}
+
+/* Adaptación a móviles */
+@media (max-width: 600px) {
+    #rosterDetailsModal .dashboard-roster-seccion:last-child {
+        padding: 16px;
+        border-radius: 13px;
+    }
+
+    #rosterDetailsModal .detalle-roster-lista-jugadores {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 18px;
+    }
+
+    #rosterDetailsModal .detalle-roster-jugador {
+        gap: 13px;
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    #rosterDetailsModal .detalle-roster-jugador-avatar {
+        flex-basis: 64px;
+        width: 64px;
+        height: 64px;
+    }
+
+    #rosterDetailsModal .detalle-roster-jugador-info strong {
+        font-size: 15px;
+    }
+}
+
+
+
+/* =========================================================
+   LOPZEK — INFORMES POR ROSTER Y JUGADOR
+   Diseño integrado con la identidad visual de la plataforma
+========================================================= */
+
+/* Panel de filtros */
+.reports-filters-panel {
+    margin-bottom: 22px;
+    padding: 22px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.reports-filters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: end;
+}
+
+.reports-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.reports-filter-field label {
+    color: var(--texto-secundario);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.3px;
+}
+
+.reports-filter-field select {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 12px;
+    color: var(--texto);
+    background: var(--fondo);
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.reports-filter-field select:hover,
+.reports-filter-field select:focus {
+    border-color: var(--dorado-oscuro);
+}
+
+.reports-filter-field select:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 2px;
+}
+
+.reports-filter-field select option {
+    color: var(--texto);
+    background: var(--panel);
+}
+
+.reports-filter-hint {
+    margin-top: 14px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Encabezado del roster seleccionado */
+.reports-roster-heading {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+    padding: 20px;
+    background: var(--panel-secundario);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+}
+
+.reports-roster-image {
+    display: block;
+    flex: 0 0 76px;
+    width: 76px;
+    height: 76px;
+    padding: 6px;
+    object-fit: contain;
+    background: var(--fondo);
+    border: 1px solid rgba(213, 163, 72, 0.35);
+    border-radius: 12px;
+}
+
+.reports-roster-heading h3 {
+    margin: 0 0 5px;
+    color: var(--texto);
+    font-size: 20px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.reports-roster-heading p {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+/* Cuadrícula de jugadores */
+.reports-player-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.reports-player-card {
+    min-width: 0;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.reports-player-card:hover {
+    border-color: rgba(213, 163, 72, 0.45);
+    transform: translateY(-2px);
+}
+
+.reports-player-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.reports-player-photo {
+    display: block;
+    flex: 0 0 62px;
+    width: 62px;
+    height: 62px;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid var(--dorado-oscuro);
+    border-radius: 50%;
+    background: var(--fondo);
+}
+
+.reports-player-card-header > div {
+    min-width: 0;
+}
+
+.reports-player-card-header h4 {
+    margin: 0 0 5px;
+    color: var(--texto);
+    font-size: 15px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.reports-player-card-header p {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* Estadísticas individuales */
+.reports-player-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.reports-player-stats > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+    min-height: 72px;
+    padding: 12px;
+    background: var(--fondo);
+    border: 1px solid rgba(48, 53, 64, 0.8);
+    border-radius: 9px;
+}
+
+.reports-player-stats span {
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.reports-player-stats strong {
+    color: var(--dorado-claro);
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Adaptación a pantallas medianas */
+@media (max-width: 1000px) {
+    .reports-filters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .reports-player-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Adaptación a móviles */
+@media (max-width: 600px) {
+    .reports-filters-panel {
+        padding: 16px;
+    }
+
+    .reports-filters-grid,
+    .reports-player-cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .reports-roster-heading {
+        gap: 14px;
+        padding: 15px;
+    }
+
+    .reports-roster-image {
+        flex-basis: 60px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .reports-roster-heading h3 {
+        font-size: 17px;
+    }
+
+    .reports-player-card {
+        padding: 16px;
+    }
+}
+
+
+/* LOPZEK — Tarjetas del informe por roster */
+
+.reports-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+    margin-top: 20px;
+    align-items: stretch;
+}
+
+.reports-summary-grid .reports-summary-stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    min-width: 0;
+    min-height: 100px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #15181E;
+    border: 1px solid #303540;
+    border-radius: 12px;
+}
+
+.reports-summary-grid .reports-summary-stat span {
+    color: #A5A9B2;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+.reports-summary-grid .reports-summary-stat strong {
+    color: #F0C875;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .reports-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .reports-summary-grid .reports-summary-stat {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 380px) {
+    .reports-summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   FIN DE ESTILOS LOPZEK
+   ========================================================= */
