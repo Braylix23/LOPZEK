@@ -416,6 +416,17 @@ function initNavigation() {
 function renderMainDashboard() {
     const stats = state.matchPlayerStats || [];
 
+    console.log("Total de registros:", stats.length);
+
+console.table(
+    stats.map(stat => ({
+        fecha: stat.matchDate,
+        bloque: stat.blockNumber,
+        sala: stat.roomNumber,
+        jugador: stat.playerId
+    }))
+);
+
     const totalKills = stats.reduce(
         (sum, stat) => sum + (Number(stat.kills) || 0),
         0
@@ -438,6 +449,8 @@ function renderMainDashboard() {
     );
 
     const totalMatches = matches.size;
+
+    console.log("LOPZEK — Partidas únicas:", totalMatches, [...matches]);
 
     const averageKills = totalMatches > 0
         ? (totalKills / totalMatches).toFixed(2)
