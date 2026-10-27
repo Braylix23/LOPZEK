@@ -1087,9 +1087,99 @@
                 
 <article class="player-profile-panel">
 
-    <div class="player-profile-panel-heading">
-        <h4>Fortalezas del jugador</h4>
+    
+<div class="player-profile-panel-heading player-profile-strengths-heading">
+    <h4>Fortalezas del jugador</h4>
+
+    <button
+        type="button"
+        id="playerProfileGoalsButton"
+        class="player-profile-goals-button"
+        title="Configurar metas semanales"
+        aria-label="Configurar metas semanales"
+        aria-expanded="false"
+        aria-controls="playerProfileGoalsPanel"
+    >
+        
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="15"
+    height="15"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+>
+    <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/>
+    <path d="m19.4 15 .1.1a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3 .9v.2a1.8 1.8 0 0 1-3.6 0v-.2a1.8 1.8 0 0 0-3-.9l-.1.1a1.8 1.8 0 0 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-.9-3H3.7a1.8 1.8 0 0 1 0-3.6h.2a1.8 1.8 0 0 0 .9-3l-.1-.1a1.8 1.8 0 0 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3-.9v-.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3 .9l.1-.1a1.8 1.8 0 0 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 .9 3h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-.9 3Z"/>
+</svg>
+
+    </button>
+</div>
+
+<div
+    id="playerProfileGoalsPanel"
+    class="player-profile-goals-panel"
+    hidden
+>
+    <h5>Metas semanales</h5>
+
+    <div class="player-profile-goals-field">
+        <label for="playerProfileWeeklyKillsGoal">
+            Meta semanal de kills
+        </label>
+
+        <input
+            type="number"
+            id="playerProfileWeeklyKillsGoal"
+            min="1"
+            step="1"
+            value="200"
+        />
     </div>
+
+    <div class="player-profile-goals-field">
+        <span class="player-profile-goals-label">
+            Puestos que cuentan como objetivo
+        </span>
+
+        <label>
+            <input type="checkbox" id="playerProfileGoalTop1" />
+            TOP 1
+        </label>
+
+        <label>
+            <input type="checkbox" id="playerProfileGoalTop2" />
+            TOP 2
+        </label>
+
+        <label>
+            <input type="checkbox" id="playerProfileGoalTop3" />
+            TOP 3
+        </label>
+
+        <label>
+            <input type="checkbox" id="playerProfileGoalTop4" />
+            TOP 4
+        </label>
+
+        <label>
+            <input type="checkbox" id="playerProfileGoalTop5" />
+            TOP 5
+        </label>
+    </div>
+
+    <button
+        type="button"
+        id="playerProfileGoalsSave"
+        class="btn btn-primary"
+    >
+        Guardar metas
+    </button>
+</div>
 
     <div id="playerProfileStrengths" class="player-profile-strengths">
 

@@ -3466,6 +3466,117 @@ a:focus-visible {
     font-weight: 800;
 }
 
+
+/* =====================================================
+   LOPZEK — CONFIGURACIÓN DE METAS DEL RADAR
+===================================================== */
+
+.player-profile-strengths-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.player-profile-goals-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid #303540;
+    border-radius: 8px;
+    background: #20242c;
+    color: #d5a348;
+    font-size: 12px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.player-profile-goals-button:hover {
+    background: #292e38;
+    border-color: #d5a348;
+    color: #f0c875;
+}
+
+.player-profile-goals-button:focus-visible {
+    outline: 2px solid #d5a348;
+    outline-offset: 2px;
+}
+
+.player-profile-goals-panel {
+    margin: 0 0 18px;
+    padding: 16px;
+    border: 1px solid #303540;
+    border-radius: 12px;
+    background: #191c22;
+    color: #f3f0e8;
+}
+
+.player-profile-goals-panel[hidden] {
+    display: none !important;
+}
+
+.player-profile-goals-panel h5 {
+    margin: 0 0 14px;
+    color: #d5a348;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.player-profile-goals-field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin-bottom: 16px;
+}
+
+.player-profile-goals-field > label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #d5d8de;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.player-profile-goals-field input[type="number"] {
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 10px;
+    border: 1px solid #303540;
+    border-radius: 8px;
+    outline: none;
+    background: #101216;
+    color: #f3f0e8;
+}
+
+.player-profile-goals-field input[type="number"]:focus {
+    border-color: #d5a348;
+}
+
+.player-profile-goals-field input[type="checkbox"] {
+    accent-color: #d5a348;
+}
+
+.player-profile-goals-label {
+    flex-basis: 100%;
+    color: #a5a9b2;
+    font-size: 12px;
+}
+
+.player-profile-goals-panel .btn {
+    min-height: 34px;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
 .player-profile-panel-tag {
     padding: 6px 8px;
     color: #F0C875;

@@ -1316,6 +1316,100 @@ if (blockTop4PlusDisplay) {
         }
 
         openButton.addEventListener("click", openModal);
+      
+        // Guardar metas semanales por jugador y semana.
+        const goalsSaveButton = $("playerProfileGoalsSave");
+        const weeklyKillsInput = $("playerProfileWeeklyKillsGoal");
+
+        const placementGoalInputs = [
+            $("playerProfileGoalTop1"),
+            $("playerProfileGoalTop2"),
+            $("playerProfileGoalTop3"),
+            $("playerProfileGoalTop4"),
+            $("playerProfileGoalTop5")
+        ];
+
+        const getGoalsStorageKey = (playerId) => {
+            const now = new Date();
+            const day = (now.getDay() + 6) % 7;
+            const monday = new Date(now);
+
+            monday.setDate(now.getDate() - day);
+
+            const weekKey = [
+                monday.getFullYear(),
+                String(monday.getMonth() + 1).padStart(2, "0"),
+                String(monday.getDate()).padStart(2, "0")
+            ].join("-");
+
+            return `lopzek_player_goals_${playerId}_${weekKey}`;
+        };
+
+        if (goalsSaveButton && weeklyKillsInput) {
+            goalsSaveButton.addEventListener("click", () => {
+                const playerNick = $("playerProfileNick")?.textContent;
+
+                const activePlayer = state.players.find(
+                    (item) => item.nick === playerNick
+                );
+
+                if (!activePlayer) {
+                    showError("No se pudo identificar al jugador abierto.");
+                    return;
+                }
+
+                const weeklyKillsGoal = Number(weeklyKillsInput.value);
+
+                if (
+                    !Number.isInteger(weeklyKillsGoal) ||
+                    weeklyKillsGoal < 1
+                ) {
+                    showError("La meta semanal de kills debe ser al menos 1.");
+                    weeklyKillsInput.focus();
+                    return;
+                }
+
+                const placementGoals = placementGoalInputs
+                    .filter((input) => input?.checked)
+                    .map((input) => input.id);
+
+                const goals = {
+                    weeklyKillsGoal,
+                    placementGoals
+                };
+
+                try {
+                    localStorage.setItem(
+                        getGoalsStorageKey(activePlayer.id),
+                        JSON.stringify(goals)
+                    );
+
+                    console.log("Metas semanales guardadas:", goals);
+                } catch (error) {
+                    console.error("Error guardando metas semanales:", error);
+                    showError("No se pudieron guardar las metas en este navegador.");
+                    return;
+                }
+
+                alert("Metas semanales guardadas correctamente.");
+            });
+        }
+
+        // Abrir y cerrar el panel de metas del radar.
+        const goalsButton = $("playerProfileGoalsButton");
+        const goalsPanel = $("playerProfileGoalsPanel");
+        
+        if (goalsButton && goalsPanel) {
+            goalsButton.addEventListener("click", () => {
+                const willOpen = goalsPanel.hidden;
+
+                goalsPanel.hidden = !willOpen;
+                goalsButton.setAttribute(
+                    "aria-expanded",
+                    String(willOpen)
+                );
+            });
+        }
 
         modal.querySelectorAll("[data-close-roster]").forEach((element) => {
             element.addEventListener("click", closeModal);
@@ -1534,7 +1628,15 @@ if (blockTop4PlusDisplay) {
         
 let playerProfileRadarChart = null;
 
-function renderPlayerProfileRadarChart(playerStats, totals, totalMatches, top3, top5, booyahs) {
+function renderPlayerProfileRadarChart(
+    playerStats,
+    totals,
+    totalMatches,
+    top3,
+    top5,
+    booyahs,
+    playerId
+) {
     console.log("RADAR: entró a la función");
     console.log("RADAR: la función se está ejecutando");
 
@@ -1555,6 +1657,182 @@ function renderPlayerProfileRadarChart(playerStats, totals, totalMatches, top3, 
         return;
     }
 
+    // Obtener las metas configuradas para este jugador y esta semana.
+    const now = new Date();
+    const day = (now.getDay() + 6) % 7;
+    const monday = new Date(now);
+
+    monday.setDate(now.getDate() - day);
+
+    const weekKey = [
+        monday.getFullYear(),
+        String(monday.getMonth() + 1).padStart(2, "0"),
+        String(monday.getDate()).padStart(2, "0")
+    ].join("-");
+
+    const goalsKey = `lopzek_player_goals_${playerId}_${weekKey}`;
+
+    let goals = {
+        weeklyKillsGoal: 200,
+        placementGoals: []
+    };
+
+    try {
+        const saved = JSON.parse(
+            localStorage.getItem(goalsKey) || "null"
+        );
+
+        if (saved) {
+            goals = { ...goals, ...saved };
+        }
+    } catch (error) {
+        console.warn(
+            "No se pudieron leer las metas del radar:",
+            error
+        );
+    }
+
+console.table(
+    playerStats.map((stat) => ({
+        fecha: stat.matchDate,
+        bloque: stat.blockNumber,
+        sala: stat.roomNumber,
+        kills: stat.kills,
+        posicion: stat.position
+    }))
+);
+
+    // Contar únicamente las partidas de lunes a viernes
+    // de la semana actual.
+    const weeklyStats = playerStats.filter((stat) => {
+        const dateText = String(stat.matchDate || "").slice(0, 10);
+        const parts = dateText.split("-");
+
+        if (parts.length !== 3) return false;
+
+        const date = new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2]),
+            12
+        );
+
+        if (
+            Number.isNaN(date.getTime()) ||
+            date.getFullYear() !== Number(parts[0]) ||
+            date.getMonth() !== Number(parts[1]) - 1 ||
+            date.getDate() !== Number(parts[2])
+        ) {
+            return false;
+        }
+
+        const weekday = (date.getDay() + 6) % 7;
+
+        const dateOnly = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+);
+
+const mondayOnly = new Date(
+    monday.getFullYear(),
+    monday.getMonth(),
+    monday.getDate()
+);
+
+const isThisWeek = dateOnly >= mondayOnly;
+
+console.log("COMPROBACIÓN SEMANAL:", {
+    fechaPartida: date.toLocaleDateString("en-CA"),
+    lunesActual: monday.toLocaleDateString("en-CA"),
+    weekday,
+    isThisWeek,
+    entreLunesYViernes: isThisWeek && weekday < 5
+});
+
+return isThisWeek && weekday < 5;
+
+    });
+
+    // Sumar las kills de la semana.
+    const weeklyKills = weeklyStats.reduce(
+        (sum, stat) => sum + (Number(stat.kills) || 0),
+        0
+    );
+
+    // Identificar las partidas y su posición final.
+    
+const weeklyMatchPositions = new Map();
+
+weeklyStats.forEach((stat) => {
+    const key =
+        `${stat.matchDate}|${stat.blockNumber}|${stat.roomNumber}`;
+
+    const position = Number(stat.position);
+
+    if (
+        Number.isInteger(position) &&
+        position >= 1
+    ) {
+        weeklyMatchPositions.set(key, position);
+    }
+});
+
+
+    const weeklyMatches = new Set(
+        weeklyStats.map((stat) =>
+            `${stat.matchDate}|${stat.blockNumber}|${stat.roomNumber}`
+        )
+    );
+
+    // COMBATE: porcentaje de avance hacia la meta semanal de kills.
+    const normalize = (value, reference) =>
+        Math.max(0, Math.min(100, (value / reference) * 100));
+
+    const combat = normalize(
+        weeklyKills,
+        Math.max(1, Number(goals.weeklyKillsGoal) || 200)
+    );
+
+    // SUPERVIVENCIA: porcentaje de partidas que cumplen
+    // alguna de las posiciones seleccionadas.
+    const selectedPositions = (goals.placementGoals || []).map((id) =>
+        Number(String(id).replace("playerProfileGoalTop", ""))
+    );
+
+const successfulMatches = [
+    ...weeklyMatchPositions.values()
+].filter((position) =>
+    selectedPositions.some((goal) =>
+        position <= goal
+    )
+).length;
+
+    const survival =
+        weeklyMatches.size > 0 && selectedPositions.length > 0
+            ? (successfulMatches / weeklyMatches.size) * 100
+            : 0;
+
+            console.log("SUPERVIVENCIA — metas seleccionadas:", goals.placementGoals);
+console.log("SUPERVIVENCIA — posiciones numéricas:", selectedPositions);
+console.log("SUPERVIVENCIA — partidas evaluadas:", [...weeklyMatches]);
+console.log("SUPERVIVENCIA — posiciones por partida:", [...weeklyMatchPositions.entries()]);
+console.log("SUPERVIVENCIA — partidas exitosas:", successfulMatches);
+console.log("SUPERVIVENCIA — porcentaje:", survival);
+
+            console.log("RADAR — jugador:", playerId);
+console.log("RADAR — metas guardadas:", goals);
+console.log("RADAR — partidas de esta semana:", weeklyStats.length);
+console.log("RADAR — kills semanales:", weeklyKills);
+console.log("RADAR — meta de kills:", goals.weeklyKillsGoal);
+console.log("RADAR — partidas únicas:", weeklyMatches.size);
+console.log("RADAR — posiciones seleccionadas:", selectedPositions);
+console.log("RADAR — posiciones encontradas:", [...weeklyMatchPositions.values()]);
+console.log("RADAR — partidas exitosas:", successfulMatches);
+console.log("RADAR — combate:", combat);
+console.log("RADAR — supervivencia:", survival);
+
+    // Promedios generales para las demás fortalezas.
     const matches = Math.max(totalMatches, 1);
 
     const averageKills = totals.kills / matches;
@@ -1562,30 +1840,11 @@ function renderPlayerProfileRadarChart(playerStats, totals, totalMatches, top3, 
     const averageAssists = totals.assists / matches;
     const averageKnockdowns = totals.knockdowns / matches;
 
-    const kd = totals.deaths > 0
-        ? totals.kills / totals.deaths
-        : totals.kills;
-
-    // Escalas visuales de referencia para normalizar los indicadores.
-    const normalize = (value, reference) =>
-        Math.max(0, Math.min(100, (value / reference) * 100));
-
-    const combat = (
-        normalize(averageKills, 5) +
-        normalize(averageDamage, 1500)
-    ) / 2;
-
-    const survival = (
-        normalize((top3 / matches) * 100, 100) +
-        normalize((top5 / matches) * 100, 100) +
-        normalize((booyahs / matches) * 100, 100)
-    ) / 3;
-
+        // APOYO: promedio de asistencias y derribos.
     const support = (
         normalize(averageAssists, 5) +
         normalize(averageKnockdowns, 5)
     ) / 2;
-
     
 const strategyScores = playerStats
     .map((stat) => stat.strategyScore)
@@ -2166,6 +2425,56 @@ datasets: [{
             };
 
             setText("playerProfileNick", player.nick, "Jugador");
+
+            
+            // Recuperar las metas semanales guardadas del jugador.
+            const weeklyKillsInput = $("playerProfileWeeklyKillsGoal");
+
+            const placementGoalInputs = [
+                $("playerProfileGoalTop1"),
+                $("playerProfileGoalTop2"),
+                $("playerProfileGoalTop3"),
+                $("playerProfileGoalTop4"),
+                $("playerProfileGoalTop5")
+            ];
+
+            const getGoalsStorageKey = (playerId) => {
+                const now = new Date();
+                const day = (now.getDay() + 6) % 7;
+                const monday = new Date(now);
+
+                monday.setDate(now.getDate() - day);
+
+                const weekKey = [
+                    monday.getFullYear(),
+                    String(monday.getMonth() + 1).padStart(2, "0"),
+                    String(monday.getDate()).padStart(2, "0")
+                ].join("-");
+
+                return `lopzek_player_goals_${playerId}_${weekKey}`;
+            };
+
+            let savedGoals = null;
+
+            try {
+                savedGoals = JSON.parse(
+                    localStorage.getItem(getGoalsStorageKey(player.id)) || "null"
+                );
+            } catch (error) {
+                console.warn("No se pudieron recuperar las metas:", error);
+            }
+
+            if (weeklyKillsInput) {
+                weeklyKillsInput.value = savedGoals?.weeklyKillsGoal ?? 200;
+            }
+
+            placementGoalInputs.forEach((input) => {
+                if (input) {
+                    input.checked =
+                        savedGoals?.placementGoals?.includes(input.id) ?? false;
+                }
+            });
+
             setText(
                 "playerProfileName",
                 player.name,
@@ -2227,8 +2536,41 @@ datasets: [{
 // ESTADÍSTICAS REALES DEL JUGADOR
 // ==========================================
 
-const playerStats = state.matchPlayerStats.filter(
-    (stat) => String(stat.playerId) === String(player.id)
+const playerStats = state.matchPlayerStats.filter((stat) => {
+    if (String(stat.playerId) !== String(player.id)) {
+        return false;
+    }
+
+    const kills = Number(stat.kills) || 0;
+    const damage = Number(stat.damage) || 0;
+    const assists = Number(stat.assists) || 0;
+    const knockdowns = Number(stat.knockdowns) || 0;
+    const deaths = Number(stat.deaths) || 0;
+
+    // Excluir registros de salas que el jugador no jugó.
+    const noJugó =
+        kills === 0 &&
+        damage === 0 &&
+        assists === 0 &&
+        knockdowns === 0 &&
+        deaths === 0;
+
+    return !noJugó;
+});
+
+console.table(
+    playerStats.map((stat) => ({
+        fecha: stat.matchDate,
+        bloque: stat.blockNumber,
+        sala: stat.roomNumber,
+        mapa: stat.map,
+        posicion: stat.position,
+        kills: stat.kills,
+        daño: stat.damage,
+        asistencias: stat.assists,
+        derribos: stat.knockdowns,
+        muertes: stat.deaths
+    }))
 );
 
 renderPlayerProfileKillsDamageChart(playerStats);
@@ -2301,7 +2643,8 @@ renderPlayerProfileRadarChart(
     totalMatches,
     top3,
     top5,
-    booyahs
+    booyahs,
+    player.id
 );
 
             // ==========================================
