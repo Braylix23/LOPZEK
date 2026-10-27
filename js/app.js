@@ -416,6 +416,15 @@ function initNavigation() {
 function renderMainDashboard() {
     const stats = state.matchPlayerStats || [];
 
+    console.table(state.players.map(p => ({
+    jugador: p.nick,
+    jugadorId: p.id,
+    rosterId: p.rosterId,
+    roster: p.rosterName
+})));
+
+    console.log("Ejemplo de registro:", stats[0]);
+
     console.log("Total de registros:", stats.length);
 
 console.table(
@@ -437,18 +446,30 @@ console.table(
         0
     );
 
-    // Cada fecha, bloque y sala cuenta como una partida.
-    const matches = new Set(
-        stats.map((stat) =>
-            [
-                stat.matchDate,
-                stat.blockNumber,
-                stat.roomNumber
-            ].join("|")
-        )
-    );
+    // Relacionar cada jugador con su roster.
+const playerRosterMap = new Map(
+    (state.players || []).map(player => [
+        String(player.id),
+        String(player.rosterId || "")
+    ])
+);
 
-    const totalMatches = matches.size;
+// Contar cada partida por fecha, bloque, sala y roster.
+const matches = new Set(
+    stats.map(stat => {
+        const rosterId =
+            playerRosterMap.get(String(stat.playerId)) || "";
+
+        return [
+            stat.matchDate,
+            stat.blockNumber,
+            stat.roomNumber,
+            rosterId
+        ].join("|");
+    })
+);
+
+const totalMatches = matches.size;
 
     console.log("LOPZEK — Partidas únicas:", totalMatches, [...matches]);
 
