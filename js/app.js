@@ -512,6 +512,761 @@ const totalMatches = matches.size;
         averageKillsElement.textContent =
             averageKills.replace(".", ",");
     }
+
+    renderDashboardPerformanceChart();
+    renderDashboardRecentActivity();
+    renderDashboardRostersSummary();
+    renderDashboardKillsDistribution();
+}
+
+
+function renderDashboardRecentActivity() {
+    const container = document.getElementById(
+        "dashboardRecentActivity"
+    );
+
+    if (!container) return;
+
+    const stats = state.matchPlayerStats || [];
+    const players = state.players || [];
+    const rosters = state.rosters || [];
+
+    if (stats.length === 0) {
+        container.className = "empty-state";
+        container.innerHTML = `
+            <span class="empty-state-icon">◷</span>
+            <p>Aún no hay actividad registrada.</p>
+        `;
+        return;
+    }
+
+    const playerMap = new Map(
+        players.map(player => [
+            String(player.id),
+            player
+        ])
+    );
+
+    const rosterMap = new Map(
+        rosters.map(roster => [
+            String(roster.id),
+            roster
+        ])
+    );
+
+    const matchesMap = new Map();
+
+    stats.forEach(stat => {
+        const player = playerMap.get(String(stat.playerId));
+        const rosterId = String(player?.rosterId || "");
+
+        const key = [
+            stat.matchDate || "",
+            stat.blockNumber || 0,
+            stat.roomNumber || 0,
+            rosterId
+        ].join("|");
+
+        if (!matchesMap.has(key)) {
+            matchesMap.set(key, {
+                fecha: stat.matchDate || "",
+                bloque: Number(stat.blockNumber) || 0,
+                sala: Number(stat.roomNumber) || 0,
+                rosterId,
+                kills: 0
+            });
+        }
+
+        matchesMap.get(key).kills += Number(stat.kills) || 0;
+    });
+
+    const recentMatches = [...matchesMap.values()]
+        .sort((a, b) =>
+            String(b.fecha).localeCompare(String(a.fecha)) ||
+            b.bloque - a.bloque ||
+            b.sala - a.sala
+        )
+        .slice(0, 5);
+
+    container.className = "recent-activity-list";
+
+    container.innerHTML = recentMatches.map(match => {
+        const roster = rosterMap.get(match.rosterId);
+        const rosterName = roster?.name ||
+            roster?.tag ||
+            "Roster";
+
+        return `
+            <div class="recent-activity-item">
+                <div class="recent-activity-info">
+                    <strong>${match.fecha || "Fecha no disponible"}</strong>
+                    <span>${rosterName}</span>
+                    <small>
+                        Bloque ${match.bloque} · Sala ${match.sala}
+                    </small>
+                </div>
+                <div class="recent-activity-kills">
+                    <strong>${match.kills}</strong>
+                    <span>KILLS</span>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+
+function renderDashboardRostersSummary() {
+    const container = document.getElementById(
+        "dashboardRostersSummary"
+    );
+
+    if (!container) return;
+
+    const rosters = state.rosters || [];
+    const players = state.players || [];
+    const stats = state.matchPlayerStats || [];
+
+    if (rosters.length === 0) {
+        container.className = "empty-state";
+        container.innerHTML = `
+            <span class="empty-state-icon">♧</span>
+            <p>Los rosters que registres aparecerán aquí.</p>
+        `;
+        return;
+    }
+
+    const playerRosterMap = new Map(
+        players.map(player => [
+            String(player.id),
+            String(player.rosterId || "")
+        ])
+    );
+
+    const rosterStats = new Map(
+        rosters.map(roster => [
+            String(roster.id),
+            {
+                name: roster.name || roster.tag || "Roster sin nombre",
+                kills: 0,
+                matches: new Set()
+            }
+        ])
+    );
+
+    stats.forEach(stat => {
+        const rosterId =
+            playerRosterMap.get(String(stat.playerId)) || "";
+
+        const roster = rosterStats.get(rosterId);
+
+        if (!roster) return;
+
+        roster.kills += Number(stat.kills) || 0;
+
+        const matchKey = [
+            stat.matchDate || "",
+            stat.blockNumber || 0,
+            stat.roomNumber || 0
+        ].join("|");
+
+        roster.matches.add(matchKey);
+    });
+
+    const ranking = [...rosterStats.values()]
+        .map(roster => ({
+            ...roster,
+            matches: roster.matches.size
+        }))
+        .sort((a, b) =>
+            b.kills - a.kills ||
+            b.matches - a.matches ||
+            a.name.localeCompare(b.name)
+        )
+        .slice(0, 5);
+
+    container.className = "dashboard-rosters-list";
+
+    container.innerHTML = ranking.map((roster, index) => `
+        <div class="dashboard-roster-item">
+            <div class="dashboard-roster-position">
+                ${index + 1}
+            </div>
+
+            <div class="dashboard-roster-info">
+                <strong>${roster.name}</strong>
+                <span>${roster.matches} partidas registradas</span>
+            </div>
+
+            <div class="dashboard-roster-kills">
+                <strong>${roster.kills.toLocaleString("es-CO")}</strong>
+                <span>KILLS</span>
+            </div>
+        </div>
+    `).join("");
+}
+
+
+
+function renderDashboardPerformanceChart() {
+    const canvas = document.getElementById("dashboardPerformanceChart");
+
+    if (!canvas || typeof Chart === "undefined") return;
+
+    const stats = state.matchPlayerStats || [];
+    const players = state.players || [];
+
+    const playerRosterMap = new Map(
+        players.map(player => [
+            String(player.id),
+            String(player.rosterId || "")
+        ])
+    );
+
+    const rosterNames = new Map();
+
+    players.forEach(player => {
+        const id = String(player.rosterId || "");
+        if (id && !rosterNames.has(id)) {
+            rosterNames.set(id, player.rosterName || "Roster sin nombre");
+        }
+    });
+
+    // Agrupar las estadísticas por fecha, bloque, sala y roster.
+    const matchesMap = new Map();
+
+    stats.forEach(stat => {
+        const rosterId = playerRosterMap.get(String(stat.playerId)) || "";
+
+        if (!rosterId || !stat.matchDate) return;
+
+        const matchKey = [
+            stat.matchDate,
+            stat.blockNumber,
+            stat.roomNumber,
+            rosterId
+        ].join("|");
+
+        if (!matchesMap.has(matchKey)) {
+            matchesMap.set(matchKey, {
+                fecha: String(stat.matchDate),
+                bloque: Number(stat.blockNumber) || 0,
+                sala: Number(stat.roomNumber) || 0,
+                rosterId,
+                kills: 0
+            });
+        }
+
+        matchesMap.get(matchKey).kills += Number(stat.kills) || 0;
+    });
+
+    const matches = [...matchesMap.values()].sort((a, b) =>
+        a.fecha.localeCompare(b.fecha) ||
+        a.bloque - b.bloque ||
+        a.sala - b.sala
+    );
+
+    const rosterIds = [...new Set(matches.map(match => match.rosterId))];
+
+    const colors = [
+        "#D5A348",
+        "#62A8FF",
+        "#63C79A",
+        "#C58BFA",
+        "#FF8D75"
+    ];
+
+    // Crear controles de período.
+    let controls = document.getElementById("dashboardPerformanceControls");
+
+    if (!controls) {
+        controls = document.createElement("div");
+        controls.id = "dashboardPerformanceControls";
+        controls.style.cssText = `
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content:space-between;
+            gap:12px;
+            margin-bottom:18px;
+        `;
+
+        canvas.parentElement.insertBefore(controls, canvas);
+    }
+
+    if (!controls.dataset.period) controls.dataset.period = "weekly";
+    if (controls.dataset.offset === undefined) controls.dataset.offset = "0";
+
+    const period = controls.dataset.period;
+    const offset = Number(controls.dataset.offset) || 0;
+
+    const today = new Date();
+    today.setHours(12, 0, 0, 0);
+
+    const parseDate = value => {
+        const [year, month, day] = value.split("-").map(Number);
+        return new Date(year, month - 1, day, 12);
+    };
+
+    const dateKey = date => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    };
+
+    const shortDate = value =>
+        parseDate(value).toLocaleDateString("es-CO", {
+            day: "2-digit",
+            month: "short"
+        }).replace(".", "");
+
+    const weekdayNames = ["Lun.", "Mar.", "Mié.", "Jue.", "Vie."];
+
+    let startDate;
+    let endDate;
+    let title = "";
+
+    if (period === "weekly") {
+        const base = new Date(today);
+        const weekday = (base.getDay() + 6) % 7;
+
+        base.setDate(base.getDate() - weekday + offset * 7);
+        startDate = new Date(base);
+        endDate = new Date(base);
+        endDate.setDate(endDate.getDate() + 4);
+
+        title = `${shortDate(dateKey(startDate))} – ${shortDate(dateKey(endDate))}`;
+    } else if (period === "monthly") {
+        startDate = new Date(today.getFullYear(), today.getMonth() + offset, 1, 12);
+        endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 12);
+
+        title = startDate.toLocaleDateString("es-CO", {
+            month: "long",
+            year: "numeric"
+        });
+
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+    } else {
+        const latestMatchDate = matches.length
+            ? parseDate(matches[matches.length - 1].fecha)
+            : new Date(today);
+
+        startDate = new Date(latestMatchDate);
+        startDate.setDate(startDate.getDate() + offset);
+        endDate = new Date(startDate);
+
+        title = shortDate(dateKey(startDate));
+    }
+
+    const filteredMatches = matches.filter(match => {
+        const date = parseDate(match.fecha);
+        return date >= startDate && date <= endDate;
+    });
+
+    // Crear los puntos del gráfico.
+
+    
+    let points = [];
+
+    if (period === "daily") {
+        const blocksMap = new Map();
+
+        filteredMatches.forEach(match => {
+            const key = `${match.fecha}|${match.bloque}`;
+
+            if (!blocksMap.has(key)) {
+                blocksMap.set(key, {
+                    key,
+                    date: match.fecha,
+                    bloque: match.bloque,
+                    label: `B${match.bloque}`
+                });
+            }
+        });
+
+        points = [...blocksMap.values()].sort((a, b) =>
+            a.bloque - b.bloque
+        );
+    } else {
+        const dates = [];
+
+        for (
+            let date = new Date(startDate);
+            date <= endDate;
+            date.setDate(date.getDate() + 1)
+        ) {
+            if (
+                period === "weekly" &&
+                (date.getDay() === 0 || date.getDay() === 6)
+            ) {
+                continue;
+            }
+
+            dates.push(dateKey(date));
+        }
+
+        points = dates.map(date => ({
+            key: date,
+            date,
+            label: period === "weekly"
+                ? `${weekdayNames[(parseDate(date).getDay() + 6) % 7]} ${shortDate(date)}`
+                : shortDate(date)
+        }));
+    }
+
+
+    const labels = points.map(point => {
+        if (period === "daily") {
+            return `B${point.bloque}`;
+        }
+
+        if (period === "weekly") {
+            return point.label.split(" ")[0];
+        }
+
+        return String(parseDate(point.date).getDate()).padStart(2, "0");
+    });
+
+    const datasets = rosterIds.map((rosterId, index) => {
+
+        const color = colors[index % colors.length];
+
+        const data = points.map(point => {
+            
+        if (period === "daily") {
+            const blockMatches = filteredMatches.filter(match =>
+                match.fecha === point.date &&
+                match.bloque === point.bloque &&
+                match.rosterId === rosterId
+            );
+
+            if (blockMatches.length === 0) return null;
+
+            return blockMatches.reduce(
+                (sum, match) => sum + match.kills,
+                0
+            );
+        }
+
+
+            return filteredMatches
+                .filter(match =>
+                    match.fecha === point.date &&
+                    match.rosterId === rosterId
+                )
+                .reduce((sum, match) => sum + match.kills, 0);
+        });
+
+        
+        return {
+            label: rosterNames.get(rosterId) || "Roster",
+            data,
+            borderColor: color,
+            backgroundColor: color,
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            pointHitRadius: 10,
+            pointBackgroundColor: "#191C22",
+            pointBorderWidth: 2,
+            tension: 0.3,
+            spanGaps: false
+        };
+
+    });
+
+    // Botones Diario, Semanal y Mensual.
+    controls.innerHTML = "";
+
+    const left = document.createElement("div");
+    left.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;align-items:center;";
+
+    [
+        ["daily", "Diario"],
+        ["weekly", "Semanal"],
+        ["monthly", "Mensual"]
+    ].forEach(([value, label]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = label;
+
+        button.style.cssText = `
+            border:1px solid ${period === value ? "#D5A348" : "#303540"};
+            background:${period === value ? "rgba(213,163,72,.13)" : "#191C22"};
+            color:${period === value ? "#F0C875" : "#A5A9B2"};
+            border-radius:8px;
+            padding:8px 12px;
+            cursor:pointer;
+            font-size:12px;
+        `;
+
+        button.addEventListener("click", () => {
+            controls.dataset.period = value;
+            controls.dataset.offset = "0";
+            renderDashboardPerformanceChart();
+        });
+
+        left.appendChild(button);
+    });
+
+    const navigation = document.createElement("div");
+    navigation.style.cssText = "display:flex;align-items:center;gap:10px;";
+
+    const previous = document.createElement("button");
+    previous.type = "button";
+    previous.textContent = "‹";
+    previous.title = "Período anterior";
+
+    const periodTitle = document.createElement("span");
+    periodTitle.textContent = title;
+    periodTitle.style.cssText = "color:#F3F0E8;font-size:12px;font-weight:600;";
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.textContent = "›";
+    next.title = "Período siguiente";
+
+    [previous, next].forEach(button => {
+        button.style.cssText = `
+            width:30px;height:30px;
+            border:1px solid #303540;
+            background:#191C22;
+            color:#F0C875;
+            border-radius:8px;
+            font-size:20px;
+            cursor:pointer;
+        `;
+    });
+
+    previous.addEventListener("click", () => {
+        controls.dataset.offset = String(offset - 1);
+        renderDashboardPerformanceChart();
+    });
+
+    next.addEventListener("click", () => {
+        controls.dataset.offset = String(offset + 1);
+        renderDashboardPerformanceChart();
+    });
+
+    navigation.append(previous, periodTitle, next);
+    controls.append(left, navigation);
+
+    // Destruir el gráfico anterior antes de dibujar el nuevo.
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) existingChart.destroy();
+
+    new Chart(canvas, {
+        type: "line",
+        data: { labels, datasets },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: "index"
+            },
+            plugins: {
+                
+legend: {
+    display: true,
+    position: "bottom",
+    align: "center",
+    labels: {
+        color: "#F3F0E8",
+        usePointStyle: true,
+        pointStyle: "circle",
+        boxWidth: 8,
+        boxHeight: 8,
+        padding: 22,
+        textAlign: "left",
+        font: {
+            size: 11,
+            weight: "600"
+        }
+    }
+},
+
+                tooltip: {
+                    backgroundColor: "#191C22",
+                    titleColor: "#F3F0E8",
+                    bodyColor: "#F3F0E8",
+                    borderColor: "rgba(213,163,72,.35)",
+                    borderWidth: 1,
+                    padding: 12,
+                    callbacks: {
+                        title(items) {
+                            const point = points[items[0]?.dataIndex];
+
+                            if (!point) return "";
+
+                            if (period === "daily") {
+                                return `${point.date} · Bloque ${point.bloque} · Sala ${point.sala}`;
+                            }
+
+                            return point.label;
+                        },
+                        label(context) {
+                            return `${context.dataset.label}: ${context.parsed.y ?? 0} kills`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    stacked: false,
+                    ticks: {
+                        color: "#A5A9B2",
+                        maxRotation: 0,
+                        autoSkip: true,
+                        maxTicksLimit: period === "monthly" ? 10 : 8
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                        color: "#A5A9B2"
+                    },
+                    grid: {
+                        color: "rgba(255,255,255,.06)"
+                    },
+                    title: {
+                        display: true,
+                        text: "Kills",
+                        color: "#A5A9B2"
+                    }
+                }
+            }
+        }
+    });
+}
+
+function renderDashboardKillsDistribution() {
+    const canvas = document.getElementById(
+        "dashboardKillsDistributionChart"
+    );
+
+    if (!canvas || typeof Chart === "undefined") return;
+
+    const stats = state.matchPlayerStats || [];
+    const players = state.players || [];
+
+    const playerMap = new Map(
+        players.map(player => [
+            String(player.id),
+            player
+        ])
+    );
+
+    const killsByPlayer = new Map();
+
+    stats.forEach(stat => {
+        const player = playerMap.get(String(stat.playerId));
+
+        if (!player) return;
+
+        const playerId = String(player.id);
+
+        if (!killsByPlayer.has(playerId)) {
+            killsByPlayer.set(playerId, {
+                name: player.nick || player.name || "Jugador",
+                kills: 0
+            });
+        }
+
+        killsByPlayer.get(playerId).kills +=
+            Number(stat.kills) || 0;
+    });
+
+    const ranking = [...killsByPlayer.values()]
+        .sort((a, b) =>
+            b.kills - a.kills ||
+            a.name.localeCompare(b.name)
+        )
+        .slice(0, 8);
+
+    const existingChart = Chart.getChart(canvas);
+
+    if (existingChart) {
+        existingChart.destroy();
+    }
+
+    new Chart(canvas, {
+        type: "bar",
+        data: {
+            labels: ranking.map(player => player.name),
+            datasets: [{
+                label: "Kills",
+                data: ranking.map(player => player.kills),
+                backgroundColor: "#D5A348",
+                borderColor: "#F0C875",
+                borderWidth: 1,
+                borderRadius: 5,
+                barThickness: 18
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                datalabels: {
+    display: context =>
+        context.dataset.data[context.dataIndex] !== null &&
+        context.dataset.data[context.dataIndex] !== undefined,
+
+    color: context => context.dataset.borderColor,
+    anchor: "end",
+    align: "top",
+    offset: 5,
+    clamp: true,
+
+    font: {
+        size: 10,
+        weight: "bold"
+    },
+
+    formatter: value =>
+        value === null || value === undefined
+            ? ""
+            : Math.round(value)
+},
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label(context) {
+                            return `${context.parsed.x} kills`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                        color: "#A5A9B2"
+                    },
+                    grid: {
+                        color: "rgba(255,255,255,0.07)"
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: "#F3F0E8"
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
 }
 
     async function loadDataFromSupabase() {

@@ -446,34 +446,45 @@ a:focus-visible {
 }
 
 
-/* 07. TARJETAS DE INDICADORES */
+/* =====================================================
+   07. TARJETAS DE INDICADORES — LOPZEK
+===================================================== */
 
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 17px;
-    margin-bottom: 22px;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .metric-card {
     position: relative;
     overflow: hidden;
     min-width: 0;
-    padding: 21px;
+    padding: 22px 20px 20px;
 
     background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(213, 163, 72, 0.075),
+            transparent 48%
+        ),
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.025),
-            transparent 65%
-        ),
-        var(--panel);
+            #1D2129,
+            var(--panel) 72%
+        );
 
     border: 1px solid var(--borde);
     border-radius: var(--radio);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
 
-    transition: var(--transicion);
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
 .metric-card::before {
@@ -490,11 +501,11 @@ a:focus-visible {
         var(--dorado-claro)
     );
 
-    opacity: 0.8;
+    opacity: 0.95;
 }
 
 .metric-card:nth-child(2)::before {
-    background: linear-gradient(90deg, #9D722B, #D5A348);
+    background: linear-gradient(90deg, #397FC4, #75B9FF);
 }
 
 .metric-card:nth-child(3)::before {
@@ -502,23 +513,28 @@ a:focus-visible {
 }
 
 .metric-card:nth-child(4)::before {
-    background: linear-gradient(90deg, #9D722B, #F0C875);
+    background: linear-gradient(90deg, #278A68, #63C79A);
 }
 
 .metric-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(213, 163, 72, 0.45);
+    border-color: rgba(213, 163, 72, 0.42);
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.22),
+        0 0 20px rgba(213, 163, 72, 0.035);
 }
 
 .metric-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 10px;
+
     color: var(--texto-secundario);
     font-size: 10px;
     font-weight: 750;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    line-height: 1.5;
 }
 
 .metric-icon {
@@ -527,26 +543,49 @@ a:focus-visible {
     flex-shrink: 0;
     width: 38px;
     height: 38px;
-    border: 1px solid rgba(213, 163, 72, 0.18);
+
+    border: 1px solid rgba(213, 163, 72, 0.20);
     border-radius: 11px;
-    background: rgba(213, 163, 72, 0.08);
+    background: rgba(213, 163, 72, 0.09);
     color: var(--dorado);
     font-size: 21px;
 }
 
+.metric-card:nth-child(2) .metric-icon {
+    color: #75B9FF;
+    background: rgba(98, 168, 255, 0.09);
+    border-color: rgba(98, 168, 255, 0.20);
+}
+
+.metric-card:nth-child(3) .metric-icon {
+    color: #C2C6CF;
+    background: rgba(194, 198, 207, 0.08);
+    border-color: rgba(194, 198, 207, 0.18);
+}
+
+.metric-card:nth-child(4) .metric-icon {
+    color: #63C79A;
+    background: rgba(99, 199, 154, 0.09);
+    border-color: rgba(99, 199, 154, 0.20);
+}
+
 .metric-card h3 {
-    margin: 18px 0 7px;
-    font-size: clamp(25px, 2.5vw, 33px);
+    margin: 21px 0 8px;
+
+    color: var(--texto);
+    font-size: clamp(27px, 2.3vw, 35px);
     font-weight: 850;
-    letter-spacing: -0.8px;
+    letter-spacing: -1px;
+    line-height: 1.1;
     font-variant-numeric: tabular-nums;
 }
 
 .metric-card p {
+    margin: 0;
     color: var(--texto-secundario);
     font-size: 11px;
+    line-height: 1.6;
 }
-
 
 /* 08. PANELES Y GRÁFICOS */
 
@@ -722,6 +761,132 @@ a:focus-visible {
     font-size: 11px;
 }
 
+
+/* =====================================================
+   LOPZEK — MEJORA VISUAL DEL DASHBOARD
+   Solo afecta los cuatro paneles de análisis
+===================================================== */
+
+/* Paneles: apariencia más refinada */
+.analytics-grid > .panel {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.025),
+            transparent 55%
+        ),
+        var(--panel);
+    border-color: rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+}
+
+/* Encabezados más definidos */
+.analytics-grid .panel-heading {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom-color: rgba(213, 163, 72, 0.13);
+}
+
+.analytics-grid .panel-heading h3 {
+    color: var(--texto);
+    font-size: 14px;
+    letter-spacing: 0.15px;
+}
+
+/* Gráfico de rendimiento */
+.performance-panel {
+    min-height: 0;
+}
+
+.performance-chart-container {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    height: 260px;
+}
+
+/* Actividad reciente */
+.activity-panel {
+    min-height: 340px;
+}
+
+.recent-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.recent-activity-item {
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.018);
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.recent-activity-item:hover {
+    border-color: rgba(213, 163, 72, 0.22);
+    background: rgba(213, 163, 72, 0.035);
+}
+
+/* Resumen de rosters */
+.rosters-panel {
+    min-height: 250px;
+}
+
+.dashboard-rosters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-roster-item {
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.018);
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.dashboard-roster-item:hover {
+    border-color: rgba(213, 163, 72, 0.22);
+    background: rgba(213, 163, 72, 0.035);
+}
+
+/* Distribución de kills */
+.distribution-panel {
+    min-height: 250px;
+}
+
+.distribution-chart-container {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    height: 260px;
+}
+
+/* Mensajes vacíos dentro de los paneles */
+.analytics-grid .empty-state {
+    border: 1px dashed rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.012);
+    border-radius: 10px;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 900px) {
+    .analytics-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .performance-chart-container,
+    .distribution-chart-container {
+        height: 240px;
+    }
+}
 
 /* 09. PIE DE PÁGINA */
 
@@ -996,6 +1161,221 @@ a:focus-visible {
         transform: translateY(0);
     }
 }
+
+
+/* =====================================================
+   LOPZEK — FILAS DE ACTIVIDAD RECIENTE
+===================================================== */
+
+.recent-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recent-activity-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-width: 0;
+    padding: 13px 14px;
+    background: linear-gradient(
+        110deg,
+        rgba(255, 255, 255, 0.025),
+        rgba(255, 255, 255, 0.008)
+    );
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.recent-activity-item:hover {
+    background: rgba(213, 163, 72, 0.045);
+    border-color: rgba(213, 163, 72, 0.30);
+}
+
+.recent-activity-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    min-width: 0;
+}
+
+.recent-activity-info strong {
+    color: var(--texto);
+    font-size: 12px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.recent-activity-info span {
+    max-width: 100%;
+    color: var(--dorado-claro);
+    font-size: 11px;
+    font-weight: 650;
+    overflow-wrap: anywhere;
+}
+
+.recent-activity-info small {
+    color: var(--texto-secundario);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.recent-activity-kills {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 62px;
+    padding: 8px 10px;
+    background: rgba(213, 163, 72, 0.075);
+    border: 1px solid rgba(213, 163, 72, 0.17);
+    border-radius: 8px;
+}
+
+.recent-activity-kills strong {
+    color: var(--dorado-claro);
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.recent-activity-kills span {
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.8px;
+}
+
+/* =====================================================
+   LOPZEK — RESUMEN Y RANKING DE ROSTERS
+===================================================== */
+
+.dashboard-rosters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-roster-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 12px;
+    background: linear-gradient(
+        110deg,
+        rgba(255, 255, 255, 0.025),
+        rgba(255, 255, 255, 0.008)
+    );
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.dashboard-roster-item:hover {
+    background: rgba(213, 163, 72, 0.045);
+    border-color: rgba(213, 163, 72, 0.30);
+}
+
+.dashboard-roster-position {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(213, 163, 72, 0.09);
+    border: 1px solid rgba(213, 163, 72, 0.24);
+    border-radius: 9px;
+    color: var(--dorado-claro);
+    font-size: 13px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.dashboard-roster-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.dashboard-roster-info strong {
+    color: var(--texto);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.dashboard-roster-info span {
+    color: var(--texto-secundario);
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.dashboard-roster-kills {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    min-width: 55px;
+}
+
+.dashboard-roster-kills strong {
+    color: var(--dorado-claro);
+    font-size: 17px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.dashboard-roster-kills span {
+    color: var(--texto-secundario);
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.7px;
+}
+
+/* Ajuste para pantallas estrechas */
+@media (max-width: 480px) {
+    .recent-activity-item,
+    .dashboard-roster-item {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .recent-activity-kills {
+        min-width: 52px;
+        padding: 7px;
+    }
+
+    .recent-activity-kills strong {
+        font-size: 17px;
+    }
+
+    .dashboard-roster-position {
+        width: 28px;
+        height: 28px;
+    }
+
+    .dashboard-roster-kills {
+        min-width: 45px;
+    }
+
+    .dashboard-roster-kills strong {
+        font-size: 15px;
+    }
+}
+
 
 .app.dashboard-appearing {
     animation: dashboardAppear 0.45s ease both;
@@ -6527,6 +6907,13 @@ a:focus-visible {
     }
 }
 
+.performance-chart-container {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    height: 260px;
+    padding-top: 8px;
+}
 
 /* =========================================================
    FIN DE ESTILOS LOPZEK

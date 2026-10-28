@@ -312,14 +312,14 @@
                                 <span class="panel-tag">KILLS / PARTIDA</span>
                             </div>
 
-                            <div class="empty-chart">
-                                <div class="chart-symbol">⌁</div>
-                                <strong>Tu análisis comienza aquí</strong>
-                                <p>
-                                    Cuando registremos resultados, aquí
-                                    visualizaremos la evolución del rendimiento.
-                                </p>
-                            </div>
+<div class="performance-chart-container">
+    <canvas
+        id="dashboardPerformanceChart"
+        aria-label="Evolución de kills por partida"
+        role="img"
+    ></canvas>
+</div>
+
                         </article>
 
                         <article class="panel activity-panel">
@@ -330,10 +330,10 @@
                                 </div>
                             </div>
 
-                            <div class="empty-state">
-                                <span class="empty-state-icon">◷</span>
-                                <p>Aún no hay actividad registrada.</p>
-                            </div>
+                            <div class="empty-state" id="dashboardRecentActivity">
+    <span class="empty-state-icon">◷</span>
+    <p>Aún no hay actividad registrada.</p>
+</div>
                         </article>
 
                         <article class="panel rosters-panel" id="rosters-summary">
@@ -346,10 +346,10 @@
                                 <span class="panel-tag">0 ROSTERS</span>
                             </div>
 
-                            <div class="empty-state">
-                                <span class="empty-state-icon">♧</span>
-                                <p>Los rosters que registres aparecerán aquí.</p>
-                            </div>
+                            <div class="empty-state" id="dashboardRostersSummary">
+    <span class="empty-state-icon">♧</span>
+    <p>Los rosters que registres aparecerán aquí.</p>
+</div>
                         </article>
 
                         <article class="panel distribution-panel">
@@ -360,10 +360,13 @@
                                 </div>
                             </div>
 
-                            <div class="empty-state">
-                                <span class="empty-state-icon">◉</span>
-                                <p>El gráfico estará disponible cuando existan resultados.</p>
-                            </div>
+                            <div class="distribution-chart-container" id="dashboardKillsDistribution">
+    <canvas
+        id="dashboardKillsDistributionChart"
+        aria-label="Distribución de kills por jugador"
+        role="img"
+    ></canvas>
+</div>
                         </article>
 
                     </section>
@@ -1994,6 +1997,7 @@ FORMULARIO: CREAR ROSTER
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 <script src="js/app.js"></script>
 <script src="js/platform-auth.js"></script>
 
