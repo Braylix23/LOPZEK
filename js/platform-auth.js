@@ -5,6 +5,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainApp = document.getElementById("mainApp");
 
     const enterButton = document.getElementById("enterPlatform");
+
+    
+    // Cerrar sesión de LOPZEK.
+    logoutButton.addEventListener("click", async () => {
+        logoutButton.disabled = true;
+
+        try {
+            const { error } = await supabaseClient.auth.signOut();
+
+            if (error) throw error;
+
+            localStorage.removeItem("lopzek_user_id");
+
+            mainApp.hidden = true;
+            loginScreen.hidden = true;
+            welcomeScreen.hidden = false;
+
+            loginForm.reset();
+            loginMessage.textContent = "";
+        } catch (error) {
+            console.error("Error al cerrar sesión:", error);
+            alert("No se pudo cerrar la sesión. Inténtalo nuevamente.");
+        } finally {
+            logoutButton.disabled = false;
+        }
+    });
+
     const backButton = document.getElementById("backToWelcome");
     const loginForm = document.getElementById("loginForm");
     const loginMessage = document.getElementById("loginMessage");
@@ -38,24 +65,42 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Comprobar si ya existe una sesión de Supabase.
-    async function checkSession() {
-        try {
-            const { data, error } =
-                await supabaseClient.auth.getSession();
+    
+async function checkSession() {
+    try {
+        const { data, error } =
+            await supabaseClient.auth.getSession();
 
-            if (error) throw error;
+        if (error) throw error;
 
-            welcomeScreen.hidden = false;
-loginScreen.hidden = true;
-mainApp.hidden = true;
+        if (data.session) {
+            // Ya existe una sesión: entrar directamente.
+            welcomeScreen.hidden = true;
+            loginScreen.hidden = true;
+            mainApp.hidden = false;
 
-        } catch (error) {
-            console.error("Error al verificar la sesión:", error);
+            localStorage.setItem(
+                "lopzek_user_id",
+                data.session.user.id
+            );
+        } else {
+            // No hay sesión: mostrar la bienvenida.
             welcomeScreen.hidden = false;
             loginScreen.hidden = true;
             mainApp.hidden = true;
         }
+
+    } catch (error) {
+        console.error(
+            "Error al verificar la sesión:",
+            error
+        );
+
+        welcomeScreen.hidden = false;
+        loginScreen.hidden = true;
+        mainApp.hidden = true;
     }
+}
 
     // Iniciar sesión sin salir de index.html.
     loginForm.addEventListener("submit", async (event) => {

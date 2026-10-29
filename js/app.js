@@ -2766,7 +2766,8 @@ afterDraw(chart) {
         const dy = labelPosition.y - scale.yCenter;
         const distance = Math.hypot(dx, dy) || 1;
 
-        const offset = 30;
+        const offset = index === 0 ? 10 : 30;
+
         const x = labelPosition.x + (dx / distance) * offset;
         const y = labelPosition.y + (dy / distance) * offset;
 
@@ -2858,11 +2859,29 @@ datasets: [{
                         color: "rgba(255,255,255,0.10)"
                     },
 
-                    pointLabels: {
-                        color: "#d5d8de",
-                        padding: 24,
-                        font: { size: 11, weight: "600"}
-                    }
+pointLabels: {
+    color: "#d5d8de",
+    padding: 24,
+    font: (context) => {
+        const width = window.innerWidth;
+        const label = context.chart.data.labels[context.index];
+
+        if (width <= 390) {
+            return {
+                size: 7.5,
+                weight: "600"
+            };
+        }
+
+        return {
+            size: label === "Supervivencia" || label === "Movilidad"
+                ? 9
+                : 11,
+            weight: "600"
+        };
+    }
+}
+
                 }
             }
         },

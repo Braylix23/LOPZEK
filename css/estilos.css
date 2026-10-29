@@ -7658,6 +7658,74 @@ a:focus-visible {
 
 }
 
+
+/* =========================================
+   LOPZEK — BOTÓN CERRAR SESIÓN
+========================================= */
+
+.sidebar-logout {
+    margin: 12px 16px 18px;
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+
+    background: #191C22;
+    border: 1px solid #303540;
+    border-radius: 10px;
+
+    color: #A5A9B2;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.logout-button .nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    font-size: 18px;
+    color: #D5A348;
+    transition: color 0.2s ease;
+}
+
+.logout-button:hover {
+    background: rgba(213, 163, 72, 0.10);
+    border-color: #9D722B;
+    color: #F0C875;
+}
+
+.logout-button:hover .nav-icon {
+    color: #F0C875;
+}
+
+.logout-button:active {
+    transform: scale(0.98);
+}
+
+.logout-button:focus-visible {
+    outline: 2px solid #F0C875;
+    outline-offset: 3px;
+}
+
+.logout-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
 /* =========================================================
    FIN DE ESTILOS LOPZEK
    ========================================================= */
