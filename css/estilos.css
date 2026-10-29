@@ -6912,7 +6912,449 @@ a:focus-visible {
     width: 100%;
     min-width: 0;
     height: 260px;
-    padding-top: 8px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LOPZEK — DISEÑO RESPONSIVE PARA TABLETAS Y CELULARES
+   Este bloque debe quedar al final de estilos.css
+========================================================= */
+
+
+/* =========================================================
+   1. TABLETAS Y PANTALLAS MEDIANAS
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    :root {
+        --sidebar-ancho: 220px;
+    }
+
+    .main-content {
+        padding-right: 23px;
+        padding-left: 23px;
+        min-width: 0;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .analytics-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dashboard-roster-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-roster-rankings,
+    .dashboard-roster-graficas {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .player-profile-chart-container,
+    .player-profile-chart-wrapper,
+    .player-profile-strengths-chart {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .stats-workspace,
+    .reports-summary-grid,
+    .roster-summary {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   2. TABLETAS PEQUEÑAS Y CELULARES
+========================================================= */
+
+@media (max-width: 760px) {
+
+    /* Estructura general */
+
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 100;
+        transition: transform 0.25s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.visible {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        background: rgba(0, 0, 0, 0.68);
+    }
+
+    .main-content {
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+        padding-right: 19px;
+        padding-left: 19px;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--borde);
+        border-radius: 9px;
+        background: var(--panel);
+        color: var(--texto);
+        cursor: pointer;
+    }
+
+    .topbar {
+        justify-content: flex-start;
+        gap: 14px;
+        min-width: 0;
+    }
+
+    .topbar-right {
+        gap: 10px;
+        margin-left: auto;
+    }
+
+    .system-status {
+        font-size: 0;
+    }
+
+    .system-status .status-indicator {
+        width: 9px;
+        height: 9px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .date-label {
+        align-self: flex-start;
+    }
+
+    /* Paneles y tarjetas */
+
+    .dashboard-content {
+        padding-top: 24px;
+    }
+
+    .module-header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .roster-item {
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 13px;
+        padding: 15px;
+    }
+
+    .roster-item-mark {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        font-size: 20px;
+    }
+
+    .roster-item-meta {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+
+    .roster-item-description {
+        grid-column: 1 / -1;
+    }
+
+    .roster-summary {
+        gap: 12px;
+    }
+
+    .roster-stat {
+        min-width: 0;
+        padding: 17px;
+    }
+
+    .dashboard-roster {
+        padding: 24px 20px;
+    }
+
+    /* Estadísticas y formularios */
+
+    .stats-workspace {
+        width: 100%;
+        margin: 14px auto;
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .stats-section-heading h2 {
+        font-size: 22px;
+    }
+
+    #saveMatchStatsButton {
+        width: 100%;
+    }
+
+    #statsPlayersContainer {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #statsPlayersContainer > *,
+    #statsPlayersContainer .stats-player-row {
+        min-width: 0;
+    }
+
+    /* Informes y gráficas */
+
+    .reports-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .player-profile-chart-container {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .player-profile-chart-wrapper {
+        width: 100%;
+        max-width: 100%;
+        height: 300px;
+    }
+
+    .player-profile-strengths-chart {
+        width: 100%;
+        height: 360px;
+        min-height: 320px;
+    }
+
+}
+
+
+/* =========================================================
+   3. CELULARES
+========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Espaciado general */
+
+    .main-content {
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+
+    .topbar {
+        gap: 9px;
+    }
+
+    .topbar-right {
+        gap: 7px;
+    }
+
+    .page-heading h1 {
+        font-size: clamp(22px, 6vw, 30px);
+        overflow-wrap: anywhere;
+    }
+
+    /* Tarjetas del dashboard */
+
+    .metrics-grid,
+    .dashboard-roster-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .metrics-grid > *,
+    .dashboard-roster-kpis > * {
+        min-width: 0;
+    }
+
+    .dashboard-roster {
+        padding: 17px;
+    }
+
+    .roster-summary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Registro de partidas */
+
+    .stats-workspace {
+        padding: 14px;
+    }
+
+    #statsPlayersContainer > * .player-stats-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    #statsPlayersContainer > * input,
+    #statsPlayersContainer > * select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Resultados de rosters */
+
+    .module-header,
+    .stats-section-heading {
+        align-items: flex-start;
+    }
+
+    /* Calendario e informes */
+
+    #reportsCalendar .reports-calendar-grid {
+        gap: 4px;
+    }
+
+    #reportsCalendar .reports-calendar-day,
+    #reportsCalendar .reports-calendar-blank {
+        min-height: 36px;
+    }
+
+    #reportsCalendar .reports-calendar-day {
+        font-size: 12px;
+    }
+
+    .reports-summary-grid {
+        gap: 12px;
+    }
+
+    .reports-summary-grid .reports-summary-stat {
+        min-width: 0;
+        padding: 15px;
+    }
+
+    .reports-summary-grid .reports-summary-stat strong {
+        font-size: 22px;
+        overflow-wrap: anywhere;
+    }
+
+    /* Perfil competitivo del jugador */
+
+    .player-profile-chart-legend {
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .player-profile-chart-wrapper {
+        height: 270px;
+    }
+
+    .player-profile-strengths-chart {
+        height: 330px;
+        min-height: 300px;
+        padding: 5px;
+    }
+
+}
+
+
+/* =========================================================
+   4. CELULARES ESTRECHOS
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .main-content {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .metrics-grid,
+    .dashboard-roster-kpis {
+        gap: 9px;
+    }
+
+    .stats-workspace {
+        padding: 12px;
+    }
+
+    #statsPlayersContainer > * .player-stats-fields {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .player-profile-chart-wrapper {
+        height: 245px;
+    }
+
+    .player-profile-strengths-chart {
+        height: 300px;
+        min-height: 280px;
+    }
+
+}
+
+
+/* =========================================================
+   5. CELULARES MUY PEQUEÑOS
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .metrics-grid,
+    .dashboard-roster-kpis,
+    .reports-summary-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .topbar {
+        gap: 7px;
+    }
+
+    .main-content {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    .player-profile-chart-wrapper {
+        height: 225px;
+    }
+
+}
+
+
+/* LOPZEK — Ajuste móvil del gráfico del Dashboard */
+@media (max-width: 600px) {
+    .analytics-grid .performance-panel {
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .performance-chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: 340px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    #dashboardPerformanceChart {
+        display: block;
+        max-width: 100%;
+    }
 }
 
 /* =========================================================

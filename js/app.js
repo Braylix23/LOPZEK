@@ -170,6 +170,37 @@ function initNavigation() {
 
     const pages = document.querySelectorAll(".app-page");
 
+        // Menú lateral para celulares y tablets
+    const menuToggle = $("menuToggle");
+    const sidebar = $("sidebar");
+    const sidebarOverlay = document.querySelector(".sidebar-overlay");
+
+    function closeMobileMenu() {
+        sidebar?.classList.remove("open");
+        sidebarOverlay?.classList.remove("visible");
+        menuToggle?.setAttribute("aria-expanded", "false");
+        menuToggle?.setAttribute("aria-label", "Abrir menú");
+    }
+
+    menuToggle?.addEventListener("click", () => {
+        const isOpen = sidebar?.classList.toggle("open");
+
+        sidebarOverlay?.classList.toggle("visible", Boolean(isOpen));
+        menuToggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Cerrar menú" : "Abrir menú"
+        );
+    });
+
+    sidebarOverlay?.addEventListener("click", closeMobileMenu);
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 760) {
+            closeMobileMenu();
+        }
+    });
+
     function showPage(pageName) {
         const target = document.getElementById(`page-${pageName}`);
 
@@ -211,9 +242,10 @@ function initNavigation() {
     }
 
     navLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
+                link.addEventListener("click", (event) => {
             event.preventDefault();
             showPage(link.dataset.page);
+            closeMobileMenu();
         });
     });
 
@@ -586,7 +618,22 @@ function renderDashboardRecentActivity() {
             b.bloque - a.bloque ||
             b.sala - a.sala
         )
-        .slice(0, 5);
+        .slice(0, 4);
+
+        console.table(recentMatches);
+
+        console.log("Actividad reciente — registros recibidos:", stats.length);
+        console.log("Actividad reciente — partidas agrupadas:", matchesMap.size);
+
+        console.table(
+    [...matchesMap.values()]
+        .sort((a, b) =>
+            String(b.fecha).localeCompare(String(a.fecha)) ||
+            b.bloque - a.bloque ||
+            b.sala - a.sala
+        )
+        .slice(0, 15)
+);
 
     container.className = "recent-activity-list";
 
@@ -790,7 +837,7 @@ function renderDashboardPerformanceChart() {
             margin-bottom:18px;
         `;
 
-        canvas.parentElement.insertBefore(controls, canvas);
+        canvas.parentElement.parentElement.insertBefore(controls, canvas.parentElement);
     }
 
     if (!controls.dataset.period) controls.dataset.period = "weekly";
@@ -1059,12 +1106,23 @@ function renderDashboardPerformanceChart() {
         type: "line",
         data: { labels, datasets },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                intersect: false,
-                mode: "index"
-            },
+    responsive: true,
+    maintainAspectRatio: false,
+    resizeDelay: 100,
+    layout: {
+        autoPadding: true,
+        padding: {
+            top: 10,
+            right: 16,
+            bottom: 16,
+            left: 16
+        }
+    },
+    interaction: {
+        intersect: false,
+        mode: "index"
+    },
+
             plugins: {
                 
 legend: {
