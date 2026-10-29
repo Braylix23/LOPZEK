@@ -7659,20 +7659,26 @@ a:focus-visible {
 }
 
 
+
 /* =========================================
    LOPZEK — BOTÓN CERRAR SESIÓN
 ========================================= */
 
 .sidebar-logout {
     margin: 12px 16px 18px;
+    width: auto;
 }
 
 .logout-button {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
+
     width: 100%;
+    min-height: 44px;
     padding: 12px 14px;
+    box-sizing: border-box;
 
     background: #191C22;
     border: 1px solid #303540;
@@ -7682,9 +7688,12 @@ a:focus-visible {
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
+    line-height: 1.4;
     text-align: left;
 
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
     transition:
         background 0.2s ease,
         color 0.2s ease,
@@ -7696,9 +7705,12 @@ a:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+
     width: 20px;
     font-size: 18px;
     color: #D5A348;
+
     transition: color 0.2s ease;
 }
 
@@ -7713,6 +7725,7 @@ a:focus-visible {
 }
 
 .logout-button:active {
+    background: rgba(213, 163, 72, 0.16);
     transform: scale(0.98);
 }
 
@@ -7725,6 +7738,44 @@ a:focus-visible {
     opacity: 0.6;
     cursor: wait;
 }
+
+/* Ajustes para celulares */
+@media (max-width: 768px) {
+    .sidebar-logout {
+        margin: 12px 14px 16px;
+        width: auto;
+    }
+
+    .logout-button {
+        display: flex;
+        width: 100%;
+        min-height: 46px;
+        padding: 13px 14px;
+        gap: 12px;
+
+        background: #191C22;
+        border: 1px solid #303540;
+        border-radius: 10px;
+
+        color: #F3F0E8;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .logout-button .nav-icon {
+        width: 22px;
+        font-size: 19px;
+        color: #D5A348;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logout-button,
+    .logout-button .nav-icon {
+        transition: none;
+    }
+}
+
 
 /* =========================================================
    FIN DE ESTILOS LOPZEK

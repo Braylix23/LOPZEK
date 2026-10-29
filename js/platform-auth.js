@@ -7,30 +7,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const enterButton = document.getElementById("enterPlatform");
 
     
+    
     // Cerrar sesión de LOPZEK.
-    logoutButton.addEventListener("click", async () => {
-        logoutButton.disabled = true;
+    if (logoutButton) {
+        logoutButton.addEventListener("click", async (event) => {
+            event.preventDefault();
 
-        try {
-            const { error } = await supabaseClient.auth.signOut();
+            if (logoutButton.disabled) return;
 
-            if (error) throw error;
-
-            localStorage.removeItem("lopzek_user_id");
-
-            mainApp.hidden = true;
-            loginScreen.hidden = true;
-            welcomeScreen.hidden = false;
-
-            loginForm.reset();
+            logoutButton.disabled = true;
             loginMessage.textContent = "";
-        } catch (error) {
-            console.error("Error al cerrar sesión:", error);
-            alert("No se pudo cerrar la sesión. Inténtalo nuevamente.");
-        } finally {
-            logoutButton.disabled = false;
-        }
-    });
+
+            try {
+                const { error } = await supabaseClient.auth.signOut();
+
+                if (error) throw error;
+
+                localStorage.removeItem("lopzek_user_id");
+
+                mainApp.hidden = true;
+                loginScreen.hidden = true;
+                welcomeScreen.hidden = false;
+
+                loginForm.reset();
+                document.getElementById("password").value = "";
+                loginMessage.textContent = "";
+            } catch (error) {
+                console.error("Error al cerrar sesión:", error);
+
+                loginMessage.textContent =
+                    "No se pudo cerrar la sesión. Inténtalo nuevamente.";
+                loginScreen.hidden = false;
+                welcomeScreen.hidden = true;
+                mainApp.hidden = true;
+            } finally {
+                logoutButton.disabled = false;
+            }
+        });
+    }
+
 
     const backButton = document.getElementById("backToWelcome");
     const loginForm = document.getElementById("loginForm");
