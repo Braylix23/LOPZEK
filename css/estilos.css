@@ -3655,6 +3655,7 @@ a:focus-visible {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    
 }
 
 .player-profile-tags span {
@@ -7355,6 +7356,306 @@ a:focus-visible {
         display: block;
         max-width: 100%;
     }
+}
+
+
+
+/* Cabecera de ficha individual — móvil */
+@media (max-width: 600px) {
+    .player-profile-header {
+        display: grid;
+        grid-template-columns: 84px minmax(0, 1fr);
+        align-items: start;
+        column-gap: 16px;
+        row-gap: 18px;
+        padding: 24px 18px;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .player-profile-avatar {
+        grid-column: 1;
+        grid-row: 1;
+        width: 84px;
+        height: 84px;
+        min-width: 84px;
+    }
+
+    .player-profile-identity {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .player-profile-identity h2 {
+        overflow-wrap: anywhere;
+        font-size: clamp(20px, 6vw, 27px);
+        line-height: 1.15;
+    }
+
+    .player-profile-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+    }
+
+    .player-profile-roster {
+        margin-top: 14px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    
+    
+    .player-profile-index {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: start;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5px;
+        width: auto;
+        max-width: 100%;
+        min-width: 0;
+        margin-top: 6px;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .player-profile-index > span {
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: #A5A9B2;
+    }
+
+    .player-profile-index > strong {
+        font-size: 12px;
+        line-height: 1;
+        color: #D5A348;
+    }
+
+    .player-profile-index > small {
+        display: none;
+    }
+
+
+    .player-profile-identity {
+        grid-row: 1;
+    }
+
+    .player-profile-index small {
+        margin-left: auto;
+        text-align: right;
+    }
+}
+
+
+/* LOPZEK — Nick e identificador en móvil */
+@media (max-width: 600px) {
+    .player-profile-nick-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 5px 10px;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .player-profile-nick-row #playerProfileNick {
+        min-width: 0;
+        max-width: 100%;
+        margin: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .player-profile-nick-row .player-profile-index {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: flex-start;
+        gap: 4px;
+        width: auto;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+    }
+
+    .player-profile-nick-row .player-profile-index span {
+        color: #A5A9B2;
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .player-profile-nick-row .player-profile-index strong {
+        color: #D5A348;
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+    .player-profile-nick-row .player-profile-index small {
+        display: none;
+    }
+}
+
+
+/* LOPZEK — Ajustes de identidad en móvil */
+@media (max-width: 600px) {
+    #playerProfileName {
+        display: none;
+    }
+
+    .player-profile-tags {
+        margin-top: 12px;
+        gap: 8px;
+    }
+}
+
+/* LOPZEK — Alineación del nick e identificador en escritorio */
+@media (min-width: 601px) {
+    .player-profile-nick-row {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .player-profile-nick-row .player-profile-index {
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+}
+
+/* LOPZEK — Resumen competitivo en celulares */
+@media (max-width: 600px) {
+    .player-profile-section {
+        padding: 22px 14px;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .player-profile-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 16px;
+    }
+
+    .player-profile-section-heading h3 {
+        margin-top: 0;
+        font-size: 20px;
+        line-height: 1.25;
+    }
+
+    .player-profile-section-heading > p {
+        font-size: 11px;
+        text-align: left;
+    }
+
+    .player-profile-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/* LOPZEK — Evolución del rendimiento en celulares */
+@media (max-width: 600px) {
+
+    .player-profile-analysis-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .player-profile-panel {
+        min-width: 0;
+        padding: 15px 12px;
+        box-sizing: border-box;
+    }
+
+    .player-profile-chart-container {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+
+/* LOPZEK — Rendimiento por mapa en celulares */
+@media (max-width: 600px) {
+
+    .player-profile-map-panel {
+        padding: 12px 10px;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .player-profile-map-panel .player-profile-table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .player-profile-map-panel .player-profile-table {
+        min-width: 520px;
+        width: 100%;
+    }
+
+    .player-profile-map-panel .player-profile-table th,
+    .player-profile-map-panel .player-profile-table td {
+        padding: 10px 8px;
+        white-space: nowrap;
+    }
+
+}
+
+
+
+/* LOPZEK — Últimas partidas en celulares */
+@media (max-width: 600px) {
+
+    .player-profile-section:has(#playerProfileRecentMatches) 
+    .player-profile-panel {
+        padding: 12px 10px;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .player-profile-section:has(#playerProfileRecentMatches)
+    .player-profile-table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .player-profile-section:has(#playerProfileRecentMatches)
+    .player-profile-table {
+        width: 100%;
+        min-width: 520px;
+    }
+
+    .player-profile-section:has(#playerProfileRecentMatches)
+    .player-profile-table th,
+    .player-profile-section:has(#playerProfileRecentMatches)
+    .player-profile-table td {
+        padding: 10px 8px;
+        white-space: nowrap;
+    }
+
 }
 
 /* =========================================================
